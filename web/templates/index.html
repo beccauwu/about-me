@@ -6,80 +6,223 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <title>Portfolio</title>
 </head>
 
 <body>
     <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Rebecca Perttula</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-                aria-controls="navbar" aria-expanded="false" aria-label="toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/" aria-current="page">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact-me/">Contact Me</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about-me/">About Me</a>
-                    </li>
-                </ul>
+            <div class="nav navbar-nav mx-auto">
+                <a class="navbar-brand" href="#">Rebecca Perttula</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                    aria-controls="navbar" aria-expanded="false" aria-label="toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#portfolio" aria-current="page">Portfolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#resume">Resume</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About Me</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact Information</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
-    <div class="accordion" id="sites">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    accountspy-preview
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#sites">
-                <strong>An accounting application demo made in python</strong>
-                <div class="break"></div>
-                <p></p>
+    <div class="container mt-2 rounded-3">
+        <div class="row mx-auto wi-fc">
+            <h2 class="text-center">My Projects</h2>
+        </div>
+        <div class="row mt-3" id="dev">
+            <div class="col-md">
+                <div class="mx-auto mt-2 wi-fc">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#projectThree" aria-expanded="false"
+                        aria-controls="projectThree">
+                        Python - accountspy preview
+                    </a>
+                </div>
+                <div class="collapse mx-auto mt-2" id="projectThree">
+                    <div class="card card-body bg-dark">
+                        <img class="card-img-top" src="/img/accountspy.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Accountspy-preview</h4>
+                            <p class="card-text">A functioning accounting demo app made in python</p>
+                            <div class="vstack gap-2">
+                                <a href="https://rugged-kings-canyon-79210.herokuapp.com/" class="card-text">Open app on Heroku</a>
+                                <a href="https://github.com/beccauwu/accountspy-preview" class="card-text">Show source on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md mx-auto">
+                <div class="mx-auto mt-2 wi-fc">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#projectTwo" aria-expanded="false"
+                        aria-controls="projectTwo">
+                        JavaScript - Snake
+                    </a>
+                </div>
+                <div class="collapse mx-auto mt-2" id="projectTwo">
+                    <div class="card card-body bg-dark">
+                        <img class="card-img-top" src="/img/snake.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Snake</h4>
+                            <p class="card-text">The classic snake game built with HTML, CSS and javascript</p>
+                            <div class="vstack gap-2">
+                                <a href="https://beccauwu.github.io/snake" class="card-text">Open app on GitHub pages</a>
+                                <a href="https://github.com/beccauwu/snake" class="card-text">Show source on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md mx-auto">
+                <div class="mx-auto mt-2 wi-fc">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#projectOne" aria-expanded="false"
+                        aria-controls="projectOne">
+                        HTML/CSS - Portfolio
+                    </a>
+                </div>
+                <div class="collapse mx-auto mt-2" id="projectOne">
+                    <div class="card card-body bg-dark">
+                        <img class="card-img-top" src="/img/my-site.png" alt="Title">
+                        <div class="card-body">
+                            <h4 class="card-title">Portfolio</h4>
+                            <p class="card-text">A webpage for my business written in HTML and CSS</p>
+                            <div class="vstack gap-2">
+                                <a href="https://beccauwu.github.io/my-site" class="card-text">Open app on GitHub pages</a>
+                                <a href="https://github.com/beccauwu/my-site" class="card-text">Show source on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    snake
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#sites">
-                <strong>The classic snake game as a webgame</strong>
-                <div class="break"></div>
-                <p></p>
-            </div>
+        <div class="row mt-3 mx-auto wi-fc">
+            <h2 class="text-center">Resume</h2>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    business site
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#sites">
-                <strong>Site for my business made in HTML&CSS</strong>
-                <div class="break"></div>
-                <p></p>
+        <div class="row mt-3" id="resume">
+            <div class="accordion" id="resumePanels">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="skillsHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#skillsPanel"
+                            aria-expanded="true" aria-controls="skillsPanel">
+                            Skills
+                        </button>
+                    </h2>
+                    <div id="skillsPanel" class="accordion-collapse collapse show" aria-labelledby="skillsHeading">
+                        <div class="accordion-body row gx-2 gy-2">
+                            <div class="col">
+                                <div class="card card-body bg-dark">
+                                    <img class="card-img-top h-25" src="/img/html5.png" alt="Title">
+                                    <div class="card-body">
+                                        <h4 class="card-title">HTML</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card card-body bg-dark">
+                                    <img class="card-img-top h-25" src="/img/css3.png" alt="Title">
+                                    <div class="card-body">
+                                        <h4 class="card-title">CSS</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card card-body bg-dark">
+                                    <img class="card-img-top h-25" src="/img/bootstrap.png" alt="Title">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Bootstrap</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card card-body bg-dark">
+                                    <img class="card-img-top h-25" src="/img/flask.png" alt="Title">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Flask</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card card-body bg-dark">
+                                    <img class="card-img-top h-25" src="/img/gspread.png" alt="Title">
+                                    <div class="card-body">
+                                        <h4 class="card-title">gspread</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card card-body bg-dark">
+                                    <img class="card-img-top h-25" src="/img/javascript.png" alt="Title">
+                                    <div class="card-body">
+                                        <h4 class="card-title">JavaScript</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="educationHeading">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#educationPanel" aria-expanded="false" aria-controls="educationPanel">
+                            Education
+                        </button>
+                    </h2>
+                    <div id="educationPanel" class="accordion-collapse collapse" aria-labelledby="educationHeading">
+                        <div class="accordion-body">
+                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
+                            collapse
+                            plugin adds the appropriate classes that we use to style each element. These classes control the
+                            overall
+                            appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
+                            custom CSS or overriding our default variables. It's also worth noting that just about any HTML can
+                            go
+                            within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="languagesHeading">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#languagesPanel" aria-expanded="false" aria-controls="languagesPanel">
+                            Languages
+                        </button>
+                    </h2>
+                    <div id="languagesPanel" class="accordion-collapse collapse" aria-labelledby="languagesHeading">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
+                            collapse
+                            plugin adds the appropriate classes that we use to style each element. These classes control the
+                            overall
+                            appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
+                            custom CSS or overriding our default variables. It's also worth noting that just about any HTML can
+                            go
+                            within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand navbar-light bg-light">
-        <div class="nav navbar-nav">
-            <a class="nav-item nav-link" href="#">Page Source <span class="visually-hidden">(current)</span></a>
-            <a class="nav-item nav-link" href="#">Home</a>
-        </div>
-    </nav>
+    <div class="container">
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom">
+            <div class="nav navbar-nav mx-auto">
+                <a class="nav-item nav-link" href="#">Page Source <span class="visually-hidden">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Home</a>
+            </div>
+        </nav>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.js"></script>
 </body>
