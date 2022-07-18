@@ -9,3 +9,12 @@
 #languagesPanel .col {
     width: 300px;
 }
+
+#dev-card {
+    max-width: none;
+    text-align: center;
+}
+
+#resume-card {
+    max-width: none;
+}
