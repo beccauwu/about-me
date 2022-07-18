@@ -15,6 +15,6 @@
     text-align: center;
 }
 
-#resume-card {
+#resume-card, #contact-card {
     max-width: none;
 }
