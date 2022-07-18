@@ -11,7 +11,7 @@ fa = FontAwesome(app)
 def index():
     return render_template('index.html')
 
-@app.route('/about-me/')
+@app.route('/contact-form/')
 def about():
     return render_template('about.html')
 
