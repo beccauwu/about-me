@@ -29,3 +29,4 @@ for (let i = 0; i < itmArray.length; i++) {
         location.href = `#${panId}`
     })
 }
+
