@@ -40,19 +40,62 @@
         </div>
     </nav>
     <div class="container mt-2 mb-4 rounded-3">
+        <div class="row mt-3" id="carousel-container">
+            <div id="carousel" class="carousel slide" data-bs-ride="true">
+                <ol class="carousel-indicators">
+                    <li data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Second slide"></li>
+                    <li data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Third slide"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <div class="card card-body bg-dark mx-auto carcard" id="accountspy">
+                            <div class="card-body row gy-2 gx-2 text-center">
+                            <img id="accountspyBannerImg" class="card-img-top h-25" src="/img/accountspy-banner.png" alt="accountspy app banner">
+                            <h4 class="card-title text-center">Accountspy</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card card-body bg-dark mx-auto carcard" id="snake">
+                            <div class="card-body row gy-2 gx-2 text-center">
+                                <img id="snakeBannerImg" class="card-img-top h-25" src="/img/snake-banner.png" alt="snake site banner">
+                                <h4 class="card-title text-center">Snake</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card card-body bg-dark mx-auto carcard" id="business">
+                            <div class="card-body row gy-2 gx-2 text-center">
+                                <img id="portfolioBannerImg" class="card-img-top h-25" src="/img/my-site-banner.png" alt="portfolio site banner">
+                                <h4 class="card-title text-center">Business site</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
         <div class="row mt-3" id="resume">
             <div class="card card-body bg-dark mx-auto" id="resume-card">
                 <div class="card-body row gy-2 gx-2">
                     <h4 class="card-title text-center">Resume</h4>
-                    <div class="accordion" id="resumePanels">
+                    <div class="accordion accordion-flush" id="resumePanels">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="skillsHeading">
-                                <button class="accordion-button text center" type="button" data-bs-toggle="collapse" data-bs-target="#skillsPanel"
-                                    aria-expanded="true" aria-controls="skillsPanel">
+                                <button class="accordion-button collapsed text center" type="button" data-bs-toggle="collapse" data-bs-target="#skillsPanel"
+                                    aria-expanded="false" aria-controls="skillsPanel">
                                     Skills
                                 </button>
                             </h2>
-                            <div id="skillsPanel" class="accordion-collapse collapse show" aria-labelledby="skillsHeading">
+                            <div id="skillsPanel" class="accordion-collapse collapse" aria-labelledby="skillsHeading">
                                 <div class="accordion-body row gx-2 gy-2">
                                     <div class="col">
                                         <div class="card card-body bg-dark">
@@ -205,7 +248,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="projectsHeading">
                                 <button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#projectsPanel" aria-expanded="false" aria-controls="projectsPanel">
+                                    data-bs-target="#projectsPanel" aria-expanded="false" aria-controls="projectsPanel" id="projectsBtn">
                                     Projects
                                 </button>
                             </h2>
@@ -217,7 +260,7 @@
                                             <div class="col-md">
                                                 <div class="mx-auto mt-2 wi-fc">
                                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#projectThree" aria-expanded="false"
-                                                        aria-controls="projectThree">
+                                                        aria-controls="projectThree" id="accountspyBtn">
                                                         Python - accountspy preview
                                                     </a>
                                                 </div>
@@ -241,7 +284,7 @@
                                             <div class="col-md mx-auto">
                                                 <div class="mx-auto mt-2 wi-fc">
                                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#projectTwo" aria-expanded="false"
-                                                        aria-controls="projectTwo">
+                                                        aria-controls="projectTwo" id="snakeBtn">
                                                         JavaScript - Snake
                                                     </a>
                                                 </div>
@@ -263,7 +306,7 @@
                                             <div class="col-md mx-auto">
                                                 <div class="mx-auto mt-2 wi-fc">
                                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#projectOne" aria-expanded="false"
-                                                        aria-controls="projectOne">
+                                                        aria-controls="projectOne" id="businessBtn">
                                                         HTML/CSS - Portfolio
                                                     </a>
                                                 </div>
@@ -288,6 +331,19 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="wi-fc mx-auto col">
+                        <div class="row wi-fc mx-auto">
+                            <iframe
+                                src="https://docs.google.com/gview?url=https://docs.google.com/document/d/1SmTpbQXWuH8WP5YeyxyPHx5i51952ffgvUU8ZuT30_I/export?format=pdf&embedded=true"
+                                style="width:200px; height:240px;" frameborder="0"></iframe>
+                        </div>
+                        <div class="rew wi-fc mx-auto">
+                            <a id="resumeDl" class="text-center row" href="https://docs.google.com/document/d/1SmTpbQXWuH8WP5YeyxyPHx5i51952ffgvUU8ZuT30_I/export?format=pdf" frameborder="0">
+                                Download resume as PDF
+                            </a>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -334,6 +390,7 @@
     </nav>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 
 </html>
