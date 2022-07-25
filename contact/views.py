@@ -10,15 +10,14 @@ def contact(request):
 		if form.is_valid():
 			subject = "Website Inquiry" 
 			body = {
-			'first_name': form.cleaned_data['first_name'], 
-			'last_name': form.cleaned_data['last_name'], 
+			'first_name': form.cleaned_data['name'], 
 			'email': form.cleaned_data['email_address'], 
 			'message':form.cleaned_data['message'], 
 			}
 			message = "\n".join(body.values())
 
 			try:
-				send_mail(subject, message, 'admin@example.com', ['admin@example.com']) 
+				send_mail(subject, message, 'rebecca@perttula.co', ['rebecca@perttula.co']) 
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			return redirect ("home")
