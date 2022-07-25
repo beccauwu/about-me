@@ -3,4 +3,4 @@
 key
 key.pub
 fbServiceAccount.json
-about_me/settings.py
+.env
