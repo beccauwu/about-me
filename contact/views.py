@@ -8,7 +8,7 @@ def contact(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 		if form.is_valid():
-			subject = "Website Inquiry" 
+			subject = form.cleaned_data['subject']
 			body = {
 			'first_name': form.cleaned_data['name'], 
 			'email': form.cleaned_data['email_address'], 

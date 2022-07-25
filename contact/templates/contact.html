@@ -1,20 +1,49 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Contact{% endblock %}
-
-
-
 {% block content %}
-<div class="container mt-4">
-    <div class="row">
-        <div class="card card-body bg-dark mx-auto text-center">
-            <div class="card-body text-center">
-                <h1 class="card-title">Contact Me</h1>
-                <p class="card-text">Please write your email address and message below and I'll get back to you ASAP :)</p>
-                <form method="post">
+<div class="container my-4">
+    <div class="row mb-4 mx-2" id="contact">
+        <div class="card card-body bg-dark mx-auto">
+            <div class="card-body row gy-2 gx-2 text-center">
+                <h2 class="card-title">Contact info:</h2>
+                <p class="card-text">
+                    <strong>Email:</strong><br>
+                    <a href="mailto:rebecca@perttula.co">rebecca@perttula.co</a>
+                </p>
+                <p class="card-text">
+                    <strong>Phone:</strong><br>
+                    <a href="tel:+46724416869">+46724416869</a>
+                </p>
+                <p class="card-text"><strong>WhatsApp:</strong></p>
+                <a href="https://wa.me/46724416869" class="bg-white wi-fc mx-auto rounded">
+                    <img src="{% static 'page/img/whatsapp.png' %}" alt="whatsapp qr code">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-2">
+        <div class="card card-body bg-dark mx-auto">
+            <div class="card-body">
+                <h2 class="card-title text-center">Contact form</h2>
+                <p class="card-text text-center">Please write your inquiry below and I'll get back to you ASAP :)</p>
+                <form method="post" class="row g-3">
                     {% csrf_token %}
-                        {{form.as_p}}
-                        <button type="submit" class="btn btn-info wi-fc mx-auto">Submit</button>
+                        <div class="col-md-6">
+                            <label for="nameInput" class="form-label">Name:</label>
+                            {{form.name}}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emailInput" class="form-label">Email:</label>
+                            {{form.email_address}}
+                        </div>
+                        <div class="col-12">
+                            {{form.subject}}
+                        </div>
+                        <div class="col-12">
+                            {{form.message}}
+                        </div>
+                        <button type="submit" class="btn btn-info wi-fc mx-auto d-block">Submit</button>
                 </form>
             </div>
         </div>
