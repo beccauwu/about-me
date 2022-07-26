@@ -24,13 +24,13 @@
                     <div class="collapse navbar-collapse" id="navbar">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                                <a class="nav-link" href="{% url 'blog' %}" aria-label="blog page">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#about">About Me</a>
+                                <a class="nav-link" href="#about" aria-label="about page">About Me</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                                <a class="nav-link" href="{% url 'contact' %}" aria-label="contact page">Contact</a>
                             </li>
                             <li class="nav-item">
                                 {% block authLink %}
@@ -65,14 +65,14 @@
             <div class="container-fluid">
                 <div class="container wi-fc mx-auto text-center">
                         <div class="nav-item row">
-                            <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me">Page Source</a>
+                            <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me" target="_blank" aria-label="page source on GitHub (opens in new tab)">Page Source</a>
                         </div>
                         <div class="nav-item row">
-                            <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me/blob/master/LICENSE">©
+                            <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me/blob/master/LICENSE" target="_blank" aria-label="license (opens in new tab)">©
                                 Rebecca Perttula 2022</a>
                         </div>
                         <div class="nav-item row">
-                            <a class="nav-link fw-light" id="toTop">Back to top</a>
+                            <a class="nav-link fw-light" id="toTop" aria-label="back to top">Back to top</a>
                         </div>
                 </div>
             </div>
