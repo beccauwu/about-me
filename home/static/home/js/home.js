@@ -5,12 +5,12 @@ const aBtn = document.getElementById('accountspyBtn');
 const bBtn = document.getElementById('businessBtn');
 const sBtn = document.getElementById('snakeBtn');
 const projectsPanel = document.getElementById('projectsPanel');
-const projectThree = document.getElementById('projectThree');
-const projectTwo = document.getElementById('projectTwo');
-const projectOne = document.getElementById('projectOne');
+const accountspyPanel = document.getElementById('accountspyPanel');
+const snakePanel = document.getElementById('snakePanel');
+const portfolioPanel = document.getElementById('portfolioPanel');
 
 const itmArray = [accountspy, snake, business]
-const panelArray = [projectThree, projectTwo, projectOne]
+const panelArray = [accountspyPanel, snakePanel, portfolioPanel]
 for (let i = 0; i < itmArray.length; i++) {
     const element = itmArray[i];
     const panel = panelArray[i];
