@@ -43,10 +43,16 @@
                         <div class="col-12">
                             {{form.message}}
                         </div>
-                        <button type="submit" class="btn btn-info wi-fc mx-auto d-block">Submit</button>
+                        <button type="submit" class="btn btn-info wi-fc mx-auto d-block" id="contactSubmit">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript" src="{% static 'contact/js/contact.js' %}"></script>
 {% endblock %}

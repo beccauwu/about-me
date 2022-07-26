@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "firebase": "^9.9.0",
+    "@emailjs/browser": "^3.6.2",
+    "firebase": "^9.9.1",
     "jquery": "^3.6.0"
   },
   "name": "about-me",
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
