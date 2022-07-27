@@ -28,7 +28,6 @@
                 <h2 class="card-title text-center">Contact form</h2>
                 <p class="card-text text-center">Please write your inquiry below and I'll get back to you ASAP :)</p>
                 <form method="post" class="row g-3">
-                    {% csrf_token %}
                         <div class="col-md-6">
                             <label for="nameInput" class="form-label">Name:</label>
                             {{form.name}}

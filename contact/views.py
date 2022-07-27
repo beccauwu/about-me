@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
-
+@csrf_exempt
 def contact(request):
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
