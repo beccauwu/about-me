@@ -17,6 +17,7 @@ Django==4.0.6
 django-ses==3.1.0
 firebase==3.0.1
 firebase-admin==5.2.0
+git-filter-repo==2.34.0
 google==3.0.0
 google-api-core==2.8.2
 google-api-python-client==2.54.0
@@ -58,6 +59,8 @@ rsa==4.8
 s3transfer==0.6.0
 selenium==4.3.0
 six==1.16.0
+smtp2go==2.0.0
+smtp2go-django==2.0.0
 sniffio==1.2.0
 sortedcontainers==2.4.0
 soupsieve==2.3.2.post1
