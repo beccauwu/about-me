@@ -10,22 +10,30 @@ def contact(request):
 		if form.is_valid():
 			name = form.cleaned_data['name']
 			subject = f"{name.upper()} | {form.cleaned_data['subject']}"
-			email = form.cleaned_data['email_address']
+			to_email = form.cleaned_data['email_address']
 			message = form.cleaned_data['message']
-			ebreak = '--------------------------------'
-			greeting = f"Hello {name}!\n"
-			content = "Your inquiry has been received and I'll get back to you as soon as possible!"
-			signature = 'Best,\nRebecca Perttula'
+			pstart = "<p style='text-align: center;'>"
+			pend = "</p>"
 			body = {
-			'greeting': greeting,
-			'content': content,
-			'br1': ebreak,
-			'message': f"Your inquiry:\n{message}",
-			'signature': signature,
+			'greeting': f"<h3 style='text-align: center;'>Hello {name},</h3>",
+			'content': f'{pstart}I have received your inquiry and will respond as soon as possible.{pend}',
+			'br1': '--------------------------------',
+			'strong': f'{pstart}<strong>Your inquiry:</strong></p>{pend}',
+			'divstart': "<div style='padding: 12px; border-left: 4px solid #d0d0d0; width: fit-content; margin: 0 auto;'>",
+			'message': f"<p style='font-style: italic; text-align: center;'>{message}</p>",
+			'divend': '</div>',
+			'signature': 'Best,<br>Rebecca Perttula',
 			}
-			message = "\n".join(body.values())
+			html_content = "<br>".join(body.values())
+			text_content = f"Hi {name}!\nI've received your message and will get back to you asap:\nYour message:\n{message}\nBest,\nRebecca Perttula"
 			try:
-				send_mail(subject, message, 'rebecca@perttula.co', ['rebecca@perttula.co'])
+				send_mail(
+        			subject=subject,
+           			message=text_content,
+              		from_email='noreply@perttula.co',
+                	recipient_list=['inbox@perttula.co', to_email],
+                 	html_message=html_content
+                )
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
 			return redirect ("home")
