@@ -33,7 +33,7 @@ def contact(request):
            			message=text_content,
               		from_email='noreply@perttula.co',
                 	recipient_list=['inbox@perttula.co', to_email],
-                 	html_message=html_content
+                 	html_message=html_content,
                 )
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
