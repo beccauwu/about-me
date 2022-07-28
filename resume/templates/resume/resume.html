@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}Resume{% endblock %}
 
 {% block content %}
 <div class="container mt-2 mb-4 rounded-3">
     <div class="row mt-3" id="carousel-container">
         <div id="carousel" class="carousel slide" data-bs-ride="true">
             <ol class="carousel-indicators">
-                <li data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                <li data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="First slide"></li>
                 <li data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Second slide"></li>
                 <li data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Third slide"></li>
             </ol>
@@ -15,15 +16,17 @@
                 <div class="carousel-item active">
                     <div class="card card-body bg-dark mx-auto carcard homeCarousel" id="accountspy">
                         <div class="card-body row gy-2 gx-2 text-center">
-                        <img id="accountspyBannerImg" class="card-img-top h-25" src="{% static 'home/img/accountspy-banner.png' %}" alt="accountspy app banner">
-                        <h4 class="card-title text-center">Accountspy</h4>
+                            <img id="accountspyBannerImg" class="card-img-top h-25"
+                                src="{% static 'home/img/accountspy-banner.png' %}" alt="accountspy app banner">
+                            <h4 class="card-title text-center">Accountspy</h4>
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="card card-body bg-dark mx-auto carcard homeCarousel" id="snake">
                         <div class="card-body row gy-2 gx-2 text-center">
-                            <img id="snakeBannerImg" class="card-img-top h-25" src="{% static 'home/img/snake-banner.png' %}" alt="snake site banner">
+                            <img id="snakeBannerImg" class="card-img-top h-25"
+                                src="{% static 'home/img/snake-banner.png' %}" alt="snake site banner">
                             <h4 class="card-title text-center">Snake</h4>
                         </div>
                     </div>
@@ -31,7 +34,8 @@
                 <div class="carousel-item">
                     <div class="card card-body bg-dark mx-auto carcard homeCarousel" id="business">
                         <div class="card-body row gy-2 gx-2 text-center">
-                            <img id="portfolioBannerImg" class="card-img-top h-25" src="{% static 'home/img/my-site-banner.png' %}" alt="portfolio site banner">
+                            <img id="portfolioBannerImg" class="card-img-top h-25"
+                                src="{% static 'home/img/my-site-banner.png' %}" alt="portfolio site banner">
                             <h4 class="card-title text-center">Business site</h4>
                         </div>
                     </div>
@@ -54,8 +58,9 @@
                 <div class="accordion accordion-flush" id="resumePanels">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="skillsHeading">
-                            <button class="accordion-button collapsed text center" type="button" data-bs-toggle="collapse" data-bs-target="#skillsPanel"
-                                aria-expanded="false" aria-controls="skillsPanel">
+                            <button class="accordion-button collapsed text center" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#skillsPanel" aria-expanded="false"
+                                aria-controls="skillsPanel">
                                 Skills
                             </button>
                         </h2>
@@ -63,7 +68,8 @@
                             <div class="accordion-body row gx-2 gy-2">
                                 <div class="col">
                                     <div class="card card-body bg-dark">
-                                        <img class="card-img-top h-25" src="{% static 'home/img/html5.png' %}" alt="Title">
+                                        <img class="card-img-top h-25" src="{% static 'home/img/html5.png' %}"
+                                            alt="Title">
                                         <div class="card-body">
                                             <h4 class="card-title">HTML</h4>
                                         </div>
@@ -71,7 +77,8 @@
                                 </div>
                                 <div class="col">
                                     <div class="card card-body bg-dark">
-                                        <img class="card-img-top h-25" src="{% static 'home/img/css3.png' %}" alt="Title">
+                                        <img class="card-img-top h-25" src="{% static 'home/img/css3.png' %}"
+                                            alt="Title">
                                         <div class="card-body">
                                             <h4 class="card-title">CSS</h4>
                                         </div>
@@ -79,7 +86,8 @@
                                 </div>
                                 <div class="col">
                                     <div class="card card-body bg-dark">
-                                        <img class="card-img-top h-25" src="{% static 'home/img/bootstrap.png' %}" alt="Title">
+                                        <img class="card-img-top h-25" src="{% static 'home/img/bootstrap.png' %}"
+                                            alt="Title">
                                         <div class="card-body">
                                             <h4 class="card-title">Bootstrap</h4>
                                         </div>
@@ -87,7 +95,8 @@
                                 </div>
                                 <div class="col">
                                     <div class="card card-body bg-dark">
-                                        <img class="card-img-top h-25" src="{% static 'home/img/flask.png' %}" alt="Title">
+                                        <img class="card-img-top h-25" src="{% static 'home/img/flask.png' %}"
+                                            alt="Title">
                                         <div class="card-body">
                                             <h4 class="card-title">Flask</h4>
                                         </div>
@@ -95,7 +104,8 @@
                                 </div>
                                 <div class="col">
                                     <div class="card card-body bg-dark">
-                                        <img class="card-img-top h-25" src="{% static 'home/img/gspread.png' %}" alt="Title">
+                                        <img class="card-img-top h-25" src="{% static 'home/img/gspread.png' %}"
+                                            alt="Title">
                                         <div class="card-body">
                                             <h4 class="card-title">gspread</h4>
                                         </div>
@@ -103,7 +113,8 @@
                                 </div>
                                 <div class="col">
                                     <div class="card card-body bg-dark">
-                                        <img class="card-img-top h-25" src="{% static 'home/img/javascript.png' %}" alt="Title">
+                                        <img class="card-img-top h-25" src="{% static 'home/img/javascript.png' %}"
+                                            alt="Title">
                                         <div class="card-body">
                                             <h4 class="card-title">JavaScript</h4>
                                         </div>
@@ -114,8 +125,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="educationHeading">
-                            <button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#educationPanel" aria-expanded="false" aria-controls="educationPanel">
+                            <button class="accordion-button collapsed text-center" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#educationPanel" aria-expanded="false"
+                                aria-controls="educationPanel">
                                 Education
                             </button>
                         </h2>
@@ -167,8 +179,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="languagesHeading">
-                            <button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#languagesPanel" aria-expanded="false" aria-controls="languagesPanel">
+                            <button class="accordion-button collapsed text-center" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#languagesPanel" aria-expanded="false"
+                                aria-controls="languagesPanel">
                                 Languages
                             </button>
                         </h2>
@@ -211,8 +224,9 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="projectsHeading">
-                            <button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#projectsPanel" aria-expanded="false" aria-controls="projectsPanel" id="projectsBtn">
+                            <button class="accordion-button collapsed text-center" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#projectsPanel" aria-expanded="false"
+                                aria-controls="projectsPanel" id="projectsBtn">
                                 Projects
                             </button>
                         </h2>
@@ -223,21 +237,26 @@
                                         <h4 class="card-title">My Projects</h4>
                                         <div class="col-md">
                                             <div class="mx-auto mt-2 wi-fc">
-                                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#accountspyPanel" aria-expanded="false"
+                                                <a class="btn btn-primary" data-bs-toggle="collapse"
+                                                    href="#accountspyPanel" aria-expanded="false"
                                                     aria-controls="accountspyPanel" id="accountspyBtn">
                                                     Python - accountspy preview
                                                 </a>
                                             </div>
                                             <div class="collapse mx-auto" id="accountspyPanel">
                                                 <div class="card card-body bg-dark mt-4">
-                                                    <img class="card-img-top" src="{% static 'home/img/accountspy.png' %}" alt="Title">
+                                                    <img class="card-img-top"
+                                                        src="{% static 'home/img/accountspy.png' %}" alt="Title">
                                                     <div class="card-body">
                                                         <h4 class="card-title">Accountspy-preview</h4>
-                                                        <p class="card-text">A functioning accounting demo app made in python</p>
+                                                        <p class="card-text">A functioning accounting demo app made in
+                                                            python</p>
                                                         <div class="vstack gap-2">
-                                                            <a href="https://rugged-kings-canyon-79210.herokuapp.com/" class="card-text">Open app on
+                                                            <a href="https://rugged-kings-canyon-79210.herokuapp.com/"
+                                                                class="card-text">Open app on
                                                                 Heroku</a>
-                                                            <a href="https://github.com/beccauwu/accountspy-preview" class="card-text">Show source
+                                                            <a href="https://github.com/beccauwu/accountspy-preview"
+                                                                class="card-text">Show source
                                                                 on
                                                                 GitHub</a>
                                                         </div>
@@ -247,21 +266,25 @@
                                         </div>
                                         <div class="col-md mx-auto">
                                             <div class="mx-auto mt-2 wi-fc">
-                                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#snakePanel" aria-expanded="false"
-                                                    aria-controls="snakePanel" id="snakeBtn">
+                                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#snakePanel"
+                                                    aria-expanded="false" aria-controls="snakePanel" id="snakeBtn">
                                                     JavaScript - Snake
                                                 </a>
                                             </div>
                                             <div class="collapse mx-auto" id="snakePanel">
                                                 <div class="card card-body bg-dark mt-4">
-                                                    <img class="card-img-top" src="{% static 'home/img/snake.png' %}" alt="Title">
+                                                    <img class="card-img-top" src="{% static 'home/img/snake.png' %}"
+                                                        alt="Title">
                                                     <div class="card-body">
                                                         <h4 class="card-title">Snake</h4>
-                                                        <p class="card-text">The classic snake game built with HTML, CSS and javascript</p>
+                                                        <p class="card-text">The classic snake game built with HTML, CSS
+                                                            and javascript</p>
                                                         <div class="vstack gap-2">
-                                                            <a href="https://beccauwu.github.io/snake" class="card-text">Open app on GitHub
+                                                            <a href="https://beccauwu.github.io/snake"
+                                                                class="card-text">Open app on GitHub
                                                                 pages</a>
-                                                            <a href="https://github.com/beccauwu/snake" class="card-text">Show source on GitHub</a>
+                                                            <a href="https://github.com/beccauwu/snake"
+                                                                class="card-text">Show source on GitHub</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -269,21 +292,26 @@
                                         </div>
                                         <div class="col-md mx-auto">
                                             <div class="mx-auto mt-2 wi-fc">
-                                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#portfolioPanel" aria-expanded="false"
+                                                <a class="btn btn-primary" data-bs-toggle="collapse"
+                                                    href="#portfolioPanel" aria-expanded="false"
                                                     aria-controls="portfolioPanel" id="businessBtn">
                                                     HTML/CSS - Portfolio
                                                 </a>
                                             </div>
                                             <div class="collapse mx-auto" id="portfolioPanel">
                                                 <div class="card card-body bg-dark mt-4">
-                                                    <img class="card-img-top" src="{% static 'home/img/my-site.png' %}" alt="Title">
+                                                    <img class="card-img-top" src="{% static 'home/img/my-site.png' %}"
+                                                        alt="Title">
                                                     <div class="card-body">
                                                         <h4 class="card-title">Portfolio</h4>
-                                                        <p class="card-text">A webpage for my business written in HTML and CSS</p>
+                                                        <p class="card-text">A webpage for my business written in HTML
+                                                            and CSS</p>
                                                         <div class="vstack gap-2">
-                                                            <a href="https://beccauwu.github.io/my-site" class="card-text">Open app on GitHub
+                                                            <a href="https://beccauwu.github.io/my-site"
+                                                                class="card-text">Open app on GitHub
                                                                 pages</a>
-                                                            <a href="https://github.com/beccauwu/my-site" class="card-text">Show source on
+                                                            <a href="https://github.com/beccauwu/my-site"
+                                                                class="card-text">Show source on
                                                                 GitHub</a>
                                                         </div>
                                                     </div>
@@ -303,11 +331,13 @@
                             style="width:200px; height:240px;" frameborder="0"></iframe>
                     </div>
                     <div class="rew wi-fc mx-auto">
-                        <a id="resumeDl" class="text-center row" href="https://docs.google.com/document/d/1SmTpbQXWuH8WP5YeyxyPHx5i51952ffgvUU8ZuT30_I/export?format=pdf" frameborder="0">
+                        <a id="resumeDl" class="text-center row"
+                            href="https://docs.google.com/document/d/1SmTpbQXWuH8WP5YeyxyPHx5i51952ffgvUU8ZuT30_I/export?format=pdf"
+                            frameborder="0">
                             Download resume as PDF
                         </a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -316,5 +346,5 @@
 
 {% endblock %}
 {% block scripts %}
-<script type="text/javascript" src="{% static 'home/js/home.js' %}"></script>
+<script type="text/javascript" src="{% static 'resume/js/resume.js' %}"></script>
 {% endblock %}

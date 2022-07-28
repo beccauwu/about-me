@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('blog/', include('blog.urls')),
     path('contact/', include('contact.urls')),
+    path('resume/', include('resume.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path('login', views.login_request, name='login'),
 ]
