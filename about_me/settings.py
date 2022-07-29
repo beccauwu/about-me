@@ -41,12 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.home',
-    'apps.blog',
-    'apps.about_me',
-    'apps.contact',
-    'apps.resume',
-    'apps.photography',
+    'home',
+    'blog',
+    'about_me',
+    'contact',
+    'resume',
+    'photography',
 ]
 
 MIDDLEWARE = [
@@ -136,8 +136,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'apps.home'
+LOGOUT_REDIRECT_URL = 'apps.home'
 
 EMAIL_HOST = 'mail.smtp2go.com'
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
