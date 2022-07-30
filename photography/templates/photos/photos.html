@@ -1,15 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block styles %}<link rel="stylesheet" type="text/css" href="{% static 'photos/css/photos.css' %}">{% endblock %}
 {% block title %}Photo Gallery{% endblock %}
 {% block photos %}<a class="nav-link active" href="{% url 'photos' %}" aria-label="current page">Photo gallery</a>{% endblock %}
 
 {% block content %}
-<div class="container my-4 bg-dark p-4 ">
-    <div class="row g-2 my-2 justify-content-evenly">
+<div class="container my-4 bg-dark p-4 rounded">
+    <h4 class="text-center">Kebnekaise</h4>
+    <div class="row my-2 justify-content-evenly keb" id="overlayContainer">
+        <img class="col-12" id="overlay">
+    </div>
+    <div class="row my-2 justify-content-evenly keb" id="kebPreview">
+        <img class="col-12" in="kebPreviewImg" src="{% static 'photos/img/kebnekaise/kebnekaise-13_result.webp' %}" alt="">
+    </div>
+    <div class="row justify-content-evenly mt-3">
+        <button class="btn btn-info col-6" id="kebBtn" type="button">Show more</button>
+    </div>
+    <div class="row g-2 my-2 justify-content-evenly keb overflow-auto" id="kebContent">
         {% for file in files %}
-            <img class="col-lg-4 col-md-6 col-sm-12" src="{% static file %}" alt="">
+            <img class="col-lg-4 col-md-6 col-sm-12 kebImg" src="{% static file %}" alt="">
         {% endfor %}
     </div>
 </div>
 {% endblock %}
 
+{% block scripts %}
+<script src="{% static 'photos/js/photos.js' %}" type="text/javascript"></script>
+{% endblock %}
