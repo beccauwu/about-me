@@ -25,4 +25,4 @@ def login_request(request):
 
 def logout_request(request):
     logout(request)
-    return redirect('home')
+    return redirect(request.META.get('HTTP_REFERER'))
