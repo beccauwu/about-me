@@ -1,46 +1,52 @@
 class Gallery {
   /**
-   * @param {thingsList} list [button, content, class, imgClass, container, overlay]
+   * @param {thingsList} list [button, content, class]
    */
-  constructor(thingsList) {
-    this.button = thingsList[0];
-    this.content = thingsList[1];
-    this.className = thingsList[2];
+  constructor([buttonID, contentID, previewID]) {
+    this.button = buttonID;
+    this.content = contentID;
+    this.preview = previewID;
+    this.overlay = '#overlay';
+    this.overlayContainer = '#overlayContainer';
+    this.contentdown = false;
 
-    $(this.content).hide();
     $(this.button).on("click", this._toggle.bind(this));
-    $('.img').on("click", this._imgPreview.bind(this));
+    $(".img").on("click", this._imgPreview.bind(this));
   }
   _toggle() {
-    const $this = this;
-    $($this.className).each(function () {
-      $(this).toggle();
-      $($this.content).is(":visible")
-        ? $($this.button).text("Hide photos")
-        : $($this.button).text("Show more");
-    });
+    $(this.preview).toggle("fast");
+    $(this.content).slideToggle("fast");
+    if (!this.contentdown) {
+      $(this.button).text("Hide photos");
+      this.contentdown = true;
+    } else {
+      $(this.overlay).trigger("click");
+      $(this.button).text("Show more");
+      this.contentdown = false;
+    }
   }
 
   _imgPreview() {
-    $('.img').on("click", function () {
-      if ($('#overlayContainer').is(":hidden")){
-        $("#overlayContainer").show();
+    const $this = this;
+    $(".img").on("click", function () {
+      if ($($this.overlayContainer).is(":hidden")) {
+        $($this.overlayContainer).show();
       }
-      $('#overlay')
+      $($this.overlay)
         .attr("src", $(this).attr("src"))
         .show()
         .one("click", function () {
           $(this).hide();
-          $("#overlayContainer").hide();
+          $($this.overlayContainer).hide();
         });
     });
   }
 
   /**
-   * @param {thingsList} list [button, content, class, imgClass, container, overlay]
+   * @param {thingsList} list [buttonID, contentID, previewID]
    */
-  static apply(thingsList) {
-    new Gallery(thingsList);
+  static apply([buttonID, contentID, previewID]) {
+    new Gallery([buttonID, contentID, previewID]);
   }
 }
 
@@ -48,15 +54,15 @@ class Gallery {
 Gallery.apply([
   "#kebBtn",
   "#kebContent",
-  ".keb",
+  "#kebPreview",
 ]);
 Gallery.apply([
   "#rgBtn",
   "#rgContent",
-  ".rg",
+  "#rgPreview",
 ]);
 Gallery.apply([
   "#otherBtn",
   "#otherContent",
-  ".oth",
+  "#othPreview",
 ]);

@@ -6,7 +6,9 @@
 
 {% block content %}
 <div class="container my-4 bg-dark p-4 rounded" id="galleryContainer">
-    
+    <div class="row my-2 justify-content-evenly keb d-md-none d-lg-flex" id="overlayContainer">
+        <img class="col-9" id="overlay">
+    </div>
     <div class="row">
         <div class="col-lg-4 col-md-12">
             <h4 class="text-center">Kebnekaise</h4>
@@ -17,8 +19,8 @@
                 <button class="btn btn-info col-6" id="kebBtn" type="button">Show more</button>
             </div>
             <div class="row g-2 my-2 justify-content-evenly keb overflow-auto imgContainer" id="kebContent">
-                {% for file in kebfiles %}
-                <img class="col-md-6 col-sm-12 img" src="{% static file %}" alt="">
+                {% for file in kebnekaise %}
+                <img class="col-12 img" src="{% static file %}" alt="">
                 {% endfor %}
             </div>
         </div>
@@ -31,63 +33,28 @@
                 <button class="btn btn-info col-6" id="rgBtn" type="button">Show more</button>
             </div>
             <div class="row g-2 my-2 justify-content-evenly content rg overflow-auto imgContainer" id="rgContent">
-                {% for file in rgs %}
-                <img class="col-md-6 col-sm-12 img" src="{% static file %}" alt="">
+                {% for file in riksgransen %}
+                <img class="col-12 img" src="{% static file %}" alt="">
                 {% endfor %}
             </div>
         </div>
         <div class="col-lg-4 col-md-12">
             <h4 class="text-center">Others</h4>
-            <div class="row my-2 justify-content-evenly oth" id="otherPreview">
+            <div class="row my-2 justify-content-evenly" id="otherPreview">
                 <img class="col-12" id="otherPreviewImg" src="{% static 'photos/img/others/city_night.webp' %}" alt="">
             </div>
             <div class="row justify-content-evenly mt-3">
                 <button class="btn btn-info col-6" id="otherBtn" type="button">Show more</button>
             </div>
-            <div class="row g-2 my-2 justify-content-evenly content oth overflow-auto imgContainer" id="otherContent">
+            <div class="row g-2 my-2 justify-content-evenly content overflow-auto imgContainer" id="otherContent">
                 {% for file in others %}
-                <img class="col-md-6 col-sm-12 img" src="{% static file %}" alt="">
+                <img class="col-12 img" src="{% static file %}" alt="">
                 {% endfor %}
             </div>
         </div>
     </div>
-    <div class="row my-2 justify-content-evenly keb d-md-none d-lg-block" id="overlayContainer">
-        <img class="col-12" id="overlay">
-    </div>
+    
 </div>
-<!-- <div class="container my-4 bg-dark p-4 rounded">
-    <h4 class="text-center">Riksgränsen</h4>
-    <div class="row my-2 justify-content-evenly rg" id="rgPreview">
-        <img class="col-12" id="rgPreviewImg" src="{% static 'photos/img/riksgransen/winter_1.webp' %}"
-            alt="">
-    </div>
-    <div class="row justify-content-evenly mt-3">
-        <button class="btn btn-info col-6" id="rgBtn" type="button">Show more</button>
-    </div>
-    <div class="row g-2 my-2 justify-content-evenly content rg overflow-auto" id="rgContent">
-        {% for file in rgs %}
-        <img class="col-lg-4 col-md-6 col-sm-12 rgImg" src="{% static file %}" alt="">
-        {% endfor %}
-    </div>
-</div>
-<div class="container my-4 bg-dark p-4 rounded">
-    <h4 class="text-center">Others</h4>
-    <div class="row my-2 justify-content-evenly oth" id="overlayContainerThree">
-        <img class="col-12" id="overlayThree">
-    </div>
-    <div class="row my-2 justify-content-evenly oth" id="otherPreview">
-        <img class="col-12" id="otherPreviewImg" src="{% static 'photos/img/others/city_night.webp' %}"
-            alt="">
-    </div>
-    <div class="row justify-content-evenly mt-3">
-        <button class="btn btn-info col-6" id="otherBtn" type="button">Show more</button>
-    </div>
-    <div class="row g-2 my-2 justify-content-evenly content oth overflow-auto" id="otherContent">
-        {% for file in others %}
-        <img class="col-lg-4 col-md-6 col-sm-12 othImg" src="{% static file %}" alt="">
-        {% endfor %}
-    </div>
-</div> -->
 {% endblock %}
 
 {% block scripts %}
