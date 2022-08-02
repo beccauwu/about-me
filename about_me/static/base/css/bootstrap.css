@@ -5857,8 +5857,8 @@ fieldset:disabled .btn {
 }
 
 .list-group-item-dark {
-  color: #141619;
-  background-color: #d3d3d4;
+  color: var(--bs-white);
+  background-color: var(--bs-dark);
 }
 
 .list-group-item-dark.list-group-item-action:hover,
