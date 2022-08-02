@@ -9,7 +9,6 @@ class Gallery {
     this.overlay = '#overlay';
     this.overlayContainer = '#overlayContainer';
     this.contentdown = false;
-
     $(this.button).on("click", this._toggle.bind(this));
     $(".img").on("click", this._imgPreview.bind(this));
   }
@@ -25,7 +24,6 @@ class Gallery {
       this.contentdown = false;
     }
   }
-
   _imgPreview() {
     const $this = this;
     $(".img").on("click", function () {
@@ -41,7 +39,6 @@ class Gallery {
         });
     });
   }
-
   /**
    * @param {thingsList} list [buttonID, contentID, previewID]
    */
