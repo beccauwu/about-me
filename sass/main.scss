@@ -1,0 +1,48 @@
+//general
+$primary: #7D3BA3;
+$light: #A15FC7;
+$dark: #32094A;
+$black: #08060D;
+$success: #A8EBA4;
+$warning: #F7D23B;
+$danger: #DD6980;
+$info: #5E92BF;
+$border-color: #E6478E;
+
+//body
+$body-color: $dark;
+$body-bg: #C99FF9;
+
+//cards
+$card-bg: #EC8DB8;
+
+//accordions
+$accordion-bg: $body-bg;
+$accordion-button-active-bg: $accordion-bg;
+$accordion-button-active-color: $body-color;
+
+//forms
+$input-bg: #A03E99;
+$input-color: #F8CADF;
+$input-placeholder-color: $input-color;
+$input-border-color: $border-color;
+$form-label-color: $dark;
+$form-select-indicator-color: #E6478E;
+
+//list groups
+$list-group-bg: #A03E99;
+$list-group-color: #F8CADF;
+$list-group-border-color: $border-color;
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+$my-theme-colours: (
+    "altlight": #CAACEC,
+    "altdark": #55286F,
+    "btnprimary": #A03E99,
+);
+
+$theme-colors: map-merge($my-theme-colours, $theme-colors);
+
+@import "../node_modules/bootstrap/scss/bootstrap";

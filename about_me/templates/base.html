@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'base/css/bootstrap.css' %}">
+    <meta http-equiv="Content-Security-Policy" content="*">
+    <link rel="stylesheet" type="text/css" href="{% static 'base/css/main.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'base/img/icon.png' %}" type="image/x-icon">
     {% block styles %}{% endblock %}
@@ -14,7 +15,7 @@
 
 <body class="d-flex flex-column min-vh-100">
     <header id="top">
-        <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-lg">
+        <nav class="navbar sticky-top navbar-expand-lg bg-primary">
             <div class="container-fluid">
                 <div class="nav navbar-nav mx-auto">
                     <a class="navbar-brand" href="{% url 'home' %}">Rebecca Perttula</a>
@@ -41,10 +42,10 @@
                             </li>
                             <li class="nav-item">
                                 <div class="dropdown">
-                                    <a class="btn btn-dark dropdown-toggle nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="btn  dropdown-toggle nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Admin
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                    <ul class="dropdown-menu ">
                                         <li>
                                             {% block admin %}
                                             {% if user.is_authenticated %}
@@ -82,14 +83,14 @@
     </main>
     <div class="mt-auto"></div>
     <footer>
-        <nav class="navbar navbar-expand navbar-dark bg-dark static-bottom">
+        <nav class="navbar navbar-expand static-bottom bg-primary">
             <div class="container-fluid">
                 <div class="container wi-fc mx-auto text-center">
                     <div class="nav-item row">
-                        <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me" target="_blank" aria-label="page source on GitHub (opens in new tab)">Page Source</a>
+                        <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me/" target="_blank" aria-label="page source on GitHub (opens in new tab)">Page Source</a>
                     </div>
                     <div class="nav-item row">
-                        <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me/blob/master/LICENSE" target="_blank" aria-label="license (opens in new tab)">©
+                        <a class="nav-link fw-light" href="https://github.com/beccauwu/about-me/blob/master/LICENSE/" target="_blank" aria-label="license (opens in new tab)">©
                             Rebecca Perttula 2022</a>
                     </div>
                     <div class="nav-item row">
@@ -99,9 +100,8 @@
             </div>
         </nav>
     </footer>
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{% static 'base/js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap.bundle.js' %}" type="module"></script>
     <script src="{% static 'base/js/base.js' %}"></script>
     {% block scripts %}
     {% endblock %}
