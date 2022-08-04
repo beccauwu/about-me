@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Glacial Indifference Bold';
+    src: url('../fonts/GlacialIndifference-Bold.woff2');
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -17,11 +22,20 @@ body,
 html {
     height: 100%;
 }
-.navbar-brand{
-    padding-right: 30px;
+
+.navbar-brand {
+    padding-left: 5px;
+    padding-right: 80px;
+    margin: 0;
 }
+
 #adminDropdown {
-    width: 70px;
+    width: 125px;
+    padding-right: 35px;
+}
+
+.giBold {
+    font-family: 'Glacial Indifference Bold';
 }
 
 .bg {
@@ -38,6 +52,7 @@ html {
 
 .wi-fc {
     width: fit-content;
+    width: -moz-fit-content;
 }
 
 #languagesPanel .col {
@@ -55,11 +70,21 @@ html {
     max-width: none;
 }
 
-#navbar a, .navbar-brand {
+#navbar a,
+.navbar-brand {
     color: #fff;
 }
 
 body {
     height: 100vh;
     z-index: 1;
+}
+
+main {
+    z-index: 1;
+}
+
+#adminDropdown ul {
+    left: initial;
+    right: 0;
 }

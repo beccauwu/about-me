@@ -9,6 +9,8 @@ class Gallery {
     this.overlay = '#overlay';
     this.overlayContainer = '#overlayContainer';
     this.contentdown = false;
+    $(this.overlayContainer).hide()
+    $(this.overlay).hide();
     $(this.button).on("click", this._toggle.bind(this));
     $(".img").on("click", this._imgPreview.bind(this));
   }
@@ -61,5 +63,5 @@ Gallery.apply([
 Gallery.apply([
   "#otherBtn",
   "#otherContent",
-  "#othPreview",
+  "#otherPreview",
 ]);

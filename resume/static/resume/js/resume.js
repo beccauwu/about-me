@@ -28,3 +28,7 @@ $(itmsArray).each(function() {
     });
 })
 
+$('.carousel-caption').each(function(){
+  $(this)
+    .css("background-color", "#e4a2f3")
+})

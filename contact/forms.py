@@ -8,7 +8,7 @@ class ContactForm(Form):
         ('Request for quote on a job', 'Request for quote on a job'),
         ('Website inquiry', 'Website inquiry'),
         ('Other', 'Other'))
-    subject = ChoiceField(choices=CHOISES, widget=Select(attrs={'class': "form-select", 'id': 'subjectInput'}))
-    name = CharField(max_length = 100, required=True, widget=TextInput(attrs={'class': "form-control", 'id': 'nameInput', 'placeholder': 'Nathaneal Down'}))
-    email_address = EmailField(max_length = 150, required=True, widget=TextInput(attrs={'class': "form-control", 'id': 'emailInput', 'placeholder': 'name@example.com'}))
-    message = CharField(max_length = 2000, required=True, widget=Textarea(attrs={'class': "form-control", 'id': 'msgInput', 'placeholder': 'Message'}))
+    subject = ChoiceField(choices=CHOISES, widget=Select(attrs={'class': "form-select giBold", 'id': 'subjectInput'}))
+    name = CharField(max_length = 100, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'nameInput', 'placeholder': 'Nathaneal Down'}))
+    email_address = EmailField(max_length = 150, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'name@example.com'}))
+    message = CharField(max_length = 2000, required=True, widget=Textarea(attrs={'class': "form-control giBold", 'id': 'msgInput', 'placeholder': 'Message'}))
