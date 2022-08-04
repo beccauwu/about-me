@@ -160,3 +160,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 # AWS_SES_REGION_NAME = 'eu-west-1'
 # AWS_SES_REGION_ENDPOINT = 'email.eu-west-1.amazonaws.com'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
+}
