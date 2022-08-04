@@ -5,16 +5,15 @@
 
 {% block content %}
 <div class="container-fluid my-4">
-    <div class="card mb-3 text-center wi-fc mx-auto p-4" style="max-width: 80%;">
-        <div class="card-body">
-            <h5 class="card-title">Welcome!</h5>
-            <p class="card-text">
-                This page is here for you (probably potential future employer) to be able to have a look at my resume or to learn more about me
-            </p>
-            <p class="card-text">
-                There is also a page where you'll be able to contact me, <a href="{% url 'contact' %}">here</a>.
-            </p>
-        </div>
+    <div class="col">
+        <h2 class="card-title giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">Welcome!</h2>
+        <p class="card-text giBold text-black bg-light wi-fc mx-auto row p-1 border border-black">
+            This page is here for you (probably potential future employer) to be able to have a look at my resume or to learn
+            more about me
+        </p>
+        <p class="card-text giBold text-black bg-light wi-fc mx-auto row p-1 border border-black">
+            There is also a page where you'll be able to contact me, <a href="{% url 'contact' %}">here</a>.
+        </p>
     </div>
 </div>
 {% endblock %}
