@@ -14,8 +14,9 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    <div class="bg"></div>
     <header id="top">
-        <nav class="navbar sticky-top navbar-expand-lg bg-primary">
+        <nav class="navbar sticky-top navbar-expand-lg bg-black">
             <div class="container-fluid">
                 <div class="nav navbar-nav mx-auto">
                     <a class="navbar-brand" href="{% url 'home' %}">Rebecca Perttula</a>
@@ -24,7 +25,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbar">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-tabs">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 {% block home %}<a class="nav-link" href="{% url 'home' %}" aria-label="home page">Home</a>{% endblock %}
                             </li>
@@ -83,7 +84,7 @@
     </main>
     <div class="mt-auto"></div>
     <footer>
-        <nav class="navbar navbar-expand static-bottom bg-primary">
+        <nav class="navbar navbar-expand static-bottom bg-black">
             <div class="container-fluid">
                 <div class="container wi-fc mx-auto text-center">
                     <div class="nav-item row">

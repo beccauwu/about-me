@@ -1,38 +1,47 @@
+@font-face {
+    font-family: 'Glacial Indifference';
+    src: url('../fonts/GlacialIndifference-Regular.woff2');
+}
 //general
 $primary: #7D3BA3;
-$light: #A15FC7;
+$light: #e4a2f3;
 $dark: #32094A;
-$black: #08060D;
+$black: #08060dac;
 $success: #A8EBA4;
 $warning: #F7D23B;
 $danger: #DD6980;
 $info: #5E92BF;
-$border-color: #E6478E;
+$border-color: #000000;
 
 //body
-$body-color: $dark;
-$body-bg: #C99FF9;
+$body-color: #ffff;
+$body-bg: #12100700;
 
 //cards
-$card-bg: #EC8DB8;
+$card-bg: $black;
+$card-color: $body-color;
 
 //accordions
-$accordion-bg: $body-bg;
+$accordion-bg: $light;
+$accordion-color: $body-color;
 $accordion-button-active-bg: $accordion-bg;
-$accordion-button-active-color: $body-color;
+$accordion-button-color: $dark;
+$accordion-button-active-color: $dark;
 
 //forms
-$input-bg: #A03E99;
-$input-color: #F8CADF;
+$input-bg: #8478A7;
+$input-color: $body-color;
 $input-placeholder-color: $input-color;
 $input-border-color: $border-color;
-$form-label-color: $dark;
-$form-select-indicator-color: #E6478E;
+$form-select-indicator-color: $primary;
 
 //list groups
-$list-group-bg: #A03E99;
-$list-group-color: #F8CADF;
+$list-group-bg: #8478A7;
+$list-group-color: $body-color;
 $list-group-border-color: $border-color;
+
+//navs
+$nav-link-color: $body-color;
 
 @import "../node_modules/bootstrap/scss/_functions";
 @import "../node_modules/bootstrap/scss/_variables";
@@ -46,3 +55,7 @@ $my-theme-colours: (
 $theme-colors: map-merge($my-theme-colours, $theme-colors);
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+:root {
+    --bs-body-font-family: 'Glacial Indifference', sans-serif;
+}
