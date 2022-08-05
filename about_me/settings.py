@@ -145,23 +145,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = 'apps.home'
-LOGOUT_REDIRECT_URL = 'apps.home'
-
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-# AWS_SES_REGION_NAME = 'eu-west-1'
-# AWS_SES_REGION_ENDPOINT = 'email.eu-west-1.amazonaws.com'
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
@@ -184,3 +167,16 @@ LOGGING = {
         },
     },
 }
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'apps.home'
+LOGOUT_REDIRECT_URL = 'apps.home'
+
+EMAIL_HOST = config('MAILGUN_SMTP_SERVER')
+EMAIL_HOST_USER = config('MAILGUN_SMTP_LOGIN')
+EMAIL_HOST_PASSWORD = config('MAILGUN_SMTP_PASSWORD')
+EMAIL_PORT = config('MAILGUN_SMTP_PORT')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
