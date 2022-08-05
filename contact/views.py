@@ -23,12 +23,16 @@ def contact(request):
                 message = EmailMessage(
 					subject=subject,
 					from_email=from_email,
-					to=[email, 'mail@perttula.co'])
+					to=[email])
                 message.template_id = 'contact'
                 message.merge_global_data = {
-					'name': fname,
+					'name': str(fname).capitalize(),
 					'message': msg,
 				}
+                message.esp_extra = {
+                    'cc': 'mail@perttula.co',
+                    'o:tag': 'resume contact form',
+                }
                 message.send()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
