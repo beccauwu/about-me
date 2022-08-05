@@ -78,10 +78,15 @@ html {
 body {
     height: 100vh;
     z-index: 1;
+    text-size-adjust: 100%;
 }
 
 main {
     z-index: 1;
+}
+
+th {
+    text-align: match-parent;
 }
 
 #adminDropdown ul {

@@ -162,6 +162,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # AWS_SES_REGION_NAME = 'eu-west-1'
 # AWS_SES_REGION_ENDPOINT = 'email.eu-west-1.amazonaws.com'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'website_cache_table',
+    }
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
