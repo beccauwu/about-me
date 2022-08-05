@@ -15,7 +15,7 @@ def contact(request):
             name = str(form.cleaned_data['name']).capitalize()
             subject = f"{name.upper()} | {form.cleaned_data['subject']}"
             email = form.cleaned_data['email_address']
-            from_email = "noreply@perttula.co"
+            from_email = 'noreply@perttula.co'
             cc_email = 'mail@perttula.co'
             msg = form.cleaned_data['message']
             try:
@@ -24,7 +24,7 @@ def contact(request):
 					from_email=from_email,
 					to=[email],
      				cc=[cc_email])
-                message.template_id = "contact"
+                message.template_id = 'contact'
                 message.merge_global_data = {
 					'name': name,
 					'message': msg,
