@@ -12,7 +12,9 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = str(form.cleaned_data['name']).capitalize()
+            fname = str(form.cleaned_data['fname']).capitalize()
+            lname = str(form.cleaned_data['lname']).capitalize()
+            name = fname + ' ' + lname
             subject = f"{name.upper()} | {form.cleaned_data['subject']}"
             email = form.cleaned_data['email_address']
             from_email = 'noreply@perttula.co'
@@ -26,7 +28,7 @@ def contact(request):
      				cc=[cc_email])
                 message.template_id = 'contact'
                 message.merge_global_data = {
-					'name': name,
+					'name': fname,
 					'message': msg,
 				}
                 message.send()

@@ -181,9 +181,9 @@ LOGOUT_REDIRECT_URL = 'apps.home'
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
 ANYMAIL = {
-  "MAILGUN_API_KEY": config('MAILGUN_API_KEY'),
+  "MAILGUN_API_KEY": config('MAILGUN_API_KEY', default=None),
   "MAILGUN_API_URL": "https://api.eu.mailgun.net/v3",
-  "MAILGUN_SENDER_DOMAIN": config('MAILGUN_DOMAIN'),
+  "MAILGUN_SENDER_DOMAIN": config('MAILGUN_DOMAIN', default=None),
 }
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
