@@ -9,7 +9,7 @@ class ContactForm(Form):
         ('Website inquiry', 'Website inquiry'),
         ('Other', 'Other'))
     subject = ChoiceField(choices=CHOISES, widget=Select(attrs={'class': "form-select giBold", 'id': 'subjectInput'}))
-    fname = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'fnameInput', 'placeholder': 'Nathaneal'}))
-    lname = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'lnameInput', 'placeholder': 'Down'}))
+    fname = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold nameInput", 'id': 'fnameInput', 'placeholder': 'Nathaneal'}))
+    lname = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold nameInput", 'id': 'lnameInput', 'placeholder': 'Down'}))
     email_address = EmailField(max_length = 150, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'name@example.com'}))
     message = CharField(max_length = 2000, required=True, widget=Textarea(attrs={'class': "form-control giBold", 'id': 'msgInput', 'placeholder': 'Message'}))
