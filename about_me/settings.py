@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'contact',
     'resume',
     'photography',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -173,10 +174,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'apps.home'
 LOGOUT_REDIRECT_URL = 'apps.home'
 
-EMAIL_HOST = config('MAILGUN_SMTP_SERVER')
-EMAIL_HOST_USER = config('MAILGUN_SMTP_LOGIN')
-EMAIL_HOST_PASSWORD = config('MAILGUN_SMTP_PASSWORD')
-EMAIL_PORT = config('MAILGUN_SMTP_PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+# EMAIL_HOST = config('MAILGUN_SMTP_SERVER')
+# EMAIL_HOST_USER = config('MAILGUN_SMTP_LOGIN')
+# EMAIL_HOST_PASSWORD = config('MAILGUN_SMTP_PASSWORD')
+# EMAIL_PORT = config('MAILGUN_SMTP_PORT')
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ANYMAIL = {
+  "MAILGUN_API_KEY": config('MAILGUN_API_KEY'),
+  "MAILGUN_API_URL": "https://api.eu.mailgun.net/v3",
+  "MAILGUN_SENDER_DOMAIN": config('MAILGUN_DOMAIN'),
+}
+
+EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
