@@ -18,14 +18,12 @@ def contact(request):
             subject = f"{name.upper()} | {form.cleaned_data['subject']}"
             email = form.cleaned_data['email_address']
             from_email = 'noreply@perttula.co'
-            cc_email = 'mail@perttula.co'
             msg = form.cleaned_data['message']
             try:
                 message = EmailMessage(
 					subject=subject,
 					from_email=from_email,
-					to=[email],
-     				cc=[cc_email])
+					to=[email, 'mail@perttula.co'])
                 message.template_id = 'contact'
                 message.merge_global_data = {
 					'name': fname,
