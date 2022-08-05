@@ -18,20 +18,22 @@ def contact(request):
             subject = f"{str(fname + ' ' + lname).upper()} | {form.cleaned_data['subject']}"
             from_email = 'mail@perttula.co'
             msg = form.cleaned_data['message']
+            recipients = [[email, subject], ['mail@perttula.co' , f'New Message from {email}']]
             try:
-                message = EmailMessage(
-					subject=subject,
-					from_email=from_email,
-					to=[email])
-                message.template_id = 'contact'
-                message.merge_global_data = {
-					'name': str(fname).capitalize(),
-					'message': msg,
-				}
-                message.esp_extra = {
-                    'o:tag': 'resume contact form',
-                }
-                message.send()
+                for recipient in recipients:
+                    message = EmailMessage(
+                        subject=recipient[1],
+                        from_email=from_email,
+                        to=[recipient[0]])
+                    message.template_id = 'contact'
+                    message.merge_global_data = {
+                        'name': str(fname).capitalize(),
+                        'message': msg,
+                    }
+                    message.esp_extra = {
+                        'o:tag': 'resume contact form',
+                    }
+                    message.send()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('home')
