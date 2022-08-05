@@ -16,7 +16,7 @@ def contact(request):
             lname = form.cleaned_data['lname']
             email = form.cleaned_data['email_address']
             subject = f"{str(fname + ' ' + lname).upper()} | {form.cleaned_data['subject']}"
-            from_email = 'noreply@perttula.co'
+            from_email = 'mail@perttula.co'
             msg = form.cleaned_data['message']
             try:
                 message = EmailMessage(
@@ -28,6 +28,9 @@ def contact(request):
 					'name': str(fname).capitalize(),
 					'message': msg,
 				}
+                message.esp_extra = {
+                    'o:tag': 'resume contact form',
+                }
                 message.send()
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
