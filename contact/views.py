@@ -54,7 +54,7 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
+            name = str(form.cleaned_data['name']).capitalize()
             subject = f"{name.upper()} | {form.cleaned_data['subject']}"
             email = form.cleaned_data['email_address']
             from_email = "noreply@perttula.co"
