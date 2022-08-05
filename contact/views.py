@@ -12,8 +12,8 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            fname = str(form.cleaned_data['fname']).capitalize()
-            lname = str(form.cleaned_data['lname']).capitalize()
+            fname = form.cleaned_data['fname']
+            lname = form.cleaned_data['lname']
             name = fname + ' ' + lname
             subject = f"{name.upper()} | {form.cleaned_data['subject']}"
             email = form.cleaned_data['email_address']
