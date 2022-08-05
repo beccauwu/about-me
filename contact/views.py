@@ -49,6 +49,7 @@ def text_message(name, message):
     """
     return body
 
+@csrf_exempt
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
