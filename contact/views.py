@@ -57,12 +57,15 @@ def contact(request):
             name = form.cleaned_data['name']
             subject = f"{name.upper()} | {form.cleaned_data['subject']}"
             email = form.cleaned_data['email_address']
+            from_email = "noreply@perttula.co"
+            cc_email = 'mail@perttula.co'
             msg = form.cleaned_data['message']
             try:
                 message = EmailMessage(
 					subject=subject,
-					from_email="noreply@perttula.co",
-					to=[email, 'inbox@perttula.co'])
+					from_email=from_email,
+					to=[email],
+     				cc=[cc_email])
                 message.template_id = "contact"
                 message.merge_global_data = {
 					'name': name,
@@ -74,29 +77,4 @@ def contact(request):
             return redirect('home')
     form = ContactForm()
     return render(request, 'contact.html', {'form': form})
-
-# @csrf_exempt
-# def contact(request):
-# 	if request.method == 'POST':
-# 		form = ContactForm(request.POST)
-# 		if form.is_valid():
-# 			name = form.cleaned_data['name']
-# 			subject = f"{name.upper()} | {form.cleaned_data['subject']}"
-# 			to_email = form.cleaned_data['email_address']
-# 			message = form.cleaned_data['message']
-# 			try:
-# 				mailgun_send(name, to_email, subject, message, request)
-# 				# send_mail(
-#         		# 	subject=subject,
-#            		# 	message=text_content,
-#               	# 	from_email='noreply@perttula.co',
-#                 # 	recipient_list=['inbox@perttula.co', to_email],
-#                 #  	html_message=html_content,
-#                 # )
-# 			except BadHeaderError:
-# 				return HttpResponse('Invalid header found.')
-# 			return redirect ("home")
-# 	form = ContactForm()
-# 	return render(request, "contact.html", {'form':form})
-
 
