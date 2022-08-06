@@ -93,3 +93,6 @@ th {
     left: initial;
     right: 0;
 }
+.pwchildren > * {
+    width: fit-content;
+}

@@ -8,3 +8,5 @@ about-me.pyproj
 about-me.sln
 geckodriver.log
 /.vs
+node_modules
+**/static
