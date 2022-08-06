@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
-    'corsheaders',
+    'storages',
     'home',
     'blog',
     'about_me',
@@ -65,9 +65,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
 
 ROOT_URLCONF = 'about_me.urls'
 
@@ -129,23 +126,30 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-# The URL to use when referring to static files (where they will be served from)
-STATIC_URL = '/static/'
 
-# The absolute path to the directory where collectstatic will collect static files for deployment.
+
+# AWS s3 settings
+AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')
+AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'resum-assets'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+AWS_LOCATION = 'static'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaStorage'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
@@ -174,12 +178,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'apps.home'
 LOGOUT_REDIRECT_URL = 'apps.home'
 
-# EMAIL_HOST = config('MAILGUN_SMTP_SERVER')
-# EMAIL_HOST_USER = config('MAILGUN_SMTP_LOGIN')
-# EMAIL_HOST_PASSWORD = config('MAILGUN_SMTP_PASSWORD')
-# EMAIL_PORT = config('MAILGUN_SMTP_PORT')
-# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-
+#email settings
 ANYMAIL = {
   "MAILGUN_API_KEY": config('MAILGUN_API_KEY', default=None),
   "MAILGUN_API_URL": "https://api.eu.mailgun.net/v3",
