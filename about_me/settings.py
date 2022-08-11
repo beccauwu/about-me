@@ -90,7 +90,14 @@ WSGI_APPLICATION = 'about_me.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'about-me-rebecca',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
