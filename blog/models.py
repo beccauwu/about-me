@@ -22,3 +22,21 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+  
+# Create your models here.
+class BlogPost(models.Model):
+    user = models.ForeignKey(User,
+                        default = 1,
+                        null = True, 
+                        on_delete = models.SET_NULL
+                        )
+    blogname = models.CharField(max_length = 100)
+    blogauth = models.CharField(max_length = 100)
+    blogdes = models.TextField(max_length = 400)
+    slug = models.SlugField(max_length=200, unique=True)
+    blogcontent = models.TextField()
+    img = models.ImageField(upload_to ='pics/blog')
+  
+    def __str__(self):
+        return self.blogname

@@ -26,6 +26,5 @@ urlpatterns = [
     path('resume/', include('resume.urls')),
     path('photography/', include('photography.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('login/', views.login_request, name='login'),
-    path('logout/', views.logout_request, name='logout')
+    path('user/', include("accounts.urls")),
 ]

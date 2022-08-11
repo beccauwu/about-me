@@ -7,4 +7,5 @@ from . import views
 
 urlpatterns = [
     path('', views.photo_gallery, name='photos'),
+    path('/upload', views.gallery_upload, name='galleryupload')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

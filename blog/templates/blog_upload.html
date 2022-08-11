@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="card card-body mx-auto wi-fc my-3">
+    <div class="card-body mx-auto" style="width: 18rem;">
+        <div class="mb-3 wi-fc mx-auto">
+            <h4 class="card-title text-center">Log In</h4>
+            <hr>
+        </div>
+        <form id="loginForm" class="row g-3 text-center" method="post">
+            {% csrf_token %}
+            {{ form.blogname }}
+            {{ form.blogauth }}
+            {{ form.blogdes }}
+            {{ form.img }}
+            <button class="btn btn-info wi-fc mx-auto" type="submit">Log In</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
