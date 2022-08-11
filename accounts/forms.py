@@ -1,20 +1,57 @@
-from django.forms import CharField, TextInput, EmailField, Form, EmailInput, PasswordInput
-from django.contrib.auth.forms import UserCreationForm
+from django.forms import CharField, TextInput, EmailField, Form, EmailInput, PasswordInput, ImageField
+from django import forms
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
+from django.utils.translation import gettext, gettext_lazy as _
+from .models import Profile
 
 # Create your forms here.
 
-class SignupForm(UserCreationForm):
-    fname = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold nameInput", 'id': 'fnameInput', 'placeholder': 'Nathaneal'}))
-    lname = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold nameInput", 'id': 'lnameInput', 'placeholder': 'Down'}))
-    username = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'Username'}))
-    email = EmailField(max_length = 150, required=True, widget=EmailInput(attrs={'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'name@example.com'}))
-    password1 = CharField(max_length = 50, required=True, widget=PasswordInput(attrs={'class': "form-control giBold", 'id': 'password1Input', 'placeholder': 'Password'}))
-    password2 = CharField(max_length = 50, required=True, widget=PasswordInput(attrs={'class': "form-control giBold", 'id': 'password2Input', 'placeholder': 'Confirm Password'}))
+class NewUserForm(UserCreationForm):
+    class Meta:
+        fields = ('username', 'email', 'password1', 'password2')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'Username'})
+        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'name@example.com'})
+        self.fields['password1'].widget.attrs.update({'class': "form-control giBold", 'id': 'password1Input', 'placeholder': 'Password'})
+        self.fields['password2'].widget.attrs.update({'class': "form-control giBold", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+        if commit:
+            auth_user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password1'])
+            login(self.request, auth_user)
+        return user
+
+class UserUpdateForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('username', 'fname', 'lname', 'email', 'password1', 'password2')
+        fields = ('username', 'email')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'usernameChangeInput', 'placeholder': 'Change username'})
+        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'emailChangeInput', 'placeholder': 'Change email'})
 
-class LoginForm(Form):
-    username = CharField(max_length = 50, required=True, widget=TextInput(attrs={'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'Username'}))
-    password = CharField(max_length = 50, required=True, widget=PasswordInput(attrs={'class': "form-control giBold", 'id': 'passwordInput', 'placeholder': 'Password'}))
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('pfp', 'bio')
+    def __init__(self):
+        self.fields['pfp'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Profile Picture'})
+        self.fields['bio'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Bio'})
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        fields = ('username', 'password')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'Username'})
+        self.fields['password'].widget.attrs.update({'class': "form-control giBold", 'id': 'passwordInput', 'placeholder': 'Password'})
+    def user_login(self):
+        user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+        if user is not None:
+            login(self.request, user)
+            return user
+        else:
+            return None
