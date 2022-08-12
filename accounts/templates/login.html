@@ -2,12 +2,12 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 <div class="card card-body mx-auto wi-fc my-3">
-    <div class="card-body mx-auto" style="width: 18rem;">
+    <div class="card-body mx-auto text-center" style="width: 18rem;">
         <div class="mb-3 wi-fc mx-auto">
-            <h4 class="card-title text-center">Log In</h4>
+            <h4 class="card-title">Log In</h4>
             <hr>
         </div>
-        <form id="loginForm" class="row g-3 text-center" method="post">
+        <form id="loginForm" class="row g-3" method="post">
             {% csrf_token %}
             <div class="col-12">
                 {{form.username}}
@@ -17,7 +17,7 @@
             </div>
             <button class="btn btn-info wi-fc mx-auto" type="submit">Log In</button>
         </form>
+        <a class="card-text" aria-label="create account" href="{% url 'signup' %}">Don't have an account?<br>Create one here</a>
     </div>
 </div>
-
 {% endblock %}
