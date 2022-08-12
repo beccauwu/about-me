@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from .models import update_profile_signal
 from django.utils.translation import gettext_lazy as _
@@ -13,7 +14,7 @@ def login_request(request):
         form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
             form.user_login()
-            update_profile_signal(instance=request.user, created=True, request=request)
+            update_profile_signal(sender=User, instance=request.user, created=True, request=request)
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
