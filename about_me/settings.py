@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'about_me',
     'contact',
     'resume',
+    'accounts',
     'photography',
     'anymail',
 ]
