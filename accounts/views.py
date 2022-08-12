@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import Group
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
+from .models import update_profile_signal
 from django.utils.translation import gettext_lazy as _
 # Create your views here.
 
@@ -9,9 +10,10 @@ from django.contrib.auth import login, authenticate, logout
 
 def login_request(request):
     if request.method == 'POST':
-        form = LoginForm(data=request.POST, instance=request.user, created=True, request=request)
+        form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
             form.user_login()
+            update_profile_signal(instance=request.user, created=True, request=request)
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
