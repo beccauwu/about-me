@@ -1,0 +1,20 @@
+{% extends profile.html %}
+{% block update_profile %}
+<form method="post" class="row g-3">
+    {% csrf_token %}
+    <div class="col-12">
+        {{user_form.username}}
+    </div>
+    <div class="col-12">
+        {{user_form.email}}
+    </div>
+    <div class="col-12">
+        {{profile_form.pfp}}
+    </div>
+    <div class="col-12">
+        {{profile_form.bio}}
+    </div>
+    <button type="submit" class="btn btn-light text-black col-6 border border-black wi-fc mx-auto d-block giBold"
+        id="contactSubmit">Submit</button>
+</form>
+{% endblock %}

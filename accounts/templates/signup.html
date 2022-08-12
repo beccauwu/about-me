@@ -1,18 +1,40 @@
 {% extends 'base.html' %}
-{% block title %}Register{% endblock %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'contact/css/contact.css' %}">{% endblock %}
+{% block title %}Contact{% endblock %}
+{% block contact %}<a class="nav-link active giBold" href="{% url 'contact' %}" aria-label="contact page">Contact</a>{%
+endblock %}
 {% block content %}
-<div class="card card-body mx-auto wi-fc my-3">
-    <div class="card-body mx-auto" style="width: 18rem;">
-        <div class="mb-3 wi-fc mx-auto">
-            <h4 class="card-title text-center">Log In</h4>
-            <hr>
-        </div>
-        <form id="loginForm" class="row g-3 text-center" method="post">
+<div class="container my-4">
+    <div class="col-md-6 col-lg-3 mx-2">
+        <h2 class="card-title giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">Contact form
+        </h2>
+        <p class="card-text giBold text-black bg-light wi-fc mx-auto row p-1 border border-black">Please write your
+            inquiry below and I'll get back to you ASAP :)</p>
+        <form method="post" class="row g-3">
             {% csrf_token %}
-            {{ login_form }}
-            <button class="btn btn-info wi-fc mx-auto" type="submit">Log In</button>
+            <div class="col-12">
+                {{form.username}}
+            </div>
+            <div class="col-12">
+                {{form.email}}
+            </div>
+            <div class="col-12">
+                {{form.password1}}
+            </div>
+            <div class="col-12">
+                {{form.password2}}
+            </div>
+            <button type="submit"
+                class="btn btn-light text-black col-6 border border-black wi-fc mx-auto d-block giBold"
+                id="contactSubmit">Submit</button>
         </form>
     </div>
 </div>
-
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript" src="{% static 'contact/js/contact.js' %}"></script>
 {% endblock %}

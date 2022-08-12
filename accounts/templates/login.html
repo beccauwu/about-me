@@ -9,7 +9,12 @@
         </div>
         <form id="loginForm" class="row g-3 text-center" method="post">
             {% csrf_token %}
-            {{ login_form }}
+            <div class="col-12">
+                {{form.username}}
+            </div>
+            <div class="col-12">
+                {{form.password}}
+            </div>
             <button class="btn btn-info wi-fc mx-auto" type="submit">Log In</button>
         </form>
     </div>

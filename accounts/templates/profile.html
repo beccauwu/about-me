@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'contact/css/contact.css' %}">{% endblock %}
+{% block title %}Contact{% endblock %}
+{% block contact %}<a class="nav-link active giBold" href="{% url 'contact' %}" aria-label="contact page">Contact</a>{%
+endblock %}
+{% block content %}
+<div class="container my-4">
+    <div class="row d-flex justify-content-center">
+    
+        <div class="col-md-7">
+    
+            <div class="card p-3 py-4">
+                {% if user.profile.pfp %}
+                <div class="text-center">
+                    <img src="{{ user.profile.pfp.url }}" width="100" class="rounded-circle">
+                </div>
+                {% endif %}
+                <div class="text-center mt-3">
+                    <h5 class="mt-2 mb-0">{{ user.username }}</h5>
+    
+                    <div class="px-4 mt-1">
+                        {% if user.profile.bio %}
+                        <p class="card-text giBold text-black bg-light wi-fc mx-auto row p-1 border border-black">
+                            {{user.profile.bio }}
+                        </p>
+                        {% endif %}
+    
+                    </div>
+    
+                    <ul class="social-list">
+                        <li><i class="fa fa-facebook"></i></li>
+                        <li><i class="fa fa-dribbble"></i></li>
+                        <li><i class="fa fa-instagram"></i></li>
+                        <li><i class="fa fa-linkedin"></i></li>
+                        <li><i class="fa fa-google"></i></li>
+                    </ul>
+    
+                    <div class="buttons">
+                        <button class="btn btn-outline-primary px-4">Message</button>
+                        <button class="btn btn-primary px-4 ms-3">Contact</button>
+                    </div>
+                </div>
+    
+    
+    
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    <div class="col-md-6 col-lg-3 mx-2">
+        <h2 class="card-title giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">{{ user.username }}</h2>
+        {% if user.profile.bio %}<p class="card-text giBold text-black bg-light wi-fc mx-auto row p-1 border border-black">{{ user.profile.bio }}</p>{% endif %}
+        {% block update_profile %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript" src="{% static 'contact/js/contact.js' %}"></script>
+{% endblock %}

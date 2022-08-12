@@ -14,7 +14,7 @@ class NewUserForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'Username'})
-        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'name@example.com'})
+        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'Email'})
         self.fields['password1'].widget.attrs.update({'class': "form-control giBold", 'id': 'password1Input', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'class': "form-control giBold", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
     def save(self, commit=True):
