@@ -10,3 +10,4 @@ geckodriver.log
 /.vs
 node_modules
 **/static
+!/static
