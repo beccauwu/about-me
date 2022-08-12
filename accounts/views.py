@@ -9,7 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 
 def login_request(request):
     if request.method == 'POST':
-        form = LoginForm(data=request.POST)
+        form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
             form.user_login()
             return redirect('home')
