@@ -9,7 +9,7 @@ from django.contrib.auth import login, authenticate, logout
 
 def login_request(request):
     if request.method == 'POST':
-        form = LoginForm(request=request, data=request.POST)
+        form = LoginForm(request=request, data=request.POST, login=True)
         if form.is_valid():
             form.user_login()
             return redirect('home')
@@ -20,7 +20,7 @@ def login_request(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = NewUserForm(data=request.POST, instance=request.user, created=True, request=request)
+        form = NewUserForm(data=request.POST, instance=request.user, created=True, login=True, request=request)
         if form.is_valid():
             user = form.save()
             users_group = Group.objects.get(name='users')
