@@ -14,7 +14,6 @@ def login_request(request):
         form = LoginForm(request=request, data=request.POST)
         if form.is_valid():
             form.user_login()
-            update_profile_signal(sender=User, instance=request.user, created=True, request=request)
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
@@ -34,7 +33,7 @@ def signup(request):
         form = NewUserForm()
     return render(request, 'signup.html', {'form': form})
 
-def update_profile(request):
+def profile(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
@@ -42,7 +41,6 @@ def update_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('home')
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
