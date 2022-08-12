@@ -15,7 +15,7 @@ def login_request(request):
         else:
             messages.error(request, 'Invalid username or password')
     form = LoginForm()
-    return render(request=request, template_name='login.html', context={'login_form':form})
+    return render(request=request, template_name='login.html', context={'form':form})
 
 def signup(request):
     if request.method == 'POST':
