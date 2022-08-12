@@ -9,5 +9,8 @@ about-me.sln
 geckodriver.log
 /.vs
 node_modules
-**/static
-!/static
+about_me/static
+contact/static
+home/static
+photography/static
+resume/static
