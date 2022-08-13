@@ -20,7 +20,7 @@
                 {% endif %}
             </div>
             <div class="buttons">
-                <button class="btn btn-primary px-4 ms-3" type="button" data-bs-toggle="modal" data-bs-target="#profileEdit" id="profileEditBtn">Edit profile</button>
+                <button class="btn btn-light text-black px-4 ms-3" type="button" data-bs-toggle="modal" data-bs-target="#profileEdit" id="profileEditBtn">Edit profile</button>
             </div>
             <div class="modal fade" id="profileEdit" tabindex="-1" aria-labelledby="profileEditTitle" aria-hidden="true">
                 <div class="modal-dialog">
@@ -31,19 +31,27 @@
                         </div>
                         <div class="modal-body">
                             <form method="post" id="profileEditForm">
+                                {% if user.profile.pfp %}
                                 <label for="pfpInput" class="form-label giBold text-black">Change profile picture:</label>
+                                {% else %}
+                                <label for="pfpInput" class="form-label giBold text-black">Add profile picture:</label>
+                                {% endif %}
                                 {{ profile_form.pfp }}
-                                <label for="bioInput" class="form-label giBold text-black">Change bio:</label>
+                                {% if user.profile.bio %}
+                                <label for="bioInput" class="form-label pt-1 giBold text-black">Change bio:</label>
+                                {% else %}
+                                <label for="bioInput" class="form-label pt-1 giBold text-black">Add bio:</label>
+                                {% endif %}
                                 {{ profile_form.bio }}
-                                <label for="usernameInput" class="form-label giBold text-black">Change username:</label>
+                                <label for="usernameInput" class="form-label pt-1 giBold text-black">Change username:</label>
                                 {{ user_form.username }}
-                                <label for="emailInput" class="form-label giBold text-black">Change email:</label>
+                                <label for="emailInput" class="form-label pt-1 giBold text-black">Change email:</label>
                                 {{ user_form.email }}
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" form="profileEditForm">Save changes</button>
+                            <button type="submit" class="btn btn-primary giBold" form="profileEditForm">Save changes</button>
                         </div>
                     </div>
                 </div>
