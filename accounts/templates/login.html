@@ -6,6 +6,13 @@
         <div class="mb-3 wi-fc mx-auto">
             <h4 class="card-title">Log In</h4>
             <hr>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
         <form id="loginForm" class="row g-3" method="post">
             {% csrf_token %}
