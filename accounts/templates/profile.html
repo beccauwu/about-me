@@ -22,31 +22,31 @@
             <div class="buttons">
                 <button class="btn btn-primary px-4 ms-3" type="button" data-bs-toggle="modal" data-bs-target="#profile-edit">Edit profile</button>
             </div>
-            <div class="modal fade" id="profile-edit" tabindex="-1" aria-labelledby="profile-edit-title" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="profile-edit-title">Profile editor</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" id="profile-edit-form">
-                                <label for="pfpInput">Change profile picture:</label>
-                                {{ profile_form.pfp }}
-                                <label for="bioInput">Change bio:</label>
-                                {{ profile_form.bio }}
-                                <label for="usernameInput">Change username:</label>
-                                {{ user_form.username }}
-                                <label for="emailInput">Change email:</label>
-                                {{ user_form.email }}
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" form="profile-edit-form">Save changes</button>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="profile-edit" tabindex="-1" aria-labelledby="profile-edit-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profile-edit-title">Profile editor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="profile-edit-form">
+                    <label for="pfpInput">Change profile picture:</label>
+                    {{ profile_form.pfp }}
+                    <label for="bioInput">Change bio:</label>
+                    {{ profile_form.bio }}
+                    <label for="usernameInput">Change username:</label>
+                    {{ user_form.username }}
+                    <label for="emailInput">Change email:</label>
+                    {{ user_form.email }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="profile-edit-form">Save changes</button>
             </div>
         </div>
     </div>
