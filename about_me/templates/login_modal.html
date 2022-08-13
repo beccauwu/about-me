@@ -1,0 +1,27 @@
+{% load static %}
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="loginModalContent">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black" id="loginModalTitle">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="loginModalForm" action="/accounts/login">
+                    {% csrf_token %}
+                    <label for="usernameInput" class="form-label giBold text-black">Username:</label>
+                    {{login_form.username}}
+                    <label for="passwordInput" class="form-label giBold text-black">Password:</label>
+                    {{login_form.password}}
+                </form>
+                <button type="button" class="btn btn-outline-primary giBold formToggle">Don't have an account?<br>Create one here</button>
+            </div>
+            <div class="modal-footer wi-fc mx-auto">
+                <div class="row wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary giBold mr-1" form="loginModalForm">Log in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
