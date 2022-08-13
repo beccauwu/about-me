@@ -1,0 +1,23 @@
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black" id="accountModalTitle">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="accountModalForm" action="/accounts/login" form-state="0">
+                    {% csrf_token %}
+                    <label for="usernameInput" class="form-label giBold text-black">Username:</label>
+                    {{login_form.username}}
+                    <label for="passwordInput" class="form-label giBold text-black">Password:</label>
+                    {{login_form.password}}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="accountModalToggleBtn">Don't have an account?</button>
+                <button type="submit" class="btn btn-primary giBold" form="accountModalForm">Log in</button>
+            </div>
+        </div>
+    </div>
+</div>

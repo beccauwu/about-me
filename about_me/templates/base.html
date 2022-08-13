@@ -17,7 +17,11 @@
     {% endblock %}
     <script src="{% static 'base/js/base.js' %}"></script>
     <script src="https://kit.fontawesome.com/cd478b5352.js" crossorigin="anonymous"></script>
-    {% block scripts %}
-    {% endblock %}
+    {% if scripts %}
+        {% for script in scripts %}
+            <script src="{{ script }}"></script>
+        {% endfor %}
+    {% endif %}
+    {% include modal.html %}
 </body>
 </html>

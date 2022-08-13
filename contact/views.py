@@ -38,5 +38,11 @@ def contact(request):
                 return HttpResponse('Invalid header found.')
             return redirect('home')
     form = ContactForm()
-    return render(request, 'contact.html', {'form': form})
+    return render(request, 'contact.html', {
+        'form': form,
+        'scripts': [
+            "{% static 'contact/js/contact.js' %}",
+            "https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+            ]
+        })
 

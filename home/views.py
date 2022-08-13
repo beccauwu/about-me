@@ -6,11 +6,6 @@ from django.shortcuts import render
 
 
 def index(request):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    #template = loader.get_template('home/index.html')
-    # context = {
-    #     'latest_question_list': latest_question_list,
-    # }
-    return render(request, 'pages/home.html')
-
-
+    context = {}
+    context['scripts'] = ["{% static 'home/js/home.js' %}"]
+    return render(request, 'home.html', context)

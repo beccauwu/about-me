@@ -29,7 +29,8 @@ def photo_gallery(request):
     context = {}
     for collection in collections:
         images = Image.objects.filter(collection=collection)
-        context[collection] = images
+        context['collection'] = images
+    context['scripts'] = ["{% static 'photos/js/photos.js' %}"]
     return render(request, 'photos/photos.html', context)
 
 def gallery_upload(request):

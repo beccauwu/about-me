@@ -17,8 +17,8 @@ def login_request(request):
             return redirect('home')
         else:
             messages.error(request, 'Invalid username or password')
-    form = LoginForm()
-    return render(request=request, template_name='login.html', context={'form':form})
+    # form = LoginForm()
+    # return render(request=request, template_name='login.html', context={'form':form})
 
 def signup(request):
     if request.method == 'POST':
@@ -31,11 +31,12 @@ def signup(request):
             users_group.user_set.add(user)
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
-    else:
-        form = NewUserForm()
-    return render(request, 'signup.html', {'form': form})
+    # else:
+    #     form = NewUserForm()
+    # return render(request, 'signup.html', {'form': form})
 
 def profile(request):
+    context = {}
     if request.method == 'POST':
         user_form = UserUpdateForm(data=request.POST, instance=request.user, request=request)
         profile_form = ProfileForm(data=request.POST, instance=request.user.profile, request=request)
@@ -46,7 +47,9 @@ def profile(request):
     else:
         user_form = UserUpdateForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    context['forms'] = {'user_form': user_form, 'profile_form': profile_form}
+    context['scripts'] = ["{% static 'accounts/js/accounts.js' %}"]
+    return render(request, 'profile.html', context)
 
 def logout_request(request):
     logout(request)

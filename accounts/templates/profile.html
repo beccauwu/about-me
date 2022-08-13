@@ -36,17 +36,17 @@
                                 {% else %}
                                 <label for="pfpInput" class="form-label giBold text-black">Add profile picture:</label>
                                 {% endif %}
-                                {{ profile_form.pfp }}
+                                {{ forms.profile_form.pfp }}
                                 {% if user.profile.bio %}
                                 <label for="bioInput" class="form-label pt-1 giBold text-black">Change bio:</label>
                                 {% else %}
                                 <label for="bioInput" class="form-label pt-1 giBold text-black">Add bio:</label>
                                 {% endif %}
-                                {{ profile_form.bio }}
+                                {{ forms.profile_form.bio }}
                                 <label for="usernameInput" class="form-label pt-1 giBold text-black">Change username:</label>
-                                {{ user_form.username }}
+                                {{ forms.user_form.username }}
                                 <label for="emailInput" class="form-label pt-1 giBold text-black">Change email:</label>
-                                {{ user_form.email }}
+                                {{ forms.user_form.email }}
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -59,7 +59,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-{% block scripts %}
-<script type="text/javascript" src="{% static 'accounts/js/accounts.js' %}"></script>
 {% endblock %}
