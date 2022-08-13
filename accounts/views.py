@@ -29,7 +29,6 @@ def signup(request):
             users_group = Group.objects.get(name='users')
             user.refresh_from_db()
             users_group.user_set.add(user)
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
     else:
         form = NewUserForm()
