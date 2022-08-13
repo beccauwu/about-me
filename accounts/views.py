@@ -44,8 +44,8 @@ def profile(request):
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
     else:
-        user_form = UserUpdateForm()
-        profile_form = ProfileForm()
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'profile_update.html', {'user_form': user_form, 'profile_form': profile_form})
 
 def logout_request(request):
