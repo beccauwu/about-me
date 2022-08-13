@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'base/img/logo.png' %}" type="image/x-icon">
     {% block styles %}{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
     <title>{% block title %}{% endblock %} | Rebecca Perttula</title>
 </head>
 
@@ -38,14 +42,14 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Account</a>
+                        {% block account %}<a class="nav-link" href="{% url 'profile' %}">Account</a>{% endblock %}
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        {% block login %}<a class="nav-link" href="{% url 'login' %}">Login</a>{% endblock %}
                     </li>
                     {% endif %}
                     {% if request.user.is_staff %}
@@ -81,8 +85,6 @@
             </div>
         </nav>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'base/js/base.js' %}"></script>
     {% block scripts %}
     {% endblock %}

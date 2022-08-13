@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'contact/css/contact.css' %}">{% endblock %}
 {% block title %}Sign up{% endblock %}
+{% block login %}<a class="nav-link active giBold" href="{% url 'signup' %}">Signup</a>{% endblock %}
 {% block content %}
 <div class="card card-body mx-auto wi-fc my-3">
     <div class="card-body mx-auto text-center" style="width: 18rem;">
