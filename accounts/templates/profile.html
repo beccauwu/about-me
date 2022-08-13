@@ -26,18 +26,18 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="profileEditTitle">Profile editor</h5>
+                            <h5 class="modal-title giBold text-black" id="profileEditTitle">Profile editor</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form method="post" id="profileEditForm">
-                                <label for="pfpInput">Change profile picture:</label>
+                                <label for="pfpInput" class="form-label giBold text-black">Change profile picture:</label>
                                 {{ profile_form.pfp }}
-                                <label for="bioInput">Change bio:</label>
+                                <label for="bioInput" class="form-label giBold text-black">Change bio:</label>
                                 {{ profile_form.bio }}
-                                <label for="usernameInput">Change username:</label>
+                                <label for="usernameInput" class="form-label giBold text-black">Change username:</label>
                                 {{ user_form.username }}
-                                <label for="emailInput">Change email:</label>
+                                <label for="emailInput" class="form-label giBold text-black">Change email:</label>
                                 {{ user_form.email }}
                             </form>
                         </div>
