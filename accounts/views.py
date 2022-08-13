@@ -22,7 +22,7 @@ def login_request(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = NewUserForm(data=request.POST, instance=request.user, request=request)
+        form = NewUserForm(data=request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
             update_profile_signal(sender=User, instance=user, created=True, request=request)
