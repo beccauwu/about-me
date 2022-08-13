@@ -38,14 +38,14 @@ def signup(request):
 def profile(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(data=request.POST, instance=request.user, request=request)
-        profile_form = ProfileForm(data=request.POST, instance=request.user.profile, reques=request)
+        profile_form = ProfileForm(data=request.POST, instance=request.user.profile, request=request)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
     else:
-        user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
+        user_form = UserUpdateForm()
+        profile_form = ProfileForm()
     return render(request, 'profile_update.html', {'user_form': user_form, 'profile_form': profile_form})
 
 def logout_request(request):
