@@ -22,13 +22,14 @@ def login_request(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = NewUserForm(data=request.POST, instance=request.user)
+        form = NewUserForm(data=request.POST)
         if form.is_valid():
             user = form.save()
             update_profile_signal(sender=User, instance=user, created=True, request=request)
             users_group = Group.objects.get(name='users')
             user.refresh_from_db()
             users_group.user_set.add(user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
     else:
         form = NewUserForm()
