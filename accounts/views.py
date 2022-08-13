@@ -22,9 +22,10 @@ def login_request(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = NewUserForm(data=request.POST, instance=request.user, created=True, request=request)
+        form = NewUserForm(data=request.POST, instance=request.user, request=request)
         if form.is_valid():
             user = form.save()
+            update_profile_signal(sender=User, instance=user, created=True, request=request)
             users_group = Group.objects.get(name='users')
             user.refresh_from_db()
             users_group.user_set.add(user)
@@ -35,8 +36,8 @@ def signup(request):
 
 def profile(request):
     if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        user_form = UserUpdateForm(data=request.POST, instance=request.user request=request)
+        profile_form = ProfileForm(data=request.POST, instance=request.user.profile reques=request)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
