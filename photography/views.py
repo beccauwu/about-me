@@ -45,7 +45,7 @@ def gallery_upload(request):
                 Collection.objects.create(collection=collection, collection_summary=collection_summary)
             for image in images:
                 Image.objects.create(img=image, collection=collection, title=title)
-    return render(request, 'photos/gallery_upload.html')
+    return render(request, 'photos/gallery_upload.html', {'form': form})
 
 def PhotoLike(request, pk):
     post = get_object_or_404(Image, id=request.POST.get('title'))
