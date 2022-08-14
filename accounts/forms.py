@@ -2,7 +2,7 @@ from django.forms import CharField, TextInput, EmailField, Form, EmailInput, Pas
 from django import forms
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.utils.translation import gettext, gettext_lazy as _
 from .models import Profile
 
@@ -18,6 +18,14 @@ class NewUserForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'signupEmailInput', 'placeholder': 'mail@example.com'})
         self.fields['password1'].widget.attrs.update({'class': "form-control giBold", 'id': 'password1Input', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'class': "form-control giBold", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
+    def save(self, commit=True):
+        from .models import update_profile_signal
+        user = super().save(commit=commit)
+        update_profile_signal(sender=User, instance=user, created=True, request=self.request)
+        if commit:
+            auth_user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password1'])
+            login(self.request, auth_user)
+        return user
 
 class UserUpdateForm(UserChangeForm):
     class Meta:
@@ -42,7 +50,7 @@ class LoginForm(AuthenticationForm):
         fields = ('username', 'password')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginUsernameInput', 'placeholder': 'greatestusername'})
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginUsernameInput'})
         self.fields['password'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginPasswordInput'})
     def user_login(self):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
