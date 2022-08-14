@@ -7,12 +7,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="loginModalForm" action="/user/login">
+                <form method="post" id="loginModalForm" action=".">
                     {% csrf_token %}
                     <label for="loginUsernameInput" class="form-label giBold text-black">Username:</label>
-                    {{login_form.username}}
+                    {{request.login_form.username}}
                     <label for="loginPasswordInput" class="form-label giBold text-black">Password:</label>
-                    {{login_form.password}}
+                    {{request.login_form.password}}
                 </form>
                 <button type="button" class="btn btn-outline-primary giBold" data-bs-target="#signupModal" data-bs-toggle="modal">Don't have an account?<br>Create one here</button>
             </div>
