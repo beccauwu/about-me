@@ -1,0 +1,57 @@
+{% load static %}
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="loginModalContent">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black" id="loginModalTitle">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="loginModalForm" action="/accounts/login">
+                    {% csrf_token %}
+                    <label for="loginUsernameInput" class="form-label giBold text-black">Username:</label>
+                    {{login_form.username}}
+                    <label for="loginPasswordInput" class="form-label giBold text-black">Password:</label>
+                    {{login_form.password}}
+                </form>
+                <button type="button" class="btn btn-outline-primary giBold" data-bs-target="#signupModal" data-bs-toggle="modal">Don't have an account?<br>Create one here</button>
+            </div>
+            <div class="modal-footer wi-fc mx-auto">
+                <div class="row wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary giBold mr-1" form="loginModalForm">Log in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="signupModalTitle" aria-hidden="true" id="signupModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black" id="signupModalTitle">Sign up</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="signupModalForm" action="/accounts/signup">
+                    {% csrf_token %}
+                    <label for="signupUsernameInput" class="form-label giBold text-black">Username:</label>
+                    {{signup_form.username}}
+                    <label for="signupEmailInput" class="form-label giBold text-black">Email:</label>
+                    {{signup_form.email}}
+                    {{signup_form.password1}}
+                    {{signup_form.password2}}
+                </form>
+            </div>
+            <div class="modal-footer wi-fc mx-auto">
+                <div class="row wi-fc mx-auto text-center">
+                    <button type="button" class="btn btn-outline-primary giBold" data-bs-target="#loginModal" data-bs-toggle="modal">Log in instead</button>
+                </div>
+                <div class="row wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary giBold mr-1" form="signupModalForm">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

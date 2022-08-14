@@ -14,8 +14,8 @@ class NewUserForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'greatestusername'})
-        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'emailInput', 'placeholder': 'mail@example.com'})
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'signupUsernameInput', 'placeholder': 'greatestusername'})
+        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'signupEmailInput', 'placeholder': 'mail@example.com'})
         self.fields['password1'].widget.attrs.update({'class': "form-control giBold", 'id': 'password1Input', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'class': "form-control giBold", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
 
@@ -42,8 +42,8 @@ class LoginForm(AuthenticationForm):
         fields = ('username', 'password')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'usernameInput', 'placeholder': 'greatestusername'})
-        self.fields['password'].widget.attrs.update({'class': "form-control giBold", 'id': 'passwordInput'})
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginUsernameInput', 'placeholder': 'greatestusername'})
+        self.fields['password'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginPasswordInput'})
     def user_login(self):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         if user is not None:
