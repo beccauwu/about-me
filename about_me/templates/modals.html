@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="loginModalForm" action="/accounts/login">
+                <form method="post" id="loginModalForm" action="/user/login">
                     {% csrf_token %}
                     <label for="loginUsernameInput" class="form-label giBold text-black">Username:</label>
                     {{login_form.username}}
@@ -16,11 +16,10 @@
                 </form>
                 <button type="button" class="btn btn-outline-primary giBold" data-bs-target="#signupModal" data-bs-toggle="modal">Don't have an account?<br>Create one here</button>
             </div>
-            <div class="modal-footer wi-fc mx-auto">
-                <div class="row wi-fc mx-auto">
-                    <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary giBold mr-1" form="loginModalForm">Log in</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-target="#signupModal" data-bs-toggle="modal">Sign up instead</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary giBold" form="loginModalForm">Log in</button>
             </div>
         </div>
     </div>
@@ -33,7 +32,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="signupModalForm" action="/accounts/signup">
+                <form method="post" id="signupModalForm" action="/user/signup">
                     {% csrf_token %}
                     <label for="signupUsernameInput" class="form-label giBold text-black">Username:</label>
                     {{signup_form.username}}
@@ -43,14 +42,10 @@
                     {{signup_form.password2}}
                 </form>
             </div>
-            <div class="modal-footer wi-fc mx-auto">
-                <div class="row wi-fc mx-auto text-center">
-                    <button type="button" class="btn btn-outline-primary giBold" data-bs-target="#loginModal" data-bs-toggle="modal">Log in instead</button>
-                </div>
-                <div class="row wi-fc mx-auto">
-                    <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary giBold mr-1" form="signupModalForm">Sign up</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-target="#loginModal" data-bs-toggle="modal">Log in instead</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary giBold" form="signupModalForm">Sign up</button>
             </div>
         </div>
     </div>
