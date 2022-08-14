@@ -1,6 +1,10 @@
 from accounts.forms import LoginForm
 
 class LoginFormMiddleware(object):
+    def __init__(self, get_response):
+            self.get_response = get_response
+    def __call__(self, request):
+        return self.get_response(request)
     def process_request(self, request):
         if request.method == 'POST':
             form = LoginForm(request=request, data=request.POST)
