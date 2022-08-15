@@ -4,13 +4,11 @@
 {% block account %}<a class="nav-link active giBold" href="{% url 'profile' %}">Account</a>{% endblock %}
 {% block content %}
 <div class="container my-4">
-    <div class="col-mx-2">
-        {% if user.profile.pfp %}
-        <div class="text-center">
+    <div class="col-6 mx-auto">
+        <div class="text-center mt-3 rounded p-4 bg-light text-black">
+            {% if user.profile.pfp %}
             <img src="{{ user.profile.pfp.url }}" width="100" class="rounded-circle">
-        </div>
-        {% endif %}
-        <div class="text-center mt-3 rounded wi-fc p-4 bg-light text-black">
+            {% endif %}
             <h2 class="mt-2 mb-0">@{{ user.username }}</h2>
             {% if user.profile.bio %}
             <p class="card-text">
