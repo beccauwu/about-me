@@ -39,11 +39,12 @@ def signup(request):
 def profile(request):
     context = {}
     if request.method == 'POST':
-        user_form = UserUpdateForm(data=request.POST, instance=request.user, request=request)
-        profile_form = ProfileForm(data=request.POST, instance=request.user.profile, request=request)
+        user_form = UserUpdateForm(data=request.POST)
+        profile_form = ProfileForm(data=request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            update_profile_signal(sender=User, instance=request.user, created=False, request=request)
             messages.success(request, _('Your profile was successfully updated!'))
     else:
         user_form = UserUpdateForm(instance=request.user)
