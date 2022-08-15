@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
-from .models import update_profile_signal
+from .models import update_profile_signal, Profile
 from django.utils.translation import gettext_lazy as _
 from rest_framework.generics import GenericAPIView
 import getpass

@@ -9,4 +9,4 @@ urlpatterns = [
     path('', views.photo_gallery, name='photos'),
     path('upload/', views.gallery_upload, name='galleryupload'),
     path('photo-like/<int:pk>/', views.PhotoLike, name='photolike'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

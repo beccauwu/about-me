@@ -134,7 +134,7 @@ USE_TZ = True
 AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')
 AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'resum-assets'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = 'https://d3s28krxxl6j0u.cloudfront.net'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
     'ACL': 'public-read',
@@ -147,7 +147,7 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
 PUBLIC_MEDIA_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_LOCATION)
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaStorage'
 
 CACHES = {
     'default': {
