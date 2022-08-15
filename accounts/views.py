@@ -39,8 +39,8 @@ def signup(request):
 def profile(request):
     context = {}
     if request.method == 'POST':
-        user_form = UserUpdateForm(data=request.POST)
-        profile_form = ProfileForm(data=request.POST)
+        user_form = UserUpdateForm(data=request.POST, instance=request.user)
+        profile_form = ProfileForm(data=request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
