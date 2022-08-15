@@ -25,7 +25,6 @@ class NewUserForm(UserCreationForm):
         if commit:
             auth_user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password1'])
             login(self.request, auth_user)
-        return user
 
 class UserUpdateForm(UserChangeForm):
     class Meta:
@@ -56,6 +55,3 @@ class LoginForm(AuthenticationForm):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         if user is not None:
             login(self.request, user)
-            return user
-        else:
-            return None

@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from .models import update_profile_signal
 from django.utils.translation import gettext_lazy as _
+from rest_framework.generics import GenericAPIView
+import getpass
 # Create your views here.
 
 from django.contrib import messages
@@ -52,3 +55,4 @@ def profile(request):
 def logout_request(request):
     logout(request)
     return redirect(request.META.get('HTTP_REFERER'))
+
