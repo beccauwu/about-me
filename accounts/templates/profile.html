@@ -33,7 +33,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="profileEditForm">
+                <form enctype="multipart/form-data" method="post" id="profileEditForm">
                     {% csrf_token %}
                     {% if user.profile.pfp %}
                     <label for="pfpInput" class="form-label giBold text-black">Change profile picture:</label>
