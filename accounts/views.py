@@ -38,19 +38,21 @@ def signup(request):
 
 def profile(request):
     context = {}
+    user = request.user
+    profile  = user.profile
     if request.method == 'POST':
-        user_form = UserUpdateForm(data=request.POST, instance=request.user)
-        profile_form = ProfileForm(data=request.POST, instance=request.user.profile)
+        user_form = UserUpdateForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            update_profile_signal(sender=User, instance=request.user, created=False, request=request)
+            update_profile_signal(sender=User, instance=user, created=False, request=request)
             messages.success(request, _('Your profile was successfully updated!'))
     else:
-        user_form = UserUpdateForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
+        user_form = UserUpdateForm(instance=user)
+        profile_form = ProfileForm(instance=profile)
     context['forms'] = {'user_form': user_form, 'profile_form': profile_form}
-    context['scripts'] = ["{% static 'accounts/js/accounts.js' %}"]
+    context['scripts'] = ["{% static 'js/accounts.js' %}"]
     return render(request, 'profile.html', context)
 
 def logout_request(request):
