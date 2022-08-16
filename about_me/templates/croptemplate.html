@@ -4,17 +4,21 @@
     data-res-height="{{ widget.res_height }}" data-res-format="{{ widget.res_format }}"
     data-res-quality="{{ widget.res_quality }}">
     {% if original_uploaded_data %}
-    <input type="hidden" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %} value="{{ original_uploaded_data }}">
+    <input type="hidden" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}
+        value="{{ original_uploaded_data }}">
     {% else %}
     <input type="hidden" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
     {% endif %}
-    <img src="{{ current_img_url }}" class="dcsic_current_img rounded-circle" style="width: {{ widget.preview_width }}px; height: {{ widget.preview_height }}px"/>
-    <label>
-        <span class="dcsic_choose_img btn btn-primary">{% trans "Choose image" %}</span>
-        <span class="dcsic_choose_other_img btn btn-primary">{% trans "Choose other image" %}</span>
-        <input type="file" class="dcsic_file_input" accept="image/*" />
-    </label>
-    {% if input_clearable %}<span class="dcsic_delete_image btn btn-primary">{% trans "Delete image" %}</span>{% endif %}
+    <img src="{{ current_img_url }}" class="dcsic_current_img rounded-circle"
+        style="width: {{ widget.preview_width }}px; height: {{ widget.preview_height }}px" />
+    <div id="imgOptionsContainer">
+        <label>
+            <span class="dcsic_choose_img btn btn-primary btn-sm">{% trans "Choose image" %}</span>
+            <span class="dcsic_choose_other_img btn btn-primary btn-sm">{% trans "Choose other image" %}</span>
+            <input type="file" class="dcsic_file_input" accept="image/*" />
+        </label>
+        {% if input_clearable %}<span class="dcsic_delete_image btn btn-primary btn-sm">{% trans "Delete image" %}</span>{% endif %}
+    </div>
 </div>
 <div class="dcsic_overlay">
     <div class="dcsic_dialog bg-light">
