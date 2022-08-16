@@ -8,7 +8,7 @@
     {% else %}
     <input type="hidden" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
     {% endif %}
-    <img src="{{ current_img_url }}" class="dcsic_current_img rounded-circle"/>
+    <img src="{{ current_img_url }}" class="dcsic_current_img rounded-circle" style="width: {{ widget.preview_width }}px; height: {{ widget.preview_height }}px"/>
     <label>
         <span class="dcsic_choose_img btn btn-primary">{% trans "Choose image" %}</span>
         <span class="dcsic_choose_other_img btn btn-primary">{% trans "Choose other image" %}</span>
