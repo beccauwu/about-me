@@ -41,8 +41,8 @@ class ProfileForm(forms.ModelForm):
         fields = ('pfp', 'bio')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['pfp'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Profile Picture'})
-        self.fields['bio'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Bio'})
+        self.fields['pfp'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Profile Picture', 'id': 'pfpInput'})
+        self.fields['bio'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Bio', 'id': 'bioInput'})
 
 class LoginForm(AuthenticationForm):
     class Meta:

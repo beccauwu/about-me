@@ -32,14 +32,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="signupModalForm" action="/user/signup">
+                <form enctype="multipart/form-data" method="post" id="signupModalForm" action=".">
                     {% csrf_token %}
                     <label for="signupUsernameInput" class="form-label giBold text-black">Username:</label>
-                    {{signup_form.username}}
+                    {{request.signup_form.username}}
                     <label for="signupEmailInput" class="form-label giBold text-black">Email:</label>
-                    {{signup_form.email}}
-                    {{signup_form.password1}}
-                    {{signup_form.password2}}
+                    {{request.signup_form.email}}
+                    {{request.signup_form.password1}}
+                    {{request.signup_form.password2}}
+                    <label for="pfpInput" class="form-label giBold text-black">Upload profile photo now? **optional</label>
+                    {{request.profile_form.pfp}}
+                    <label for="bioInput" class="form-label giBold text-black">Add a bio? **optional</label>
+                    {{request.profile_form.bio}}
                 </form>
             </div>
             <div class="modal-footer">
