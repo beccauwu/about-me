@@ -46,6 +46,7 @@ class ProfileForm(forms.ModelForm):
                 height=300,
                 preview_height=100,
                 preview_width=100,
+                format='png',
             )
         }
     def __init__(self, *args, **kwargs):
