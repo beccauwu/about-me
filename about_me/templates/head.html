@@ -2,11 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if not request.user.profile.dark %}
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/main.min.css' %}">
-    {% else %}
-    <link rel="stylesheet" type="text/css" href="{% static 'base/css/dark.min.css' %}">
-    {% endif %}
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/styles.css' %}">
     <link rel="shortcut icon" href="{% static 'base/img/logo.png' %}" type="image/x-icon">
     {% block styles %}{% endblock %}
