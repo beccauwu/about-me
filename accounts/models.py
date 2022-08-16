@@ -1,4 +1,6 @@
 import uuid
+import pathlib
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
@@ -6,10 +8,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 def upload_location(instance, filename):
-    ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
-    username = instance.user.username
-    return 'accounts/%s/%s' % (username, filename)
+    ext = pathlib.Path(filename).suffix
+    filename = "{}{}".format(uuid.uuid4().hex, ext)
+    return 'user_{}/pfp_{}'.format(instance.user.id, filename)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

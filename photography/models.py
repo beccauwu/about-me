@@ -1,6 +1,13 @@
 import collections
+import uuid
+import pathlib
 from django.db import models
 from django.contrib.auth.models import User
+
+def upload_location(instance, filename):
+    ext = pathlib.Path(filename).suffix
+    filename = "{}{}".format(uuid.uuid4().hex, ext)
+    return 'user_{}/gallery/{}'.format(instance.user.id, filename)
 
 # Create your models here.
 
@@ -31,7 +38,7 @@ class Image(models.Model):
     collection = models.ForeignKey(Collection, default=1, verbose_name='Collections', on_delete=models.SET_DEFAULT)
     likes = models.ManyToManyField(User, related_name='blogpost_like')
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='images')
-    img = models.ImageField(upload_to=f'{uploaded_by}/gallery')
+    img = models.ImageField(upload_to=upload_location)
     upload_date = models.DateTimeField(auto_now_add=True)
 
     def number_of_likes(self):
