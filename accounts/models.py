@@ -6,15 +6,16 @@ from django import forms
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from about_me.validators import validate_file_size
 
 def upload_location(instance, filename):
     ext = pathlib.Path(filename).suffix
     filename = "{}{}".format(uuid.uuid4().hex, ext)
-    return 'user_{}/pfp_{}'.format(instance.user.id, filename)
+    return 'user_{}/{}'.format(instance.user.id, filename)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pfp = models.ImageField(upload_to=upload_location, blank=True)
+    pfp = models.ImageField(upload_to=upload_location, validators=[validate_file_size], blank=True)
     bio = models.CharField(max_length=200, blank=True)
     dark = models.BooleanField(default=False)
 

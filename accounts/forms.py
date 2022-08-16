@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User, Group
 from django.utils.translation import gettext, gettext_lazy as _
+from client_side_image_cropping import ClientsideCroppingWidget
 from .models import Profile
 
 # Create your forms here.
@@ -39,6 +40,14 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('pfp', 'bio')
+        widgets = {
+            'pfp': ClientsideCroppingWidget(
+                width=300,
+                height=300,
+                preview_height=100,
+                preview_width=100,
+            )
+        }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['pfp'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Profile Picture', 'id': 'pfpInput'})
