@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User, Group
 from django.utils.translation import gettext, gettext_lazy as _
-from client_side_image_cropping import ClientsideCroppingWidget
+from about_me.cropwidget import CustomCropWidget
 from .models import Profile
 
 # Create your forms here.
@@ -41,7 +41,7 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('pfp', 'bio')
         widgets = {
-            'pfp': ClientsideCroppingWidget(
+            'pfp': CustomCropWidget(
                 width=300,
                 height=300,
                 preview_height=100,
