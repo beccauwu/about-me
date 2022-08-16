@@ -15,7 +15,7 @@ def upload_location(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pfp = models.ImageField(upload_to=upload_location, validators=[validate_file_size], blank=True)
+    pfp = models.ImageField(upload_to=upload_location, blank=True)
     bio = models.CharField(max_length=200, blank=True)
     dark = models.BooleanField(default=False)
 
