@@ -20,7 +20,7 @@ class Collection(models.Model):
         verbose_name_plural = "Collections"
 
     def __str__(self):
-        return self.collection
+        return self.name
 
 class Image(models.Model):
     title = models.CharField(max_length=200, unique=True)
