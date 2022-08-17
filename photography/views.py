@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from boto.s3.connection import S3Connection
 from .models import Image, Collection, Comment
-from .forms import GalleryForm
+from .forms import PhotoUploadForm
 import boto3
 
 class PhotoDetail(DetailView):
@@ -25,27 +25,20 @@ class PhotoDetail(DetailView):
 
 # Create your views here.
 def photo_gallery(request):
-    collections = Image.objects.values_list('collection', flat=True).distinct()
     context = {}
-    for collection in collections:
-        images = Image.objects.filter(collection=collection)
-        context['collection'] = images
+    form = PhotoUploadForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+    context['form'] = form
     context['scripts'] = ["{% static 'photos/js/photos.js' %}"]
     return render(request, 'photos/photos.html', context)
 
 def gallery_upload(request):
-    form = GalleryForm(request.POST)
-    collections = Image.objects.values_list('collection', flat=True).distinct()
+    form = PhotoUploadForm(request.POST)
     if request.method == "POST":
         if form.is_valid():
-            images = request.FILES.getlist('images')
-            collection = form.cleaned_data['collection']
-            title = form.cleaned_data['title']
-            if collection not in collections:
-                collection_summary = form.cleaned_data['collection_summary']
-                Collection.objects.create(collection=collection, collection_summary=collection_summary)
-            for image in images:
-                Image.objects.create(img=image, collection=collection, title=title)
+            form.save()
     return render(request, 'photos/gallery_upload.html', {'form': form})
 
 def PhotoLike(request, pk):

@@ -14,6 +14,7 @@ def upload_location(instance, filename):
 class Collection(models.Model):
     collection = models.CharField(max_length=200, unique=True)
     collection_summary = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = "Collections"
@@ -23,8 +24,7 @@ class Collection(models.Model):
 
 class Image(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    likes = models.ManyToManyField(User)
-    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='images')
+    likes = models.ManyToManyField(User, default=1)
     img = models.ImageField(upload_to=upload_location)
     upload_date = models.DateTimeField(auto_now_add=True)
     collection = models.ForeignKey(Collection, default=1, verbose_name='Collections', on_delete=models.SET_DEFAULT)
@@ -36,7 +36,7 @@ class Image(models.Model):
         return self.title
 
 class Comment(models.Model):
-    comment = models.CharField(max_length=200)
+    comment = models.TextField()
     author = models.OneToOneField(User, default=1, on_delete=models.SET_DEFAULT)
     created_on = models.DateTimeField(auto_now_add=True)
     image = models.ForeignKey(Image, default=1, verbose_name='Images', on_delete=models.SET_DEFAULT)

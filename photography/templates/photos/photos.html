@@ -5,58 +5,62 @@
 {% block photos %}<a class="nav-link active giBold" href="{% url 'photos' %}" aria-label="current page">Photo gallery</a>{% endblock %}
 
 {% block content %}
-<div class="container my-4 p-4 rounded" id="galleryContainer">
-    <div class="row my-2 justify-content-evenly d-md-none d-lg-flex" id="overlayContainer">
-        <img class="col-9 p-3 bg-black rounded" id="overlay">
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-12">
-            <h4 class="giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">Kebnekaise</h4>
-            <div class="row my-2 justify-content-evenly keb content" id="kebPreview">
-                <img class="col-12" id="kebPreviewImg" src="{% static 'photos/img/kebnekaise/kebnekaise-13_result.webp' %}" alt="">
+<div class="container my-4">
+    <div class="col-6 mx-auto">
+        <div class="text-center mt-3 rounded p-4 bg-light text-black">
+            {% for user in users %}
+            {% if user.collections %}
+            {% for collection in user.collections %}
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="giBold">{{ collection.name }}</h3>
+                    {% for image in collection.images %}
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="{{ image.image }}" class="img-fluid">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="row justify-content-evenly mt-3">
-                <button class="btn btn-light text-black col-6 border border-black giBold" id="kebBtn" type="button">Show more</button>
-            </div>
-            <div class="row g-2 my-2 justify-content-evenly keb overflow-auto imgContainer" id="kebContent">
-                {% for file in kebnekaise %}
-                <img class="col-12 img" src="{% static file %}" alt="">
-                {% endfor %}
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <h4 class="giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">Riksgränsen</h4>
-            <div class="row my-2 justify-content-evenly rg" id="rgPreview">
-                <img class="col-12" id="rgPreviewImg" src="{% static 'photos/img/riksgransen/winter_1.webp' %}" alt="">
-            </div>
-            <div class="row justify-content-evenly mt-3">
-                <button class="btn btn-light text-black col-6 border border-black giBold" id="rgBtn" type="button">Show more</button>
-            </div>
-            <div class="row g-2 my-2 justify-content-evenly content rg overflow-auto imgContainer" id="rgContent">
-                {% for file in riksgransen %}
-                <img class="col-12 img" src="{% static file %}" alt="">
-                {% endfor %}
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <h4 class="giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">Others</h4>
-            <div class="row my-2 justify-content-evenly" id="otherPreview">
-                <img class="col-12" id="otherPreviewImg" src="{% static 'photos/img/others/city_night.webp' %}" alt="">
-            </div>
-            <div class="row justify-content-evenly mt-3">
-                <button class="btn btn-light text-black col-6 border border-black giBold" id="otherBtn" type="button">Show more</button>
-            </div>
-            <div class="row g-2 my-2 justify-content-evenly content overflow-auto imgContainer" id="otherContent">
-                {% for file in others %}
-                <img class="col-12 img" src="{% static file %}" alt="">
-                {% endfor %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            <div class="buttons my-2">
+                <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal" data-bs-target="#imgUpload"
+                    id="imgUploadBtn">Upload image</button>
             </div>
         </div>
     </div>
-    
 </div>
 {% endblock %}
-
-{% block scripts %}
-<script src="{% static 'photos/js/photos.js' %}" type="text/javascript"></script>
+{% block bodyend %}
+<div class="modal fade" id="imgUpload" tabindex="-1" aria-labelledby="imgUploadTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black wi-fc mx-auto" id="imgUploadTitle"><i
+                        class="fa-solid fa-pen-to-square"></i> Image upload</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" method="post" id="imgUploadForm">
+                    {% csrf_token %}
+                    <label for="titleInput" class="form-label giBold text-black" id="bioLabel">Add photo title:</label>
+                    {{ form.title }}
+                    <label for="collectionInput" class="form-label giBold text-black">Choose collection:</label>
+                    {{ form.collection }}
+                    <label for="imageInput" class="form-label pt-1 giBold text-black">Upload image:</label>
+                    {{ forms.img }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="imgUploadForm">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

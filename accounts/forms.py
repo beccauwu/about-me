@@ -61,6 +61,7 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginUsernameInput'})
         self.fields['password'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginPasswordInput'})
+        
     def user_login(self):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         if user is not None:
