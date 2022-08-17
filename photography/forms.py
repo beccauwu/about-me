@@ -1,14 +1,21 @@
 from django import forms
+from dal import autocomplete
+from django.urls import reverse_lazy
+from django_addanother.widgets import AddAnotherWidgetWrapper
 from .models import Image, Comment
 
 class PhotoUploadForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ('title', 'img', 'collection')
+        widgets = {
+            'collection': AddAnotherWidgetWrapper(
+                autocomplete.ModelSelect2(url='collection-autocomplete'),
+                reverse_lazy('collection-create')
+            )
+        }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['collection'].empty_label = "Select a collection"
-        self.fields['collection'].queryset = Image.objects.values_list('collection', flat=True).distinct()
 
 class CommentUploadForm(forms.ModelForm):
     class Meta:

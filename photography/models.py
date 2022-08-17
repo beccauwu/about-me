@@ -12,8 +12,8 @@ def upload_location(instance, filename):
 # Create your models here.
 
 class Collection(models.Model):
-    collection = models.CharField(max_length=200, unique=True)
-    collection_summary = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, unique=True)
+    summary = models.CharField(max_length=200, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

@@ -37,6 +37,9 @@ CORS_ALLOW_ALL_ORIGINS: True
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+    'django_addanother',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

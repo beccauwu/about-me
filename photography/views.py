@@ -1,12 +1,32 @@
 import os
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django_addanother.views import CreatePopupMixin
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from boto.s3.connection import S3Connection
+from dal import autocomplete
 from .models import Image, Collection, Comment
 from .forms import PhotoUploadForm
 import boto3
+
+class CollectionCreate(CreatePopupMixin, CreateView):
+    model = Collection
+    fields = ['name', 'summary']
+
+class CollectionAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Collection.objects.none()
+
+        qs = Collection.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs
 
 class PhotoDetail(DetailView):
     model = Image
