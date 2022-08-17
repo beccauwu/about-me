@@ -13,7 +13,6 @@ import boto3
 
 class CollectionCreate(CreatePopupMixin, CreateView):
     model = Collection
-    template_name = 'photos/photos.html'
     fields = ['name', 'summary']
 
 class CollectionAutocomplete(autocomplete.Select2QuerySetView):
