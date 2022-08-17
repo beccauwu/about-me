@@ -12,7 +12,6 @@ class PhotoUploadForm(forms.ModelForm):
             'collection': CustomAddAnotherWidgetWrapper(
                 widget=autocomplete.ModelSelect2(url='collection-autocomplete'),
                 add_related_url=reverse_lazy('collection-create'),
-                add_icon='fa fa-plus',
             )
         }
     def __init__(self, *args, **kwargs):
