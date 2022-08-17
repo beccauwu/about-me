@@ -15,6 +15,9 @@ class CollectionCreate(CreatePopupMixin, CreateView):
     model = Collection
     template_name = 'collection_form.html'
     fields = ['name', 'summary']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CollectionCreate, self).form_valid(form)
 
 class CollectionAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
