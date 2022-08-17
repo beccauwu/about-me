@@ -1,7 +1,7 @@
 from django import forms
 from dal import autocomplete
 from django.urls import reverse_lazy
-from django_addanother.widgets import AddAnotherWidgetWrapper
+from about_me.widgets import CustomAddAnotherWidgetWrapper
 from .models import Image, Comment
 
 class PhotoUploadForm(forms.ModelForm):
@@ -9,13 +9,15 @@ class PhotoUploadForm(forms.ModelForm):
         model = Image
         fields = ('title', 'img', 'collection')
         widgets = {
-            'collection': AddAnotherWidgetWrapper(
-                autocomplete.ModelSelect2(url='collection-autocomplete'),
-                reverse_lazy('collection-create')
+            'collection': CustomAddAnotherWidgetWrapper(
+                widget=autocomplete.ModelSelect2(url='collection-autocomplete'),
+                add_related_url=reverse_lazy('collection-create'),
+                add_icon='fa fa-plus',
             )
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['collection'].widget.attrs.update({'class': 'form-control', 'id': 'collectionInput'})
 
 class CommentUploadForm(forms.ModelForm):
     class Meta:

@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User, Group
 from django.utils.translation import gettext, gettext_lazy as _
-from about_me.cropwidget import CustomCropWidget
+from about_me.widgets import CustomCropWidget
 from .models import Profile
 
 # Create your forms here.
