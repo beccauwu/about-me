@@ -12,33 +12,37 @@ from urllib.parse import urljoin
 #     location = 'static'
 #     default_acl = 'public-read'
 
-class MediaGCSStorage(GoogleCloudStorage):
-    """GoogleCloudStorage suitable for Django's Media files."""
+# class MediaGCSStorage(GoogleCloudStorage):
+#     """GoogleCloudStorage suitable for Django's Media files."""
 
-    def __init__(self, *args, **kwargs):
-        if not settings.MEDIA_URL:
-            raise Exception('MEDIA_URL has not been configured')
-        kwargs['location'] = setting('MEDIA_LOCATION')
+#     def __init__(self, *args, **kwargs):
+#         if not settings.MEDIA_URL:
+#             raise Exception('MEDIA_URL has not been configured')
+#         kwargs['location'] = setting('MEDIA_LOCATION')
         
-        super(MediaGCSStorage, self).__init__(*args, **kwargs)
+#         super(MediaGCSStorage, self).__init__(*args, **kwargs)
 
-    def url(self, name):
-        """.url that doesn't call Google."""
-        return urljoin(settings.MEDIA_URL, name)
+#     def url(self, name):
+#         """.url that doesn't call Google."""
+#         return urljoin(settings.MEDIA_URL, name)
 
 
-class StaticGCSStorage(GoogleCloudStorage):
-    """GoogleCloudStorage suitable for Django's Static files"""
+# class StaticGCSStorage(GoogleCloudStorage):
+#     """GoogleCloudStorage suitable for Django's Static files"""
 
-    def __init__(self, *args, **kwargs):
-        if not settings.STATIC_URL:
-            raise Exception('STATIC_URL has not been configured')
-        kwargs['location'] = setting('STATIC_LOCATION')
-        super(StaticGCSStorage, self).__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         if not settings.STATIC_URL:
+#             raise Exception('STATIC_URL has not been configured')
+#         kwargs['location'] = setting('STATIC_LOCATION')
+#         super(StaticGCSStorage, self).__init__(*args, **kwargs)
 
-    def url(self, name):
-        """.url that doesn't call Google."""
-        return urljoin(settings.STATIC_URL, name)
+#     def url(self, name):
+#         """.url that doesn't call Google."""
+#         return urljoin(settings.STATIC_URL, name)
+
+StaticGCSStorage = lambda: GoogleCloudStorage(location='static')
+MediaGCSStorage = lambda: GoogleCloudStorage(location='media')
+                                        
 
 # StaticRootS3Boto3Storage = lambda: S3Boto3Storage(location='static')
 # MediaRootS3Boto3Storage = lambda: S3Boto3Storage(location='media')
