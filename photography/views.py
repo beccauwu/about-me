@@ -24,12 +24,9 @@ class CollectionAutocomplete(autocomplete.Select2QuerySetView):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated:
             return Collection.objects.none()
-
         qs = Collection.objects.all()
-
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
-
         return qs
 
 class PhotoDetail(DetailView):

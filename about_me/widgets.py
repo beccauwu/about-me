@@ -9,4 +9,4 @@ class CustomCropWidget(ClientsideCroppingWidget):
 class CustomAddAnotherWidgetWrapper(BaseRelatedWidgetWrapper):
     template = 'addanothertemplate.html'
     def __init__(self, widget, add_related_url, add_icon=None):
-        super(CustomAddAnotherWidgetWrapper, self).__init__( widget, add_related_url, None, add_icon, None)
+        super(CustomAddAnotherWidgetWrapper, self).__init__(widget, add_related_url, None, add_icon, None)

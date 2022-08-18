@@ -16,3 +16,4 @@ photography/static
 resume/static
 accounts/static
 !/static
+fb_creds.json

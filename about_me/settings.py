@@ -13,6 +13,7 @@ import os
 import dj_database_url
 from pathlib import Path
 from decouple import config
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,8 +32,6 @@ ALLOWED_HOSTS = [
     '*'
     # 'about-me-rebecca.herokuapp.com'
 ]
-
-CORS_ALLOW_ALL_ORIGINS: True
 
 # Application definition
 
@@ -97,7 +96,19 @@ WSGI_APPLICATION = 'about_me.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
+if not DEBUG:
+    DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('POSTGRESQL_DATABASE'),
+            'USER': config('POSTGRESQL_USER'),
+            'PASSWORD': config('POSTGRESQL_PASSWORD'),
+            'HOST': config('POSTGRESQL_HOST'),
+            'PORT': config('POSTGRESQL_PORT'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -135,21 +146,34 @@ USE_TZ = True
 
 
 # AWS s3 settings
-AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')
-AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_DOMAIN')
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-    'ACL': 'public-read',
-}
-AWS_LOCATION = 'static'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-STATICFILES_STORAGE = 'about_me.storage_backends.StaticRootS3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaRootS3Boto3Storage'
+# AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')
+# AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
+# AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_DOMAIN')
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+#     'ACL': 'public-read',
+# }
+# AWS_LOCATION = 'static'
+# STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        os.path.join(BASE_DIR, 'fb_creds.json')
+    )
+
+DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaGCSStorage'
+GS_BUCKET_NAME = 'django-site1-b420694.appspot.com'
+
+STATICFILES_STORAGE = "about_me.storage_backends.StaticGCSStorage"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_LOCATION = 'static'
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+MEDIA_LOCATION = 'media'
+MEDIA_URL = '/media/'
 
 CACHES = {
     'default': {

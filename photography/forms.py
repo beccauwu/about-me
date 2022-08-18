@@ -16,7 +16,7 @@ class PhotoUploadForm(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['collection'].widget.attrs.update({'class': 'form-control', 'id': 'collectionInput'})
+        self.fields['collection'].widget.attrs.update({'class': 'form-select', 'id': 'collectionInput'})
 
 class CommentUploadForm(forms.ModelForm):
     class Meta:
