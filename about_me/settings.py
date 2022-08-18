@@ -170,10 +170,10 @@ STATICFILES_STORAGE = "about_me.storage_backends.StaticGCSStorage"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_LOCATION = 'static'
-STATIC_URL = '/static/'
+STATIC_URL = 'https://{}/{}/'.format(GS_BUCKET_NAME, STATIC_LOCATION)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 MEDIA_LOCATION = 'media'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://{}/{}/'.format(GS_BUCKET_NAME, MEDIA_LOCATION)
 
 CACHES = {
     'default': {
