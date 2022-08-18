@@ -173,10 +173,10 @@ STATICFILES_STORAGE = "about_me.storage_backends.StaticGCSStorage"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_LOCATION = 'static'
-STATIC_URL = 'https://{}/{}/'.format(GS_BUCKET_NAME, STATIC_LOCATION)
+STATIC_URL = 'https://storage.googleapis.com/{}/static/'.format(GS_BUCKET_NAME)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 MEDIA_LOCATION = 'media'
-MEDIA_URL = 'https://{}/{}/'.format(GS_BUCKET_NAME, MEDIA_LOCATION)
+MEDIA_URL = 'https://storage.googleapis.com/{}/media/'.format(GS_BUCKET_NAME)
 
 CACHES = {
     'default': {
