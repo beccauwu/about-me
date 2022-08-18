@@ -160,7 +160,7 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'static'),
 # )
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        os.path.join(BASE_DIR, 'fb_creds.json')
+        os.path.join(BASE_DIR, 'google-credentials.json')
     )
 
 DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaGCSStorage'
