@@ -149,34 +149,35 @@ USE_TZ = True
 
 
 # AWS s3 settings
-# AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')
-# AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
-# AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_DOMAIN')
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-#     'ACL': 'public-read',
-# }
-# AWS_LOCATION = 'static'
-# STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+AWS_S3_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY_ID')
+AWS_S3_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_DOMAIN')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+    'ACL': 'public-read',
+}
+AWS_LOCATION = 'static'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
         os.path.join(BASE_DIR, 'google-credentials.json')
     )
 
-DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaGCSStorage'
-GS_BUCKET_NAME = 'django-site1-b420694.appspot.com'
+DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaRootS3Boto3Storage'
+STATICFILES_STORAGE = "about_me.storage_backends.StaticRootS3Boto3Storage"
+# GS_BUCKET_NAME = 'django-site1-b420694.appspot.com'
 
-STATICFILES_STORAGE = "about_me.storage_backends.StaticGCSStorage"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_LOCATION = 'static'
-STATIC_URL = 'https://storage.googleapis.com/{}/static/'.format(GS_BUCKET_NAME)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-MEDIA_LOCATION = 'media'
-MEDIA_URL = 'https://storage.googleapis.com/{}/media/'.format(GS_BUCKET_NAME)
+# STATICFILES_STORAGE = "about_me.storage_backends.StaticGCSStorage"
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_LOCATION = 'static'
+# STATIC_URL = 'https://storage.googleapis.com/{}/static/'.format(GS_BUCKET_NAME)
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+# MEDIA_LOCATION = 'media'
+# MEDIA_URL = 'https://storage.googleapis.com/{}/media/'.format(GS_BUCKET_NAME)
 
 CACHES = {
     'default': {

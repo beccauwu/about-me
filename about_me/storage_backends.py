@@ -1,4 +1,4 @@
-# from storages.backends.s3boto3 import S3Boto3Storage
+from storages.backends.s3boto3 import S3Boto3Storage
 from django.conf import settings
 from storages.backends.gcloud import GoogleCloudStorage
 from storages.utils import setting
@@ -40,9 +40,9 @@ from urllib.parse import urljoin
 #         """.url that doesn't call Google."""
 #         return urljoin(settings.STATIC_URL, name)
 
-StaticGCSStorage = lambda: GoogleCloudStorage(location='static')
-MediaGCSStorage = lambda: GoogleCloudStorage(location='media')
+# StaticGCSStorage = lambda: GoogleCloudStorage(location='static')
+# MediaGCSStorage = lambda: GoogleCloudStorage(location='media')
                                         
 
-# StaticRootS3Boto3Storage = lambda: S3Boto3Storage(location='static')
-# MediaRootS3Boto3Storage = lambda: S3Boto3Storage(location='media')
+StaticRootS3Boto3Storage = lambda: S3Boto3Storage(location='static')
+MediaRootS3Boto3Storage = lambda: S3Boto3Storage(location='media')
