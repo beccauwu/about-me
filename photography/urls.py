@@ -8,12 +8,8 @@ from . import views
 urlpatterns = [
     path('', views.photo_gallery, name='photos'),
     path('upload/', views.gallery_upload, name='galleryupload'),
-    path('photo-like/<int:pk>/', views.PhotoLike, name='photolike'),
-    path(
-        'collection-autocomplete/',
-        views.CollectionAutocomplete.as_view(),
-        name='collection-autocomplete',
-    ),
+    path('photos/<int:pk>/', views.PhotoDetail.as_view(), name='photodetail'),
+    path('photos/comment/', views.post_comment, name='postcomment'),
     path(
         'collection-create/',
         views.CollectionCreate.as_view(),

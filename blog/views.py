@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.views import generic
 from .models import Post
+from django.views.generic.edit import CreateView
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -16,6 +17,12 @@ from .forms import BlogForm
 from .models import BlogPost
 from django.contrib import messages
 # Create your views here.
+
+class BlogPost(CreateView):
+    model = BlogPost
+    form_class = BlogForm
+    
+
 def usblog(request):
     blogs = BlogPost.objects.all()
     return render(request, 'blog.html', {'blogs' : blogs})

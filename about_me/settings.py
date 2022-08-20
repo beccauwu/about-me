@@ -159,13 +159,13 @@ AWS_S3_OBJECT_PARAMETERS = {
     'ACL': 'public-read',
 }
 AWS_LOCATION = 'static'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATIC_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        os.path.join(BASE_DIR, 'google-credentials.json')
-    )
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#         os.path.join(BASE_DIR, 'google-credentials.json')
+#     )
 
 DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaRootS3Boto3Storage'
 STATICFILES_STORAGE = "about_me.storage_backends.StaticRootS3Boto3Storage"
@@ -198,7 +198,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
-             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+             'level': os.getenv('DJANGO_LOG_LEVEL'),
         },
     },
 }

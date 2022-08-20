@@ -36,7 +36,6 @@ class BlogPost(models.Model):
     blogdes = models.TextField(max_length = 400)
     slug = models.SlugField(max_length=200, unique=True)
     blogcontent = models.TextField()
-    img = models.ImageField(upload_to ='pics/blog')
   
     def __str__(self):
         return self.blogname

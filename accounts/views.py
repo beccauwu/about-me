@@ -4,13 +4,39 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from .models import update_profile_signal, Profile
+from photography.models import Image
+from photography.forms import PhotoEditForm
 from django.utils.translation import gettext_lazy as _
-from rest_framework.generics import GenericAPIView
+from django.views.generic.edit import UpdateView, DeleteView
+from about_me.storage_backends import staturl
 import getpass
 # Create your views here.
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
+
+class DeleteImageView(DeleteView):
+    model = Image
+    success_url = '/user/'
+    template_name = 'delete_image.html'
+    def get_context_data(self, **kwargs):
+        context = {}
+        if self.object:
+            context['image'] = self.object
+            context_object_name = self.get_context_object_name(self.object)
+            if context_object_name:
+                context[context_object_name] = self.object
+        context.update(kwargs)
+        return super().get_context_data(**context)
+
+class EditImageView(UpdateView):
+    model = Image
+    form_class = PhotoEditForm
+    template_name = 'edit_image.html'
+    success_url = '/user/'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 def login_request(request):
     form = LoginForm(request=request, data=request.POST)
@@ -52,10 +78,10 @@ def profile(request):
         user_form = UserUpdateForm(instance=user)
         profile_form = ProfileForm(instance=profile)
     context['forms'] = {'user_form': user_form, 'profile_form': profile_form}
-    context['scripts'] = ["{% static 'js/accounts.js' %}"]
+    context['scripts'] = [staturl("accounts/js/accounts.js")]
     return render(request, 'profile.html', context)
 
 def logout_request(request):
     logout(request)
-    return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('home')
 
