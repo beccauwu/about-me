@@ -26,14 +26,13 @@ class PhotoDetail(DetailView):
 
 def post_comment(request):
     if request.method == "POST":
-        if request.user not in Comment.objects.all():
-            comment = Comment(
-            image = Image.objects.get(id=request.POST['image_id']),
-            author = request.user,
-            comment = request.POST['comment']
-            )
-            comment.save()
-            return HttpResponseRedirect(request.path_info)
+        comment = Comment(
+        image = Image.objects.get(id=request.POST['image_id']),
+        author = request.user,
+        comment = request.POST['comment']
+        )
+        comment.save()
+    return HttpResponseRedirect(request.path_info)
 
 class PostComment(CreateView):
     model = Comment

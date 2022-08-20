@@ -8,12 +8,12 @@
             <h5 class="modal-title giBold text-black wi-fc mx-auto mb-2" id="imgUploadTitle">{{ image.title }}</h5>
             <img class="img-fluid" src="{{ image.img.url }}">
         </div>
-        {% for comment in comments %}
+        
         <div class="text-center mt-3 rounded p-4 bg-light text-black">
             <h5 class="modal-title giBold text-black wi-fc mx-auto mb-2" id="commentTitle">{{ comment.author.username }}</h5>
             <p>{{ comment.created_on }}</p>
             <p>{{ comment.comment }}</p>
-        {% endfor %}
+        
         <div class="row bg-light rounded my-2 py-2 d-flex justify-content-around">
             <div class="col-md-4 col-sm-12 text-center align-self-end p-2">
                 <form method="post" action="{% url 'postcomment' %}">
@@ -26,10 +26,25 @@
             </div>
             <div class="col-md-6 col-sm-12 border border-black rounded p-2">
                 <div class="text-center mt-3 rounded bg-light text-black">
-                    <h5 class="modal-title giBold text-black wi-fc mx-auto mb-2" id="commentTitle">Comments</h5>
-                    <p class="text-right">{{ comment.author.username }}</p>
-                    <p class="text-right small">{{ comment.created_on }}</p>
-                    <p class="text-left giBold">{{ comment.comment }}</p>
+                    <h5 class="modal-title giBold text-black wi-fc mx-auto mb-2 border-bottom border-black" id="commentTitle">Comments</h5>
+                    {% for comment in image.comment_set.all %}
+                    <div class="d-flex mb-3 justify-content-between border-bottom border-black">
+                        <div class="align-self-end pl-2">
+                            <p class="giBold">{{ comment.comment }}</p>
+                        </div>
+                        <div class="wi-fc">
+                            <p class="text-start m-0 p-0">{{ comment.created_on }}</p>
+                            <div class="float-end m-0 p-0">
+                                <p class="d-inline giBold">{{ comment.author.username }}</p>
+                                {% if comment.author.profile.pfp %}
+                                <img class="rounded-circle" width="30" src="{{ comment.author.profile.pfp.url }}">
+                                {% else %}
+                                <img class="rounded-circle" width="30" src="{% static 'base/images/default_pfp.png' %}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
