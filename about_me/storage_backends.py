@@ -46,3 +46,7 @@ from urllib.parse import urljoin
 
 StaticRootS3Boto3Storage = lambda: S3Boto3Storage(location='static')
 MediaRootS3Boto3Storage = lambda: S3Boto3Storage(location='media')
+
+def staturl(name):
+    """Return the full URL to a static file."""
+    return urljoin(settings.STATIC_URL, name)
