@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'client_side_image_cropping',
+    'inlineedit',
     'corsheaders',
     'storages',
     'home',
@@ -215,3 +216,10 @@ ANYMAIL = {
 }
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
+
+
+INLINEEDIT_EDIT_ACCESS = lambda user, model, field: True
+
+INLINEEDIT_ADAPTORS = {
+    "formcontrol": "about_me.adaptors.FormControl",
+}

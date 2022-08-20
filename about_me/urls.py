@@ -27,4 +27,5 @@ urlpatterns = [
     path('photography/', include('photography.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path('user/', include("accounts.urls")),
+    path('inlineedit/', include('inlineedit.urls')),
 ]
