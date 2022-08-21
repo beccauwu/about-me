@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign up{% endblock %}
+{% block login %}<a class="nav-link active giBold" href="{% url 'signup' %}">Signup</a>{% endblock %}
+{% block content %}
+<div class="card card-body mx-auto wi-fc my-3">
+    <div class="card-body mx-auto text-center" style="width: 18rem;">
+        <div class="mb-3 wi-fc mx-auto">
+            <h4 class="card-title">Create account</h4>
+            <hr>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <form id="loginForm" class="row g-3" method="post">
+            {% csrf_token %}
+            <div class="col-12">
+                {{form.username}}
+            </div>
+            <div class="col-12">
+                {{form.email}}
+            </div>
+            <div class="col-12">
+                {{form.password1}}
+            </div>
+            <div class="col-12">
+                {{form.password2}}
+            </div>
+            <button class="btn btn-info wi-fc mx-auto" type="submit">Sign Up</button>
+        </form>
+        <a class="card-text" aria-label="create account" href="{% url 'login' %}">Already have an account?<br>Log in here</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@emailjs/browser": "^3.6.2",
+    "bootstrap": "^5.2.0",
+    "firebase": "^9.9.1",
+    "jquery": "^3.6.0"
+  },
+  "name": "about-me",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beccauwu/about-me.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beccauwu/about-me/issues"
+  },
+  "homepage": "https://github.com/beccauwu/about-me#readme"
+}

@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load inlineedit %}
+{% block styles %}<link rel="stylesheet" type="text/css" href="{% static 'photos/css/photos.css' %}">{% endblock %}
+{% block title %}Photo Gallery{% endblock %}
+{% block photos %}<a class="nav-link active giBold" href="{% url 'photos' %}" aria-label="current page">Photo gallery</a>{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    {% for user in users %}
+        {% for collection in user.collection_set.all %}
+            {% if collection.image_set.all.exists %}
+                {% for image in collection.image_set.all %}
+                <div class="col-md-4 col-sm-12 text-black bg-light rounded p-2">
+                    <div class="thumbnail">
+                        <a href="{% url 'photodetail' image.id %}">
+                            <img src="{{ image.img.url }}" class="card-img-top img-rounded">
+                            <div class="caption text-center">
+                                <h3 class="giBold pt-1 text-black text-decoration-none">{{ image.title }}</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    {% if user.is_authenticated %}
+    <div class="buttons my-2 wi-fc mx-auto">
+        <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal" data-bs-target="#imgUpload"
+            id="imgUploadBtn">Upload image</button>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+{% block bodyend %}
+<div class="modal fade" id="imgUpload" tabindex="-1" aria-labelledby="imgUploadTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black wi-fc mx-auto" id="imgUploadTitle"><i
+                        class="fa-solid fa-pen-to-square"></i> Image upload</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" method="post" id="imgUploadForm">
+                    {% csrf_token %}
+                    <label for="collectionInput" class="form-label giBold text-black">Choose collection:</label>
+                    <div>
+                        {{ form.collection }}
+                        <a href="{% url 'collection-create' %}">
+                            <i class="fa-solid fa-plus"></i>
+                        </a>
+                    </div>
+                    <label for="titleInput" class="form-label giBold text-black" id="bioLabel">Add photo title:</label>
+                    {{ form.title }}
+                    <label for="imageInput" class="form-label pt-1 giBold text-black">Upload image:</label>
+                    {{ form.img }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="imgUploadForm">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Check jQuery is loaded
+        window.onload = function () {
+            const id = $(".inlineedit-toggle-area").attr("data-field-id");
+            if (!window.jQuery) {
+                alert(
+                    "jQuery must be loaded for Django-inlineedit to work.\nIf it is, check it happens before the inlineedit_scripts template tag"
+                );
+            }
+        };
+
+        // Mouse enters toggle area
+        $(".inlineedit-toggle-area").mouseenter(function () {
+            const id = $(this).attr("data-field-id");
+            $("#inlineedit-toggle-" + id).css("display", "inline");
+        });
+
+        // Mouse leaves toggle area
+        $(".inlineedit-toggle-area").mouseleave(function () {
+            const id = $(this).attr("data-field-id");
+            $("#inlineedit-toggle-" + id).fadeOut(1000);
+        });
+
+        // Click in edit icon (toggles field editor on)
+        $(".inlineedit-toggle-area").click(function () {
+            const id = $(this).attr("data-field-id");
+            $("#inlineedit-value-" + id).css("display", "none");
+            $("#inlineedit-toggle-" + id).hide();
+            $("#inlineedit-form-" + id)
+                .show()
+                .css("display", "inline");
+            $("#inlineedit-form-" + id)
+                .siblings(".imageDelete")
+                .css("display", "none");
+        });
+
+        // Cancel editing
+        function inlineedit_exit_editing(object) {
+            const id = $(object).closest("form").attr("data-field-id");
+            $("#inlineedit-form-" + id).hide();
+            $("#inlineedit-value-" + id).css("display", "inline");
+            $("#inlineedit-form-" + id)
+                .siblings(".imageDelete")
+                .css("display", "inline-block");
+        }
+
+        // Override form submit action to prevent page refresh
+        $(".inlineedit-form").on("submit", function (event) {
+            const id = $(this).attr("data-field-id");
+            event.preventDefault(); //prevent default action
+            let url = $(this).attr("action"); //get form action url
+            if (!url || url.length < 3) {
+                url = "/inlineedit/";
+            }
+
+            if ($(this).attr("adaptor").substr(0, 8) === "ckeditor") {
+                for (instance in CKEDITOR.instances)
+                    CKEDITOR.instances[instance].updateElement();
+            }
+
+            const param = {
+                url: url,
+                type: $(this).attr("method"), // GET/POST method
+                data: new FormData(this), // Serialised form data
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (response) {
+                    if (response.empty_message) {
+                        $("#inlineedit-value-" + id).html(response.empty_message);
+                        $("#inlineedit-value-" + id).attr(
+                            "class",
+                            "inlineedit-value-transparent"
+                        );
+                    } else {
+                        $("#inlineedit-value-" + id).html(response.value);
+                        $("#inlineedit-value-" + id).attr("class", "inlineedit-value");
+                    }
+                    $("#inlineedit-form-" + id)
+                        .hide()
+                        .css("display", "none");
+                    $("#inlineedit-value-" + id)
+                        .show()
+                        .css("display", "inline");
+                    $("#inlineedit-form-" + id)
+                        .siblings(".imageDelete")
+                        .css("display", "inline-block");
+                },
+            };
+
+            $.ajax(param);
+        });
+
+</script>
+{% endblock %}

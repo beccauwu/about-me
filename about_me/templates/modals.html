@@ -1,0 +1,56 @@
+{% load static %}
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="loginModalContent">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black" id="loginModalTitle">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="loginModalForm" action=".">
+                    {% csrf_token %}
+                    <label for="loginUsernameInput" class="form-label giBold text-black">Username:</label>
+                    {{request.login_form.username}}
+                    <label for="loginPasswordInput" class="form-label giBold text-black">Password:</label>
+                    {{request.login_form.password}}
+                </form>
+                <button type="button" class="btn btn-outline-primary giBold" data-bs-target="#signupModal" data-bs-toggle="modal">Don't have an account?<br>Create one here</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-target="#signupModal" data-bs-toggle="modal">Sign up instead</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary giBold" form="loginModalForm">Log in</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" aria-labelledby="signupModalTitle" aria-hidden="true" id="signupModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black" id="signupModalTitle">Sign up</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" method="post" id="signupModalForm" action=".">
+                    {% csrf_token %}
+                    <label for="signupUsernameInput" class="form-label giBold text-black">Username:</label>
+                    {{request.signup_form.username}}
+                    <label for="signupEmailInput" class="form-label giBold text-black">Email:</label>
+                    {{request.signup_form.email}}
+                    {{request.signup_form.password1}}
+                    {{request.signup_form.password2}}
+                    <label for="pfpInput" class="form-label giBold text-black">Upload profile photo now? **optional</label>
+                    {{request.profile_form.pfp}}
+                    <label for="bioInput" class="form-label giBold text-black">Add a bio? **optional</label>
+                    {{request.profile_form.bio}}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-target="#loginModal" data-bs-toggle="modal">Log in instead</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary giBold" form="signupModalForm">Sign up</button>
+            </div>
+        </div>
+    </div>
+</div>

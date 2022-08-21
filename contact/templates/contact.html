@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}<link rel="stylesheet" type="text/css" href="{% static 'contact/css/contact.css' %}">{% endblock %}
+{% block title %}Contact{% endblock %}
+{% block contact %}<a class="nav-link active giBold" href="{% url 'contact' %}" aria-label="contact page">Contact</a>{% endblock %}
+{% block content %}
+<div class="container my-4">
+    <div class="col mx-2">
+        <h2 class="card-title giBold text-black bg-light mb-1 wi-fc mx-auto row p-1 border border-black">Contact form</h2>
+        <p class="card-text giBold text-black bg-light wi-fc mx-auto row p-1 border border-black">Please write your inquiry below and I'll get back to you ASAP :)</p>
+        <form method="post" class="row g-3">
+            <div class="col-md-4">
+                <label for="fnameInput" class="form-label giBold text-black bg-light p-1 border border-black">First name:</label>
+                {{form.fname}}
+            </div>
+            <div class="col-md-4">
+                <label for="lnameInput" class="form-label giBold text-black bg-light p-1 border border-black">Last name:</label>
+                {{form.lname}}
+            </div>
+            <div class="col-md-4">
+                <label for="emailInput" class="form-label giBold text-black bg-light p-1 border border-black">Email:</label>
+                {{form.email_address}}
+            </div>
+            <div class="col-12">
+                {{form.subject}}
+            </div>
+            <div class="col-12">
+                {{form.message}}
+            </div>
+            <button type="submit" class="btn btn-light text-black col-6 border border-black wi-fc mx-auto d-block giBold" id="contactSubmit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

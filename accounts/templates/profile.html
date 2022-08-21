@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load inlineedit %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'client_side_image_cropping/croppie.css' %}">
+<link rel="stylesheet" href="{% static 'base/css/croptemplate.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+<script src="{% static 'client_side_image_cropping/croppie.min.js' %}"></script>
+<script src="{% static 'client_side_image_cropping/cropping_widget.js' %}"></script>
+<script src="{% static 'accounts/js/accounts.js' %}"></script>
+{% endblock %}
+{% block title %}Account{% endblock %}
+{% block account %}<a class="nav-link active giBold" href="{% url 'profile' %}">Account</a>{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container my-4">
+    <div class="col-6 mx-auto">
+        <div class="text-center mt-3 rounded p-4 bg-light text-black">
+            {% if user.profile.pfp %}
+            <img src="{{ user.profile.pfp.url }}" width="100" class="rounded-circle">
+            {% endif %}
+            <h2 class="mt-2 mb-0">@{{ user.username }}</h2>
+            {% if user.profile.bio %}
+            <p class="card-text">
+                <!-- {{user.profile.bio }} -->
+            </p>
+            {% inlineedit 'user.profile.bio' 'formcontrol' template='inlineedit_custom.html' %}
+            {% endif %}
+            <div class="buttons my-2">
+                <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal" data-bs-target="#profileEdit" id="profileEditBtn">Edit profile</button>
+            </div>
+        </div>
+        <div class="text-center mt-3 rounded p-4 bg-light text-black">
+            {% if user.collection_set.all.exists %}
+            <h2 class="mt-2 mb-0 giBold">Your Collections</h2>
+            {% for collection in user.collection_set.all %}
+            <h3 class="giBold">{{ collection.name }}:</h3>
+            {% if collection.image_set.all.exists %}
+            {% for image in collection.image_set.all %}
+            <div class="p-3 my-2 wi-fc mx-auto rounded border border-black">
+                <img src="{{ image.img.url }}" width="100">
+                {% inlineedit 'image.title' 'formcontrol' template='inlineedit_custom.html' %}
+                <a class="btn btn-primary btn-sm imageDelete" href="{% url 'deleteimage' image.id %}">Delete image</a>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Collection is empty</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="buttons my-2 wi-fc mx-auto">
+        <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal" data-bs-target="#imgUpload"
+            id="imgUploadBtn">Upload image</button>
+    </div>
+</div>
+{% else %}
+<div class="container my-4">
+    <div class="col-6 mx-auto">
+        <div class="text-center mt-3 rounded p-4 bg-light text-black">
+            <h2 class="mt-2 mb-0">Please log in</h2>
+            <p class="card-text">
+                Please log in to view your profile.
+            </p>
+            <div class="buttons my-2">
+                <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal"
+                    data-bs-target="#loginModal">Log in</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block bodyend %}
+<div class="modal fade" id="imgUpload" tabindex="-1" aria-labelledby="imgUploadTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black wi-fc mx-auto" id="imgUploadTitle"><i
+                        class="fa-solid fa-pen-to-square"></i> Image upload</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" method="post" id="imgUploadForm" action="{% url 'galleryupload' %}">
+                    {% csrf_token %}
+                    <label for="collectionInput" id="collectionInputLabel" class="form-label giBold text-black">Choose collection:</label>
+                    <div>
+                        <select class="form-select" name="collection" id="collectionInput">
+                            {% for collection in user.collection_set.all %}
+                            <option value="{{ collection.id }}">{{ collection.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="collectionNameInput" id="collectionNameLabel" class="d-none form-label giBold text-black">Specify name for new collection:</label>
+                        <input id="collectionNameInput" name="collectionName" class="form-control mb-2 d-none" type="text" disabled>
+                        <label for="collectionSummaryInput" id="collectionSummaryLabel" class="d-none form-label giBold text-black">Add collection summary:</label>
+                        <input id="collectionSummaryInput" name="collectionSummary" class="form-control mb-2 d-none" type="text" disabled>
+                        <i id="collectionCreateButton" class="text-black mt-2 fs-4 fa-solid fa-plus" am-clicked="false"></i>
+                    </div>
+                    <label for="titleInput" class="form-label giBold text-black" id="bioLabel">Add photo title:</label>
+                    <input type="text" name="title" maxlength="200" class="form-control" id="titleInput">
+                    <label for="imageInput" class="form-label pt-1 giBold text-black">Upload image:</label>
+                    <input type="file" name="img" accept="image/*" class="form-control" id="imageInput">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="imgUploadForm">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="profileEdit" tabindex="-1" aria-labelledby="profileEditTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title giBold text-black wi-fc mx-auto" id="profileEditTitle"><i class="fa-solid fa-pen-to-square"></i> Profile editor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" method="post" id="profileEditForm">
+                    {% csrf_token %}
+                    {% if user.profile.pfp %}
+                    <label for="pfpInput" class="form-label giBold text-black" id="bioLabel">Change profile picture:</label>
+                    {% else %}
+                    <label for="pfpInput" class="form-label giBold text-black">Add profile picture:</label>
+                    {% endif %}
+                    {{ forms.profile_form.pfp }}
+                    {% if user.profile.bio %}
+                    <label for="bioInput" class="form-label pt-1 giBold text-black">Change bio:</label>
+                    {% else %}
+                    <label for="bioInput" class="form-label pt-1 giBold text-black">Add bio:</label>
+                    {% endif %}
+                    {{ forms.profile_form.bio }}
+                    <label for="usernameChangeInput" class="form-label pt-1 giBold text-black">Change username:</label>
+                    {{ forms.user_form.username }}
+                    <label for="emailChangeInput" class="form-label pt-1 giBold text-black">Change email:</label>
+                    {{ forms.user_form.email }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="wi-fc mx-auto">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="profileEditForm">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'base/js/inlineedit.js' %}"></script>
+<script>
+    $('#collectionCreateButton').on('click', function () {
+            $(this).toggleClass('fa-plus fa-minus');
+            if ($(this).attr('am-clicked') == 'false') {
+                $(this).attr('am-clicked', 'true');
+                $("#collectionNameInput").removeClass("d-none").removeAttr("disabled");
+                $("#collectionSummaryInput").removeClass("d-none").removeAttr("disabled");
+                $("#collectionNameLabel").removeClass("d-none");
+                $("#collectionSummaryLabel").removeClass("d-none");
+                $('#collectionInput').addClass("d-none").attr("disabled", 'disabled');
+                $('#collectionInputLabel').addClass("d-none");
+            } else {
+                $(this).attr('am-clicked', 'false');
+                $("#collectionNameInput").addClass("d-none").attr("disabled", "disabled");
+                $("#collectionSummaryInput").addClass("d-none").attr("disabled", "disabled");
+                $("#collectionNameLabel").addClass("d-none");
+                $("#collectionSummaryLabel").addClass("d-none");
+                $('#collectionInput').removeClass("d-none").removeAttr("disabled");
+                $('#collectionInputLabel').removeClass("d-none");
+            }
+        });
+</script>
+{% endblock %}
