@@ -19,5 +19,6 @@ accounts/static
 fb_creds.json
 /resume
 /home
+/blog
 localstorage.js
 db.sqlite3
