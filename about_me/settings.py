@@ -220,3 +220,8 @@ INLINEEDIT_EDIT_ACCESS = lambda user, model, field: True
 INLINEEDIT_ADAPTORS = {
     "formcontrol": "about_me.adaptors.FormControl",
 }
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
