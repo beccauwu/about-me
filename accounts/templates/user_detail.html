@@ -8,17 +8,40 @@
 <div class="container my-4">
     <div class="col-6 mx-auto">
         <div class="text-center mt-3 rounded p-4 bg-light text-black">
-            {% if userdetail.profile.pfp %}
-            <img src="{{ userdetail.profile.pfp.url }}" width="100" class="rounded-circle">
-            {% else %}
-            <img src="{% static 'base/img/default_pfp.png' %}" width="100" class="rounded-circle">
-            {% endif %}
-            <h2 class="mt-2 mb-0">@{{ userdetail.username }}</h2>
-            {% if userdetail.profile.bio %}
-            <p class="card-text">{{userdetail.profile.bio }}</p>
-            {% else %}
-            <p class="card-text">User has no bio</p>
-            {% endif %}
+            <div class="rounded wi-fc mx-auto border border-black p-4">
+                {% if userdetail.profile.pfp %}
+                <img src="{{ userdetail.profile.pfp.url }}" width="100" class="rounded-circle">
+                {% else %}
+                <img src="{% static 'base/img/default_pfp.png' %}" width="100" class="rounded-circle me-2">
+                {% endif %}
+                <span class="d-block mt-2">
+                    <h3 class="me-2 d-inline">{{ userdetail.username }}</h3>
+                    {% for follower in followers %}
+                    {% if request.user.username in follower.follower.user.username %}
+                    <p class="giBold d-inline">following</p>
+                    {% endif %}
+                    {% endfor %}
+                    <small class="d-block">{{ follower_count }} followers</small>
+                </span>
+                <span class="d-block my-2 pb-2 border-bottom border-black">
+                    {% for follower in followers %}
+                    {% if request.user.username in follower.follower.user.username %}
+                    <a href="{% url 'unfollowuser' userdetail.id %}" class="me-2 text-reset text-decoration-none">
+                        <i class="fs-4 fa-solid fa-user-minus"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'followuser' userdetail.id %}" class="me-2 text-reset text-decoration-none">
+                        <i class="fs-4 fa-solid fa-user-plus"></i>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </span>
+                {% if userdetail.profile.bio %}
+                <p class="card-text">{{userdetail.profile.bio }}</p>
+                {% else %}
+                <p class="card-text">User has no bio</p>
+                {% endif %}
+            </div>
         </div>
         <div class="text-center mt-3 rounded p-4 bg-light text-black">
             {% if userdetail.collection_set.all.exists %}
