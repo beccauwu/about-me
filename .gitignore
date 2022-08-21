@@ -17,3 +17,7 @@ resume/static
 accounts/static
 !/static
 fb_creds.json
+/resume
+/home
+localstorage.js
+db.sqlite3

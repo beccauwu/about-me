@@ -5,15 +5,26 @@ from django.contrib.auth.models import User
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from .models import update_profile_signal, Profile
 from photography.models import Image
-from photography.forms import PhotoEditForm
+from photography.forms import PhotoEditForm, PhotoUploadForm
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic.detail import DetailView
 from about_me.storage_backends import staturl
 import getpass
 # Create your views here.
 
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
+
+class UserView(DetailView):
+    model = User
+    template_name = 'user_detail.html'
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['userdetail'] = get_object_or_404(User, id=self.kwargs['pk'])
+            print(context)
+            return super().get_context_data(**context)
 
 class DeleteImageView(DeleteView):
     model = Image
@@ -77,7 +88,7 @@ def profile(request):
     else:
         user_form = UserUpdateForm(instance=user)
         profile_form = ProfileForm(instance=profile)
-    context['forms'] = {'user_form': user_form, 'profile_form': profile_form}
+    context['forms'] = {'user_form': user_form, 'profile_form': profile_form, 'upload_form': PhotoUploadForm}
     context['scripts'] = [staturl("accounts/js/accounts.js")]
     return render(request, 'profile.html', context)
 

@@ -16,56 +16,12 @@ import boto3
 class PhotoDetail(DetailView):
     model = Image
     template_name = 'photos/photo_detail.html'
-    success_url = '/photos/'
     def get_context_data(self, **kwargs):
             context = super().get_context_data(**kwargs)
             context['image'] = get_object_or_404(Image, id=self.kwargs['pk'])
             context['form'] = CommentUploadForm()
             print(context)
             return super().get_context_data(**context)
-
-def post_comment(request):
-    if request.method == "POST":
-        comment = Comment(
-        image = Image.objects.get(id=request.POST['image_id']),
-        author = request.user,
-        comment = request.POST['comment']
-        )
-        comment.save()
-    return HttpResponseRedirect(request.path_info)
-
-class PostComment(CreateView):
-    model = Comment
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.user = self.request.user
-        instance.image = self.get_object()
-        instance.save()
-        return HttpResponseRedirect(self.request.path_info)
-
-class CollectionCreate(CreateView):
-    model = Collection
-    form_class = CollectionCreateForm
-    success_url = '/photography/'
-    template_name = 'collection_form.html'
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(CollectionCreate, self).form_valid(form)
-
-# class PhotoDetail(DetailView):
-#     model = Image
-#     template_name = 'photos/photo_detail.html'
-#     context_object_name = 'image'
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         likes_connected = get_object_or_404(Image, id=self.kwargs['pk'])
-#         liked = False
-#         if likes_connected.likes.filter(id=self.request.user.id).exists():
-#             liked = True
-#         context['number_of_likes'] = likes_connected.number_of_likes()
-#         context['liked'] = liked
-#         context['comments'] = Comment.objects.filter(image=self.object)
-#         return context
 
 # Create your views here.
 def photo_gallery(request):
@@ -79,9 +35,36 @@ def photo_gallery(request):
     return render(request, 'photos/photos.html', context)
 
 def gallery_upload(request):
-    form = PhotoUploadForm(request.POST)
     if request.method == "POST":
-        if form.is_valid():
-            form.save()
-    return render(request, 'photos/gallery_upload.html', {'form': form})
+        if 'collectionName' in request.POST:
+            collection = Collection(
+            name=request.POST['collectionName'],
+            summary=request.POST['collectionSummary'],
+            user = request.user
+            )
+            collection.save()
+            image = Image(
+            img = request.FILES['img'],
+            title = request.POST['title'],
+            collection = Collection.objects.get(id=collection.id),
+            )
+            image.save()
+        else:
+            image = Image(
+            img = request.FILES['img'],
+            title = request.POST['title'],
+            collection = Collection.objects.get(id=request.POST['collection'])
+            )
+            image.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def post_comment(request):
+    if request.method == "POST":
+        comment = Comment(
+        image = Image.objects.get(id=request.POST['image_id']),
+        author = request.user,
+        comment = request.POST['comment']
+        )
+        comment.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

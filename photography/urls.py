@@ -6,13 +6,8 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.photo_gallery, name='photos'),
+    path('', views.photo_gallery, name='start'),
     path('upload/', views.gallery_upload, name='galleryupload'),
-    path('photos/<int:pk>/', views.PhotoDetail.as_view(), name='photodetail'),
-    path('photos/comment/', views.post_comment, name='postcomment'),
-    path(
-        'collection-create/',
-        views.CollectionCreate.as_view(),
-        name='collection-create',
-    ),
+    path('posts/<int:pk>/', views.PhotoDetail.as_view(), name='photodetail'),
+    path('posts/comment/', views.post_comment, name='postcomment'),
 ]

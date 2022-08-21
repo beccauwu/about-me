@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', views.logout_request, name='logout'),
     path('edit-image/<int:pk>/update', views.EditImageView.as_view(), name='editimage'),
     path('delete-image/<int:pk>/', views.DeleteImageView.as_view(), name='deleteimage'),
+    path('profile/<int:pk>/', views.UserView.as_view(), name='profiledetails'),
     path('', views.profile, name='profile'),
 ]

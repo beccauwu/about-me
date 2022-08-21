@@ -1,8 +1,8 @@
 {% load static %}
 <header id="top">
     <nav class="navbar sticky-top navbar-expand-lg bg-black justify-content-between p-2">
-        <a class="navbar-brand" href="{% url 'home' %}" aria-label="go to home page">
-            <img src="{% static 'base/img/logo.png' %}" alt="logo" width="40" height="40">
+        <a class="navbar-brand" href="{% url 'start' %}" aria-label="go to home page">
+            <img src="{% static 'base/img/logo2.png' %}" alt="logo" width="40" height="40">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="toggle navigation">
@@ -11,15 +11,8 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                 <li class="nav-item">
-                    {% block home %}<a class="nav-link" href="{% url 'home' %}" aria-label="home page">Home</a>{% endblock %}
-                </li>
-                <li class="nav-item">
-                    {% block resume %}<a class="nav-link" href="{% url 'resume' %}"
-                        aria-label="resume page">Resume</a>{% endblock %}
-                </li>
-                <li class="nav-item">
-                    {% block photos %}<a class="nav-link" href="{% url 'photos' %}"
-                        aria-label="photo gallery page">Photo gallery</a>{% endblock %}
+                    {% block photos %}<a class="nav-link" href="{% url 'start' %}"
+                        aria-label="photo gallery page">Posts</a>{% endblock %}
                 </li>
                 <li class="nav-item">
                     {% block contact %}<a class="nav-link" href="{% url 'contact' %}"

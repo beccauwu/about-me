@@ -20,11 +20,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('blog/', include('blog.urls')),
+    path('', include('photography.urls')),
     path('contact/', include('contact.urls')),
-    path('resume/', include('resume.urls')),
-    path('photography/', include('photography.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path('user/', include("accounts.urls")),
     path('inlineedit/', include('inlineedit.urls')),

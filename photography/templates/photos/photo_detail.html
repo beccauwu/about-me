@@ -34,14 +34,14 @@
                         </div>
                         <div class="wi-fc">
                             <p class="text-start m-0 p-0">{{ comment.created_on }}</p>
-                            <div class="float-end m-0 p-0">
+                            <a href="{% url 'profiledetails' comment.author.id %}" class="d-block float-end m-0 p-0">
                                 <p class="d-inline giBold">{{ comment.author.username }}</p>
                                 {% if comment.author.profile.pfp %}
                                 <img class="rounded-circle" width="30" src="{{ comment.author.profile.pfp.url }}">
                                 {% else %}
                                 <img class="rounded-circle" width="30" src="{% static 'base/images/default_pfp.png' %}">
                                 {% endif %}
-                            </div>
+                            </a>
                         </div>
                     </div>
                     {% endfor %}
