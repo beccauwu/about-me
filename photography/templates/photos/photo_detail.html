@@ -5,6 +5,11 @@
 {% block content %}
 <div class="container my-4">
     <div class="col mx-auto">
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="{% url 'profiledetails' image.collection.user.id %}">{{ image.collection.user.username }}</a>
+            <a class="breadcrumb-item" href="{% url 'collection' image.collection.id %}">{{ image.collection.name }}</a>
+            <span class="breadcrumb-item active" aria-current="page">{{ image.title }}</span>
+        </nav>
         <div class="text-center mt-3 rounded p-4 bg-light text-black">
             {% if image.collection.user.id == request.user.id %}
             {% inlineedit 'image.title' 'formcontrol' template='inlineedit_custom.html' %}

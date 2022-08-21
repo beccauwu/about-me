@@ -7,6 +7,7 @@
 
 {% block content %}
 <div class="container my-2">
+    {% if not collection %}
     <div class="row">
         <div class="btn-toolbar wi-fc mx-auto mb-2" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Post selection">
@@ -22,11 +23,20 @@
         <form class="search" method="GET" action="{% url 'search' %}">
             <div class="d-flex flex-nowrap wi-fc mx-auto bg-light rounded border border-black">
                 <input class="form-control d-inline border-0" type="search" name="search">
-                <button class="btn btn-outline-primary search d-inline fa-solid fa-magnifying-glass border-0"
-                    type="submit" aria-label="submit search"></button>
+                <button class="btn btn-outline-primary search d-inline fa-solid fa-magnifying-glass border-0" type="submit"
+                    aria-label="submit search"></button>
             </div>
         </form>
     </div>
+    {% else %}
+    <div class="row bg-light rounded">
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="{% url 'profiledetails' collection.user.id %}">{{ collection.user.username }}</a>
+            <span class="breadcrumb-item active" aria-current="page">{{ collection.name }}</span>
+        </nav>
+        <h1 class="text-center giBold">{{ collection.name }}</h1>
+    </div>
+    {% endif %}
     <div class="row g-2">
         {% for image in images %}
         <div class="col-md-4 col-sm-12 text-black">

@@ -70,8 +70,14 @@ class PhotosView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['images'] = Image.objects.all()
-        context['scripts'] = [staturl('photos/js/photos.js')]
         return context
+
+class CollectionView(TemplateView):
+    template_name = 'photos/photos.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = Image.objects.filter(collection=self.kwargs['pk'])
+        context['collection'] = Collection.objects.get(id=self.kwargs['pk'])
 # Create your views here.
 
 def photo_delete(request, pk):
