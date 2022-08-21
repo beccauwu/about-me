@@ -22,6 +22,11 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Follower(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    friends_since = models.DateTimeField(auto_now_add=True)
+
 @receiver(post_save, sender=User)
 def update_profile_signal(sender, instance, created, **kwargs):
     if created:
