@@ -11,16 +11,3 @@ class FormControl(BasicAdaptor):
         return f
     def display_value(self):
         return format_html(self.db_value())
-
-class NewComment(BasicAdaptor):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.image = kwargs['image']
-    def form_field(self):
-        f = self._field.formfield()
-        f.widget = forms.TextInput(attrs={'class': 'form-control mt-2 text-center d-inline wi-fc'})
-        return f
-    def empty_message(self):
-        return 'Hover here to add new {}'.format(self._field.verbose_name)
-    def save(self, value):
-        Comment.create(image=self.image, comment=value, author=self._user)
