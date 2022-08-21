@@ -7,7 +7,8 @@ from . import views
 
 urlpatterns = [
     path('', views.photo_gallery, name='start'),
-    path('upload/', views.gallery_upload, name='galleryupload'),
+    path('upload/', views.gallery_upload, name='galleryupload'),  # type: ignore
     path('posts/<int:pk>/', views.PhotoDetail.as_view(), name='photodetail'),
+    path('posts/delete/<int:pk>/', views.photo_delete, name='deleteimage'),
     path('posts/comment/', views.post_comment, name='postcomment'),
 ]

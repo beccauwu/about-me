@@ -40,7 +40,12 @@
             <div class="p-3 my-2 wi-fc mx-auto rounded border border-black">
                 <img src="{{ image.img.url }}" width="100">
                 {% inlineedit 'image.title' 'formcontrol' template='inlineedit_custom.html' %}
-                <a class="btn btn-primary btn-sm imageDelete" href="{% url 'deleteimage' image.id %}">Delete image</a>
+                <button type="button" class="btn btn-primary btn-sm imageDelete">Delete Image</button>
+                <div class="wi-fc btn btn-outline-primary btn-sm d-none imgDelBtns">
+                    <a class="fs-5 d-inline fa-solid fa-trash-can" href="{% url 'deleteimage' image.id %}"></a>
+                    <span class="ms-2 me-3 h-100 border-end border-primary"></span>
+                    <i class="no-delete fs-5 fa-solid d-inline fa-xmark"></i>
+                </div>
             </div>
             {% endfor %}
             {% else %}
@@ -173,5 +178,13 @@
                 $('#collectionInputLabel').removeClass("d-none");
             }
         });
+    $('.imageDelete').on('click', function () {
+        $(this).siblings('.imgDelBtns').toggleClass('d-none', 'd-inline-block');
+        $(this).toggleClass('d-none');
+    });
+    $('.no-delete').on('click', function () {
+        $(this).parent().toggleClass('d-none', 'd-inline-block');
+        $(this).parent().siblings('.imageDelete').toggleClass('d-none');
+    });
 </script>
 {% endblock %}

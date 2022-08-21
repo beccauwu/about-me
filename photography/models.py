@@ -34,7 +34,7 @@ class Comment(models.Model):
     comment = models.TextField()
     author = models.ForeignKey(User, default=1, on_delete=models.SET_DEFAULT)
     created_on = models.DateTimeField(auto_now_add=True)
-    image = models.ForeignKey(Image, default=1, verbose_name='Images', on_delete=models.SET_DEFAULT)
+    image = models.ForeignKey(Image, verbose_name='Images', on_delete=models.CASCADE)
     
     def __str__(self):
         return self.comment

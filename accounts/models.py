@@ -22,21 +22,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-# class Theme(models.Model):
-#     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-#     #borders
-#     bc = models.CharField(max_length=7, blank=True)
-#     bw = models.IntegerField(blank=True)
-#     br = models.IntegerField(blank=True)
-#     #general colours
-#     primary = models.CharField(max_length=7, blank=True)
-#     light = models.CharField(max_length=7, blank=True)
-#     dark = models.CharField(max_length=7, blank=True)
-#     body = models.CharField(max_length=7, blank=True)
-
-#     def __str__(self):
-#         return self.profile.user
-
 @receiver(post_save, sender=User)
 def update_profile_signal(sender, instance, created, **kwargs):
     if created:

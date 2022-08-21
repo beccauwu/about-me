@@ -24,6 +24,12 @@ class PhotoDetail(DetailView):
             return super().get_context_data(**context)
 
 # Create your views here.
+
+def photo_delete(request, pk):
+    image = Image.objects.get(id=pk)
+    image.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 def photo_gallery(request):
     context = {}
     form = PhotoUploadForm(request.POST, request.FILES)
@@ -46,7 +52,7 @@ def gallery_upload(request):
             image = Image(
             img = request.FILES['img'],
             title = request.POST['title'],
-            collection = Collection.objects.get(id=collection.id),
+            collection = Collection.objects.get(id=collection.id),  # type: ignore
             )
             image.save()
         else:

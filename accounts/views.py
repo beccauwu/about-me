@@ -11,6 +11,7 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.detail import DetailView
 from about_me.storage_backends import staturl
+from django.http import HttpResponseRedirect
 import getpass
 # Create your views here.
 
@@ -64,14 +65,11 @@ def signup(request):
         user_form = NewUserForm(request.POST)
         profile_form = ProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.refresh_from_db()
+            user_form.save()
             profile_form.save()
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('home')
-    # else:
-    #     form = NewUserForm()
-    # return render(request, 'signup.html', {'form': form})
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            messages.error(request, _('Please correct the error below.'))
 
 def profile(request):
     context = {}
