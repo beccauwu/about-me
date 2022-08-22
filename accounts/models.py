@@ -23,7 +23,7 @@ class Profile(models.Model):
         return self.user.username
 
 class Follower(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     follower = models.ForeignKey(Profile, on_delete=models.CASCADE)
     friends_since = models.DateTimeField(auto_now_add=True)
 
