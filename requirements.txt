@@ -25,7 +25,7 @@ django-client-side-image-cropping==0.1.10
 django-cors-headers==3.13.0
 django-inlineedit==1.2.2
 django-js-asset==2.0.0
-django-pwa==1.0.10
+git+https://github.com/silviolleite/django-pwa
 django-reversion==5.0.2
 django-ses==3.1.0
 django-storages==1.13
