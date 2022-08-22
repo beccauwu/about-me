@@ -1,6 +1,6 @@
 {% load static %}
 <header id="top">
-    <nav class="navbar sticky-top navbar-expand-lg bg-black justify-content-between p-2">
+    <nav class="navbar sticky-top navbar-expand-lg bg-black justify-content-between text-center">
         <a class="navbar-brand" href="{% url 'start' %}" aria-label="go to home page">
             <img src="{% static 'base/img/logo2.png' %}" alt="logo" width="40" height="40">
         </a>
@@ -8,31 +8,28 @@
             aria-controls="navbar" aria-expanded="false" aria-label="toggle navigation">
             <i class="fa-solid fa-bars text-light"></i>
         </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto me-2">
                 <li class="nav-item">
                     {% block photos %}<a class="nav-link" href="{% url 'start' %}"
-                        aria-label="photo gallery page">Posts</a>{% endblock %}
-                </li>
-                <li class="nav-item">
-                    {% block contact %}<a class="nav-link" href="{% url 'contact' %}"
-                        aria-label="contact page">Contact</a>{% endblock %}
+                        aria-label="main page with posts">Posts</a>{% endblock %}
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    {% block account %}<a class="nav-link" href="{% url 'profile' %}">Account</a>{% endblock %}
+                    {% block account %}<a class="nav-link" href="{% url 'profile' %}" aria-label="your account page">Account</a>{% endblock %}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'logout' %}" aria-label="log out of your account">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    {% block login %}<a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>{% endblock %}
+                    {% block login %}<a class="nav-link" data-bs-toggle="modal"
+                        data-bs-target="#loginModal" aria-label="log in to your account">Login</a>{% endblock %}
                 </li>
                 {% endif %}
                 {% if request.user.is_staff %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin panel</a>
+                    <a class="nav-link" href="/admin" aria-label="open admin panel page">Admin panel</a>
                 </li>
                 {% endif %}
             </ul>
