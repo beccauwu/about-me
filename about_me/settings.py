@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'accounts',
     'photography',
     'anymail',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -64,9 +65,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'about_me.middlewares.LoginFormMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -219,9 +219,31 @@ INLINEEDIT_EDIT_ACCESS = lambda user, model, field: True
 
 INLINEEDIT_ADAPTORS = {
     "formcontrol": "about_me.adaptors.FormControl",
+    'textarea': 'about_me.adaptors.TextArea',
 }
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+from urllib.parse import urljoin
+PWA_APP_NAME = 'AboutMe'
+PWA_APP_DESCRIPTION = "New social media platform to share your life"
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_STATUS_BAR_COLOR = '#e4a2f3'
+PWA_APP_ICONS = [
+    {
+        'src': urljoin(STATIC_URL, 'base/img/logo.png'),
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': urljoin(STATIC_URL, 'base/img/splashscreen.png'),
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-UK'
+PWA_APP_DEBUG_MODE = True

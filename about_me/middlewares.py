@@ -1,5 +1,6 @@
 from django.utils.deprecation import MiddlewareMixin
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, redirect
+from django.contrib import messages
 from accounts.forms import LoginForm, NewUserForm, ProfileForm
 
 class LoginFormMiddleware(MiddlewareMixin):
@@ -8,25 +9,14 @@ class LoginFormMiddleware(MiddlewareMixin):
             form = LoginForm(request=request, data=request.POST)
             if form.is_valid():
                 form.user_login()
+                messages.success(request, 'You have successfully logged in!')
                 if '/user/logout/' in request.get_full_path():
-                    return HttpResponseRedirect('/')
+                    return redirect('start')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            else:
+                messages.error(request, 'Invalid username or password')
+                return redirect('start')
         else:
             form = LoginForm(request)
         request.login_form = form
 
-class SignupFormMiddleware(MiddlewareMixin):
-    def process_request(self, request):
-        if request.method == 'POST':
-            signup_form = NewUserForm(data=request.POST)
-            profile_form = ProfileForm(request.POST, request.FILES)
-            if signup_form.is_valid():
-                user = signup_form.save()
-                user.refresh_from_db()
-                profile_form.save()
-                if '/user/logout/' in request.get_full_path():
-                    return HttpResponseRedirect('/')
-        else:
-            signup_form = NewUserForm(request)
-            profile_form = ProfileForm(request)
-        request.signup_form = signup_form
-        request.profile_form = profile_form
