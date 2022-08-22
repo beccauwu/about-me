@@ -11,3 +11,11 @@ class FormControl(BasicAdaptor):
         return f
     def display_value(self):
         return format_html(self.db_value())
+
+class TextArea(BasicAdaptor):
+    def form_field(self):
+        f = self._field.formfield()
+        f.widget = forms.Textarea(attrs={'class': 'form-control mt-2 text-center d-inline wi-fc'})
+        return f
+    def display_value(self):
+        return format_html(markdown(self.db_value()))
