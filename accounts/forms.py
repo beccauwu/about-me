@@ -1,3 +1,4 @@
+from logging import setLogRecordFactory
 from django.forms import CharField, TextInput, EmailField, Form, EmailInput, PasswordInput, ImageField
 from django import forms
 from django.contrib.auth import login, authenticate
@@ -15,14 +16,14 @@ class NewUserForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'signupUsernameInput', 'placeholder': 'greatestusername'})
-        self.fields['email'].widget.attrs.update({'class': "form-control giBold", 'id': 'signupEmailInput', 'placeholder': 'mail@example.com'})
-        self.fields['password1'].widget.attrs.update({'class': "form-control giBold", 'id': 'password1Input', 'placeholder': 'Password'})
-        self.fields['password2'].widget.attrs.update({'class': "form-control giBold", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
-    def save(self, commit=True):
+        self.request = kwargs.pop('request', None)
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'signupUsernameInput', 'placeholder': 'greatestusername'})
+        self.fields['email'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'signupEmailInput', 'placeholder': 'mail@example.com'})
+        self.fields['password1'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'password1Input', 'placeholder': 'Password'})
+        self.fields['password2'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
+    def save(self, commit=True, **kwargs):
         from .models import update_profile_signal
         user = super().save(commit=commit)
-        update_profile_signal(sender=User, instance=user, created=True, request=self.request)
         if commit:
             auth_user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password1'])
             login(self.request, auth_user)
@@ -59,8 +60,8 @@ class LoginForm(AuthenticationForm):
         fields = ('username', 'password')
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginUsernameInput'})
-        self.fields['password'].widget.attrs.update({'class': "form-control giBold", 'id': 'loginPasswordInput'})
+        self.fields['username'].widget.attrs.update({'class': "form-control giBold text-center", 'id': 'loginUsernameInput'})
+        self.fields['password'].widget.attrs.update({'class': "form-control giBold text-center", 'id': 'loginPasswordInput'})
         
     def user_login(self):
         user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])

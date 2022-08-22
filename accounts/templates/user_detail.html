@@ -18,28 +18,34 @@
                     <h3 class="me-2 d-inline">{{ userdetail.username }}</h3>
                     {% for follower in followers %}
                     {% if request.user.username in follower.follower.user.username %}
-                    <p class="giBold d-inline">following</p>
+                    <p class="giBold d-inline" aria-label="you are following {{ userdetail.username }}">following</p>
                     {% endif %}
                     {% endfor %}
-                    <small class="d-block">{{ follower_count }} followers</small>
+                    <small class="d-block" aria-label="{{ userdetail.username }}'s follower count">{{ follower_count }} followers</small>
                 </span>
                 <span class="d-block my-2 pb-2 border-bottom border-black">
+                    {% if not followers %}
+                    <a href="{% url 'followuser' userdetail.id %}" aria-label="follow {{ userdetail.username }}" class="me-2 text-reset text-decoration-none">
+                        <i class="fs-4 fa-solid fa-user-plus"></i>
+                    </a>
+                    {% else %}
                     {% for follower in followers %}
-                    {% if request.user.username in follower.follower.user.username %}
-                    <a href="{% url 'unfollowuser' userdetail.id %}" class="me-2 text-reset text-decoration-none">
+                    {% if request.user.id == follower.follower.user.id %}
+                    <a href="{% url 'unfollowuser' userdetail.id %}" aria-label="unfollow {{ userdetail.username }}" class="me-2 text-reset text-decoration-none">
                         <i class="fs-4 fa-solid fa-user-minus"></i>
                     </a>
                     {% else %}
-                    <a href="{% url 'followuser' userdetail.id %}" class="me-2 text-reset text-decoration-none">
+                    <a href="{% url 'followuser' userdetail.id %}" aria-label="follow {{ userdetail.username }}" class="me-2 text-reset text-decoration-none">
                         <i class="fs-4 fa-solid fa-user-plus"></i>
                     </a>
                     {% endif %}
                     {% endfor %}
+                    {% endif %}
                 </span>
                 {% if userdetail.profile.bio %}
-                <p class="card-text">{{userdetail.profile.bio }}</p>
+                <p class="card-text" aria-label="{{ userdetail.username }}'s bio">{{userdetail.profile.bio }}</p>
                 {% else %}
-                <p class="card-text">User has no bio</p>
+                <p class="card-text" aria-label="{{ userdetail.username }}'s bio">User has no bio</p>
                 {% endif %}
             </div>
         </div>
@@ -51,7 +57,7 @@
                         {% if collection.image_set.all.exists %}
                             {% for image in collection.image_set.all %}
                             <div class="p-3 m-2 wi-fc mx-auto">
-                                <img class="rounded" src="{{ image.img.url }}" width="300">
+                                <img class="rounded" src="{{ image.img.url }}" alt="image with title {{ image.title }}" width="300">
                             </div>
                             {% endfor %}
                         {% else %}

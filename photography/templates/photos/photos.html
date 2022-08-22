@@ -11,11 +11,11 @@
     <div class="row">
         <div class="btn-toolbar wi-fc mx-auto mb-2" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Post selection">
-                <a href="{% url 'start' %}" class="btn btn-primary">All posts</a>
+                <a href="{% url 'start' %}" class="btn btn-primary" aria-label="view all posts on site">All posts</a>
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'following' %}" class="btn btn-primary">Following</a>
+                <a href="{% url 'following' %}" class="btn btn-primary" aria-label="view posts of persons you follow">Following</a>
                 {% endif %}
-                <button id="searchBtn" class="btn btn-primary">Search</button>
+                <button id="searchBtn" class="btn btn-primary" aria-label="search the site for posts">Search</button>
             </div>
         </div>
     </div>
@@ -29,22 +29,25 @@
         </form>
     </div>
     {% else %}
-    <div class="row bg-light rounded">
-        <nav class="breadcrumb">
-            <a class="breadcrumb-item" href="{% url 'profiledetails' collection.user.id %}">{{ collection.user.username }}</a>
-            <span class="breadcrumb-item active" aria-current="page">{{ collection.name }}</span>
+    <div class="row p-2 mb-2">
+        <nav class="breadcrumb wi-fc bg-light p-2 border border-black">
+            <a class="breadcrumb-item text-black" href="{% url 'profiledetails' collection.user.id %}" aria-label="profile of person who owns the collection">{{ collection.user.username }}</a>
+            <span class="breadcrumb-item active text-black giBold" aria-current="page">{{ collection.name }}</span>
         </nav>
-        <h1 class="text-center giBold">{{ collection.name }}</h1>
+        <div>
+            <h3 class="text-center text-black giBold wi-fc mx-auto bg-light p-2 border border-black" aria-label="current collection name">{{ collection.name }}</h3>
+            <p class="text-center text-black wi-fc mx-auto bg-light p-2 border border-black" aria-label="summary of current collection">{{ collection.summary }}</p>
+        </div>
     </div>
     {% endif %}
     <div class="row g-2">
         {% for image in images %}
         <div class="col-md-4 col-sm-12 text-black">
             <div class="thumbnail bg-light p-2 rounded">
-                <a href="{% url 'photodetail' image.id %}">
-                    <img src="{{ image.img.url }}" class="img-thumbnail">
+                <a href="{% url 'photodetail' image.id %}" aria-label="open post for image {{ image.title }}">
+                    <img src="{{ image.img.url }}" class="img-thumbnail" alt="image with title {{ image.title }}">
                     <div class="caption text-center">
-                        <h3 class="giBold pt-1 text-black text-decoration-none">{{ image.title }}</h3>
+                        <h3 class="giBold pt-1 text-black text-decoration-none" aria-label="image title">{{ image.title }}</h3>
                     </div>
                 </a>
             </div>

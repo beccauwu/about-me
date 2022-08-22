@@ -20,7 +20,7 @@
             {% if user.profile.pfp %}
             <img src="{{ user.profile.pfp.url }}" width="100" class="rounded-circle">
             {% endif %}
-            <h2 class="mt-2 mb-0">@{{ user.username }}</h2>
+            <h2 class="mt-2 mb-0">{{ user.username }}</h2>
             {% if user.profile.bio %}
             <p class="card-text">
                 <!-- {{user.profile.bio }} -->
@@ -31,8 +31,8 @@
                 <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal" data-bs-target="#profileEdit" id="profileEditBtn">Edit profile</button>
             </div>
         </div>
+        {% if user.collection_set.all.exists %}
         <div class="text-center mt-3 rounded p-4 bg-light text-black">
-            {% if user.collection_set.all.exists %}
             <h2 class="mt-2 mb-0 giBold border-bottom border-black pb-1">Your Collections</h2>
             {% for collection in user.collection_set.all %}
             <h3 class="giBold">{{ collection.name }}</h3>
@@ -60,8 +60,8 @@
                 {% endif %}
             </div>
             {% endfor %}
-            {% endif %}
         </div>
+        {% endif %}
     </div>
     <div class="buttons my-2 wi-fc mx-auto">
         <button class="btn btn-primary px-4" type="button" data-bs-toggle="modal" data-bs-target="#imgUpload"
@@ -139,7 +139,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data" method="post" id="profileEditForm">
+                <form enctype="multipart/form-data" method="post" id="profileEditForm" action="{% url 'profileupdate' %}">
                     {% csrf_token %}
                     {% if user.profile.pfp %}
                     <label for="pfpInput" class="form-label giBold text-black" id="bioLabel">Change profile picture:</label>

@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
+from django.views.generic.base import TemplateView
 from .models import update_profile_signal, Profile, Follower
 from photography.models import Image
 from photography.forms import PhotoEditForm, PhotoUploadForm
@@ -28,6 +29,17 @@ class UserView(DetailView):
             context['follower_count'] = str(context['followers'].count())
             print(context)
             return super().get_context_data(**context)
+
+class ProfileView(TemplateView):
+    template_name = 'profile.html'
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        context = super().get_context_data(**kwargs)
+        context['followers'] = Follower.objects.filter(user=user)
+        context['scripts'] = [staturl("accounts/js/accounts.js")]
+        context['forms'] = {'profile_form': ProfileForm(instance=user.profile), 'user_form': UserUpdateForm(instance=user)}
+        print(context)
+        return super().get_context_data(**context)
 
 class DeleteImageView(DeleteView):
     model = Image
@@ -74,50 +86,46 @@ def unfollow_user(request, pk):
     return redirect('profiledetails', pk=pk)
 
 def login_request(request):
-    form = LoginForm(request=request, data=request.POST)
-    if form.is_valid():
-        form.user_login()
-        return redirect('start')
-    else:
-        messages.error(request, 'Invalid username or password')
+    if request.method == 'POST':
+        form = LoginForm(request=request, data=request.POST)
+        try:
+            form.is_valid()
+            form.user_login()
+            messages.success(request, _('You have successfully logged in!'))
+            if '/user/logout/' in request.get_full_path():
+                return HttpResponseRedirect('/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        except Exception as e:
+            messages.error(request, '{}'.format(e))
+            return redirect('start')
     # form = LoginForm()
     # return render(request=request, template_name='login.html', context={'form':form})
 
 def signup(request):
     if request.method == 'POST':
-        user_form = NewUserForm(request.POST)
-        profile_form = ProfileForm(request.POST, request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('You have successfully registered!\nyou may now log in.'))
+            return redirect('start')
         else:
             messages.error(request, _('Please correct the error below.'))
+            return redirect('start')
 
-def profile(request):
-    if not request.user.is_authenticated:
-        messages.error(request, _('You are not logged in.'))
-        return redirect('start')
-    context = {}
-    user = request.user
-    profile  = user.profile
+def profile_update(request):
     if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=user)
-        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if user_form.is_valid() and profile_form.is_valid():
+        user_form = UserUpdateForm(data=request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        try:
             user_form.save()
             profile_form.save()
-            update_profile_signal(sender=User, instance=user, created=False, request=request)
-            messages.success(request, _('Your profile was successfully updated!'))
-    else:
-        user_form = UserUpdateForm(instance=user)
-        profile_form = ProfileForm(instance=profile)
-    context['followers'] = Follower.objects.filter(user=user)
-    context['forms'] = {'user_form': user_form, 'profile_form': profile_form, 'upload_form': PhotoUploadForm}
-    context['scripts'] = [staturl("accounts/js/accounts.js")]
-    return render(request, 'profile.html', context)
+            messages.success(request, _('Your profile has been updated!'))
+            return redirect('profile')
+        except Exception as e:
+            messages.error(request, _(f'{e}'))
+            return redirect('profile')
 
 def logout_request(request):
     logout(request)
     messages.success(request, _('You have been logged out.'))
-    return redirect('start')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

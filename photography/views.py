@@ -20,11 +20,12 @@ class PhotoDetail(DetailView):
     model = Image
     template_name = 'photos/photo_detail.html'
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['image'] = get_object_or_404(Image, id=self.kwargs['pk'])
-            context['form'] = CommentUploadForm()
-            print(context)
-            return super().get_context_data(**context)
+        context = super().get_context_data(**kwargs)
+        context['image'] = get_object_or_404(Image, id=self.kwargs['pk'])
+        context['likes'] = Like.objects.filter(image=context['image'])
+        context['form'] = CommentUploadForm()
+        print(context)
+        return super().get_context_data(**context)
 
 class FollowingView(TemplateView):
     template_name = 'photos/photos.html'
@@ -78,6 +79,7 @@ class CollectionView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['images'] = Image.objects.filter(collection=self.kwargs['pk'])
         context['collection'] = Collection.objects.get(id=self.kwargs['pk'])
+        return context
 # Create your views here.
 
 def photo_delete(request, pk):
@@ -153,4 +155,10 @@ def post_like(request, pk):
         user = request.user
         )
         like.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def post_unlike(request, pk):
+    if request.user.is_authenticated:
+        like = Like.objects.get(image=pk, user=request.user)
+        like.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
