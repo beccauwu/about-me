@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from about_me.mixins import CustomLoginRequiredMixin
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from django.views.generic.base import TemplateView
 from .models import update_profile_signal, Profile, Follower
@@ -31,7 +31,7 @@ class UserView(DetailView):
         print(context)
         return super().get_context_data(**context)
 
-class ProfileView(LoginRequiredMixin, TemplateView):
+class ProfileView(CustomLoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
     login_url = '/'
     def get_context_data(self, **kwargs):

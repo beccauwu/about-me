@@ -3,8 +3,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
+from about_me.mixins import CustomLoginRequiredMixin
 from django_addanother.views import CreatePopupMixin
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from boto.s3.connection import S3Connection
@@ -28,8 +29,9 @@ class PhotoDetail(DetailView):
         print(context)
         return super().get_context_data(**context)
 
-class FollowingView(TemplateView):
+class FollowingView(CustomLoginRequiredMixin, TemplateView):
     template_name = 'photos/photos.html'
+    login_url = '/'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = Profile.objects.get(user=self.request.user)
@@ -84,57 +86,69 @@ class CollectionView(TemplateView):
 # Create your views here.
 
 def photo_delete(request, pk):
-    image = Image.objects.get(id=pk)
-    image.delete()
-    messages.success(request, 'Image deleted')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if request.user.is_authenticated:
+        image = Image.objects.get(id=pk)
+        image.delete()
+        messages.success(request, 'Image deleted')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.error(request, 'You must be logged in to delete an image')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def comment_delete(request, pk):
-    comment = Comment.objects.get(id=pk)
-    comment.delete()
-    messages.success(request, 'Comment deleted')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if request.user.is_authenticated:
+        comment = Comment.objects.get(id=pk)
+        comment.delete()
+        messages.success(request, 'Comment deleted')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.error(request, 'You must be logged in to delete a comment')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def gallery_upload(request):
-    if request.method == "POST":
-        if 'collectionName' in request.POST:
-            collection = Collection(
-            name=request.POST['collectionName'],
-            summary=request.POST['collectionSummary'],
-            user = request.user
-            )
-            collection.save()
-            if 'textContent' in request.POST:
-                image = Image(
-                title=request.POST['title'],
-                img=request.FILES['image'],
-                text_content=request.POST['textContent'],
-                collection=collection
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if 'collectionName' in request.POST:
+                collection = Collection(
+                name=request.POST['collectionName'],
+                summary=request.POST['collectionSummary'],
+                user = request.user
                 )
-                image.save()
+                collection.save()
+                if 'textContent' in request.POST:
+                    image = Image(
+                    title=request.POST['title'],
+                    img=request.FILES['image'],
+                    text_content=request.POST['textContent'],
+                    collection=collection
+                    )
+                    image.save()
+                else:
+                    image = Image(
+                    title=request.POST['title'],
+                    img=request.FILES['image'],
+                    collection=collection
+                    )
+                    image.save()
+            elif 'textContent' in request.POST:
+                    image = Image(
+                    title=request.POST['title'],
+                    img=request.FILES['image'],
+                    text_content=request.POST['textContent'],
+                    collection=Collection.objects.get(id=request.POST['collection'])
+                    )
+                    image.save()
             else:
                 image = Image(
                 title=request.POST['title'],
                 img=request.FILES['image'],
-                collection=collection
-                )
-                image.save()
-        elif 'textContent' in request.POST:
-                image = Image(
-                title=request.POST['title'],
-                img=request.FILES['image'],
-                text_content=request.POST['textContent'],
                 collection=Collection.objects.get(id=request.POST['collection'])
                 )
                 image.save()
-        else:
-            image = Image(
-            title=request.POST['title'],
-            img=request.FILES['image'],
-            collection=Collection.objects.get(id=request.POST['collection'])
-            )
-            image.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.error(request, 'You must be logged in to upload')
+        return redirect('start')
 
 def post_comment(request, pk):
     if request.user.is_authenticated:
