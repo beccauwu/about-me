@@ -4,12 +4,13 @@ import pathlib
 from django.db import models
 from django.contrib.auth.models import User
 
+
 def upload_location(instance, filename):
     ext = pathlib.Path(filename).suffix
     filename = "{}{}".format(uuid.uuid4().hex, ext)
     return 'user_{}/gallery/{}'.format(instance.collection.user.id, filename)
 
-# Create your models here.
+
 class Collection(models.Model):
     name = models.CharField(max_length=200, unique=True)
     summary = models.CharField(max_length=200, blank=True)
@@ -21,6 +22,7 @@ class Collection(models.Model):
     def __str__(self):
         return self.name
 
+
 class Image(models.Model):
     title = models.CharField(max_length=200, unique=True)
     img = models.ImageField(upload_to=upload_location)
@@ -31,6 +33,7 @@ class Image(models.Model):
     def __str__(self):
         return self.title
 
+
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
@@ -40,6 +43,7 @@ class Like(models.Model):
             models.UniqueConstraint(fields=['user', 'image'], name='unique_like')
         ]
 
+
 class Comment(models.Model):
     comment = models.TextField()
     author = models.ForeignKey(User, default=1, on_delete=models.SET_DEFAULT)
@@ -48,6 +52,7 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment
+
 
 class PhotoGallery(models.Model):
     title = models.CharField(max_length=200, unique=True)

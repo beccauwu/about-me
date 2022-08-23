@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container my-4">
     <div class="col mx-auto">
-        <div class="text-center mt-3 rounded p-4 bg-light text-black">
+        <div class="row text-center mt-3 rounded p-4 bg-light text-black">
             <nav class="breadcrumb">
                 <a class="breadcrumb-item text-black" href="{% url 'profiledetails' image.collection.user.id %}">{{ image.collection.user.username }}</a>
                 <a class="breadcrumb-item text-black" href="{% url 'collection' image.collection.id %}">{{ image.collection.name }}</a>
@@ -16,7 +16,12 @@
             {% else %}
             <h3 class="modal-title giBold text-black wi-fc mx-auto mb-0" id="imgUploadTitle">{{ image.title }}</h3>
             {% endif %}
-            <p class="text-black text-center mb-3">{{ image.upload_date }}</p>
+            <p class="text-black text-center mb-0">{{ image.upload_date }}</p>
+            {% if image.collection.user.id == request.user.id or request.user.is_staff %}
+            <a class="d-block mb-3" href="{% url 'deleteimage' image.id %}">
+                <i class="fa-regular fa-trash-can"></i>
+            </a>
+            {% endif %}
             <img class="img-fluid" src="{{ image.img.url }}">
             {% if image.text_content %}
                 {% if image.collection.user.id == request.user.id %}
@@ -40,17 +45,17 @@
                     {% if likes %}
                     {% for like in likes %}
                     {% if request.user.id == like.user.id %}
-                    <a href="{% url 'unlike' image.id %}">
+                    <a class="text-decoration-none" href="{% url 'unlike' image.id %}">
                         <i class="mt-1 fs-4 fa-solid fa-heart text-danger"></i>
                     </a>
                     {% else %}
-                    <a href="{% url 'like' image.id %}">
+                    <a class="text-decoration-none" href="{% url 'like' image.id %}">
                         <i class="mt-1 fs-4 fa-regular fa-heart text-black"></i>
                     </a>
                     {% endif %}
                     {% endfor %}
                     {% else %}
-                    <a href="{% url 'like' image.id %}">
+                    <a class="text-decoration-none" href="{% url 'like' image.id %}">
                         <i class="mt-1 fs-4 fa-regular fa-heart text-black"></i>
                     </a>
                     {% endif %}
@@ -59,20 +64,13 @@
                         <i class="mt-1 fs-4 fa-solid fa-heart text-grey-700"></i>
                     </a>
                     {% endif %}
+                    <span class="giBold mb-2">{{ likes_count }}</span>
                 </div>
             </div>
             <!-- <div class="w-100 pb-4"></div> -->
         </div>
         <div class="row bg-light rounded my-2 py-2 d-flex justify-content-around">
-            <div class="col-md-4 col-sm-12 text-center align-self-end p-2">
-                <form method="post" action="{% url 'postcomment' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="image_id" value="{{ image.id }}">
-                    <label for="commentInput" class="text-black giBold">Upload comment:</label>
-                    <textarea class="form-control my-2" id="commentInput" name="comment" rows="3"></textarea>
-                    <button type="submit" class="btn btn-primary wi-fc mx-auto">Submit</button>
-                </form>
-            </div>
+            {% if image.comment_set.all %}
             <div class="col-md-6 col-sm-12 border border-black rounded p-2">
                 <div class="text-center mt-3 rounded bg-light text-black">
                     <h5 class="modal-title giBold text-black wi-fc mx-auto mb-2 border-bottom border-black" id="commentTitle">Comments</h5>
@@ -82,6 +80,11 @@
                             <p class="giBold">{{ comment.comment }}</p>
                         </div>
                         <div class="wi-fc">
+                            {% if comment.author.id == request.user.id or request.user.is_staff %}
+                            <a class="d-block text-end" href="{% url 'deletecomment' comment.id %}">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </a>
+                            {% endif %}
                             <p class="text-start m-0 p-0">{{ comment.created_on }}</p>
                             <a href="{% url 'profiledetails' comment.author.id %}"
                                 class="d-block float-end m-0 p-0 text-decoration-none text-reset">
@@ -95,8 +98,16 @@
                         </div>
                     </div>
                     {% endfor %}
+                    <form method="post" action="{% url 'postcomment' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="image_id" value="{{ image.id }}">
+                        <label for="commentInput" class="text-black giBold text-center">Upload comment:</label>
+                        <textarea class="form-control my-2 text-center" id="commentInput" name="comment" rows="3"></textarea>
+                        <button type="submit" class="btn btn-primary wi-fc mx-auto">Submit</button>
+                    </form>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

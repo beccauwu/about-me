@@ -16,19 +16,81 @@ Users are able to follow their favourite people to easily find their content on 
 
 # 2. Features and UX
 
-## **Front Page**
+## **Features**
 
-## **Profile Page**
+---
 
-## **Account Creation**
+### **Landing Page**
 
-## **Login/logout**
+When first opening the site, the user lands on the posts page
 
-## **Following Users**
+<img src="images/landing-page.png" alt="landing page" width="700">
 
-## **Tables**
+Here they have the opportunity to search posts based on their title
+
+<img src="images/search.png" alt="search input" width="300">
+
+### **Login/logout**
+
+If they aren't logged in since earlier they can do so by clicking the login button (or on mobile, the login link inside navigation menu).
+
+This opens up the modal for login.
+
+<img src="images/login.png" alt="login modal" width="400">
+
+### **Signup**
+
+If the user has no account and wish to create one, the login modal has a button toggling the signup modal.
+
+Here they enter a username, email and password, and accept the terms of use as well as the privacy notice.
+
+<img src="images/signup.png" alt="signup modal" width="400">
+
+After creating an account, they may log in using the details provided.
+
+### **Account Page**
+
+To easily see and manage their own posts, and edit their account, the user can go to the account page.
+
+<img src="images/account.png" alt="account" width="400">
+
+Upon clicking the 'Edit Profile' button they are prompted with a profile editor modal.
+
+<img src="images/profile-edit.png" alt="profile editor" width="400">
+
+If they wish to change their profile picture they are prompted with a cropping tool, to ensure the image will have a 1:1 aspect ratio and not get distorted.
+
+<img src="images/image-crop.png" alt="image crop tool" width="400">
+
+Here they can zoom in/out and rotate the photo.
+
+### **Following Users**
+
+Users can follow each other by clicking the user icon with a plus, in the user detail page. If they already are following them there is a minus instead, with the text 'following' next to the username.
+
+<img src="images/user.png" alt="user page" width="400">
+
+Following allows the user to now, on the post page, browse posts by the users they are following.
+
+### **Tables**
 
 <img src="images/tables.png" alt="logo image" width="1000">
+
+---
+
+## **UX**
+
+### **Typography**
+
+I wanted to choose an easy-to-read font with a modern feel and chose Glacial Indifference, both regular and bold variants.
+
+### **Colours**
+
+Below are the main colours used on the site:
+
+<img src="images/colours.png" alt="colour scheme" width="200">
+
+---
 
 # 3. Wireframes
 

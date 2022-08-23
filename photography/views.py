@@ -23,6 +23,7 @@ class PhotoDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['image'] = get_object_or_404(Image, id=self.kwargs['pk'])
         context['likes'] = Like.objects.filter(image=context['image'])
+        context['likes_count'] = context['likes'].count()
         context['form'] = CommentUploadForm()
         print(context)
         return super().get_context_data(**context)
@@ -85,17 +86,14 @@ class CollectionView(TemplateView):
 def photo_delete(request, pk):
     image = Image.objects.get(id=pk)
     image.delete()
+    messages.success(request, 'Image deleted')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def photo_gallery(request):
-    context = {}
-    form = PhotoUploadForm(request.POST, request.FILES)
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-    context['form'] = form
-    context['scripts'] = [staturl('photos/js/photos.js')]
-    return render(request, 'photos/photos.html', context)
+def comment_delete(request, pk):
+    comment = Comment.objects.get(id=pk)
+    comment.delete()
+    messages.success(request, 'Comment deleted')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def gallery_upload(request):
     if request.method == "POST":

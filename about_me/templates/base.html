@@ -25,7 +25,7 @@
                         {% block posts %}<a class="nav-link" href="{% url 'start' %}"
                             aria-label="main page with posts">Posts</a>{% endblock %}
                     </li>
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         {% block account %}<a class="nav-link" href="{% url 'profile' %}"
                             aria-label="your account page">Account</a>{% endblock %}

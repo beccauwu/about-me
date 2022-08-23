@@ -21,6 +21,7 @@
             <img src="{{ user.profile.pfp.url }}" width="100" class="rounded-circle">
             {% endif %}
             <h2 class="mt-2 mb-0">{{ user.username }}</h2>
+            <small aria-label="your follower count">{{ follower_count }} followers</small>
             {% if user.profile.bio %}
             <p class="card-text">
                 <!-- {{user.profile.bio }} -->
@@ -39,12 +40,14 @@
             <div class="py-2 rounded border border-black my-3 px-5">
                 {% if collection.image_set.all.exists %}
                 {% for image in collection.image_set.all %}
-                <div class="p-3 my-2 wi-fc mx-auto border-bottom border-top border-black">
-                    <a href="{% url 'photodetail' image.id %}">
+                <div class="px-3 my-2 wi-fc mx-auto border-bottom border-top border-black">
+                    <a class="my-2 d-inline-block" href="{% url 'photodetail' image.id %}">
                         <img src="{{ image.img.url }}" width="100">
                     </a>
-                    {% inlineedit 'image.title' 'formcontrol' template='inlineedit_custom.html' %}
-                    <button type="button" class="btn btn-primary btn-sm imageDelete">Delete Image</button>
+                    <span class="my-2">
+                        {% inlineedit 'image.title' 'formcontrol' template='inlineedit_custom.html' %}
+                    </span>
+                    <button type="button" class="btn btn-primary btn-sm imageDelete my-2">Delete Image</button>
                     <div class="wi-fc btn btn-light btn-sm d-none imgDelBtns">
                         <a class="fs-5 d-inline fa-regular fa-trash-can text-reset" href="{% url 'deleteimage' image.id %}"
                             data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-danger"
@@ -148,7 +151,7 @@
                     {% endif %}
                     {{ forms.profile_form.pfp }}
                     {% if user.profile.bio %}
-                    <label for="bioInput" class="form-label pt-1 giBold text-black">Change bio:</label>
+                    <label for="bioInput" class="mt-2 form-label pt-1 giBold text-black">Change bio:</label>
                     {% else %}
                     <label for="bioInput" class="form-label pt-1 giBold text-black">Add bio:</label>
                     {% endif %}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('search/', views.PhotoSearch.as_view(), name='search'),
     path('collection/<int:pk>/', views.CollectionView.as_view(), name='collection'),
     path('posts/comment/', views.post_comment, name='postcomment'),
+    path('posts/comment/<int:pk>/delete/', views.comment_delete, name='deletecomment'),
 ]

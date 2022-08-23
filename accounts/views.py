@@ -35,7 +35,7 @@ class ProfileView(TemplateView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super().get_context_data(**kwargs)
-        context['followers'] = Follower.objects.filter(user=user)
+        context['follower_count'] = str(Follower.objects.filter(user=user).count())
         context['scripts'] = [staturl("accounts/js/accounts.js")]
         context['forms'] = {'profile_form': ProfileForm(instance=user.profile), 'user_form': UserUpdateForm(instance=user)}
         print(context)
@@ -128,4 +128,4 @@ def profile_update(request):
 def logout_request(request):
     logout(request)
     messages.success(request, _('You have been logged out.'))
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect('start')

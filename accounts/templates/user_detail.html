@@ -56,9 +56,9 @@
                     <h3 class="giBold">{{ collection.name }}:</h3>
                         {% if collection.image_set.all.exists %}
                             {% for image in collection.image_set.all %}
-                            <div class="p-3 m-2 wi-fc mx-auto">
+                            <a href="{% url 'photodetail' image.id %}" class="d-block p-3 m-2 wi-fc mx-auto">
                                 <img class="rounded" src="{{ image.img.url }}" alt="image with title {{ image.title }}" width="300">
-                            </div>
+                            </a>
                             {% endfor %}
                         {% else %}
                         <p>Collection is empty</p>
