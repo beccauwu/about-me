@@ -1,10 +1,10 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 
 {% block title %}400{% endblock %}
 
 {% block content %}
-<div class="wi-fc mx-auto">
-    <h1 class="giBold">400 - bad request</h1>
-    <a href="{% url 'start' %}">Go to start page</a>
+<div class="wi-fc mx-auto bg-light mt-5 text-center p-4 rounded">
+    <h1 class="giBold text-black">400 -<br> bad request</h1>
+    <a class="d-block giBold pt-1 border-top border-black" href="{% url 'start' %}">Go to start page</a>
 </div>
 {% endblock %}

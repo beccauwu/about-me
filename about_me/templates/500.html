@@ -1,12 +1,12 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 
 {% block title %}500{% endblock %}
 
 {% block content %}
-<div class="wi-fc mx-auto">
-    <h1 class="giBold">500 - internal server error</h1>
-    <a href="{% url 'start' %}">Go to start page</a>
-    <small>If you keep seeing this error send me an email on <a
+<div class="wi-fc mx-auto bg-light mt-5 text-center p-4 rounded">
+    <h1 class="giBold text-black">500 -<br> internal server error</h1>
+    <a class="d-block giBold pt-1 border-top border-black" href="{% url 'start' %}">Go to start page</a>
+    <small class="text-black">If you keep seeing this error send me an email on <a
             href="mailto:rebecca@perttula.co">rebecca@perttula.co</a></small>
 </div>
 {% endblock %}
