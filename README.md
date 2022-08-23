@@ -6,7 +6,42 @@
 
 </div>
 
-# Introduction
+- [**AboutMe**](#aboutme)
+- [**Introduction**](#introduction)
+- [**Features and UX**](#features-and-ux)
+  - [**UX**](#ux)
+    - [**Typography**](#typography)
+    - [**Colours**](#colours)
+    - [**User Stories**](#user-stories)
+    - [**Admin Stories**](#admin-stories)
+  - [**Features**](#features)
+    - [**Landing Page**](#landing-page)
+    - [**Login/logout**](#loginlogout)
+    - [**Signup**](#signup)
+    - [**Account Page**](#account-page)
+    - [**Following Users**](#following-users)
+    - [**Tables**](#tables)
+- [**ClickUp**](#clickup)
+- [**Wireframes**](#wireframes)
+- [**Testing**](#testing)
+  - [**Manual testing**](#manual-testing)
+    - [**User Stories**](#user-stories-1)
+    - [**Admin Stories**](#admin-stories-1)
+  - [**Lighthouse**](#lighthouse)
+- [**Dependencies**](#dependencies)
+- [**Bugs**](#bugs)
+  - [**Fixed**](#fixed)
+  - [**Persistent**](#persistent)
+- [**Deployment**](#deployment)
+- [**Future Enhancements**](#future-enhancements)
+- [**Credits**](#credits)
+- [**Links**](#links)
+
+# **Introduction**
+
+<a href="https://about-me-rebecca.herokuapp.com/">
+<img src="images/responsive.png" alt="landing page" width="1000">
+</a>
 
 AboutMe is a site for sharing images. 
 
@@ -14,9 +49,13 @@ On the site, users can share their stories in images in combination of text post
 
 Users are able to follow their favourite people to easily find their content on the front page, and perhaps upload comment encouraging words on the posts they like.
 
-# Features and UX
+The target audience is people who just want to share stories from their lives to a smaller audience they don't know and actually get noticed.
+
+# **Features and UX**
 
 ## **UX**
+
+---
 
 ### **Typography**
 
@@ -116,7 +155,7 @@ As shown below I have implemented 7 different models to handle the variety of fu
 
 <img src="images/tables.png" alt="logo image" width="1000">
 
-# ClickUp
+# **ClickUp**
 
 For the project planning I used ClickUp to track my progress based on user/admin stories. I used different priority flags based on which order the different features should be implemented, as well as tagging to make it easier to distiguish between the features.
 
@@ -124,7 +163,7 @@ For the project planning I used ClickUp to track my progress based on user/admin
 |:---:	|:---:	|
 | <img src="images/clickupip.png" alt="clickup project screenshot" width="500"> 	| <img src="images/clickupdone.png" alt="clickup project screenshot" width="500"> 	|
 
-# Wireframes
+# **Wireframes**
 
 Before starting the project, I did create some wireframes to use as a guide during development. I hadn't been able to imagine the whole end result and the layout differs slightly but it did help me with a rough idea of the result.
 
@@ -136,7 +175,7 @@ Before starting the project, I did create some wireframes to use as a guide duri
 |:---:	|:---:	|:---:	|
 | ![login wireframe][login-wireframe] 	| ![signup wireframe][signup-wireframe] 	| ![account page wireframe][account-wireframe] 	|
 
-# Testing
+# **Testing**
 
 ## **Manual testing**
 
@@ -344,9 +383,11 @@ Verdict ✅: The test passed as everything worked as expected
 
 ## **Lighthouse**
 
+![lighthouse results][lighthouse]
 
+The lighthouse results are about what one would expect for a relatively resource-intensive app deployed to Heroku. I should note though, that while the accessibility score is 100 I didn't quite trust it myself as the background isn't a colour so it doesn't test the colour contrasts properly. I did this myself using colour blindness filters and making sure all text is readable through all of them, which it fortunately was.
 
-# Dependencies
+# **Dependencies**
 
 1. [**Django Client Side Image Corpping**](https://pypi.org/project/django-client-side-image-cropping/)
 2. [**Django CORS-headers**](https://pypi.org/project/django-cors-headers/)
@@ -359,7 +400,7 @@ Verdict ✅: The test passed as everything worked as expected
 9. [**Selenium**](https://pypi.org/project/selenium/)
 10. [**Whitenoise**](https://pypi.org/project/whitenoise/)
 
-# Bugs
+# **Bugs**
 
 ## **Fixed**
 
@@ -389,6 +430,14 @@ Verdict ✅: The test passed as everything worked as expected
 
 ---------------
 
+    Bug 🐝: Unauthorised users were able to get to restricted pages, only getting an error instead of a redirect.
+
+    Cause 🛠: I hadn't included the LoginRequiredMixin where needed
+
+    Fix 💚: Add the mixin to appropriate views
+
+---------------
+
 ## **Persistent**
 
 ---------------
@@ -401,7 +450,7 @@ Verdict ✅: The test passed as everything worked as expected
 
 ---------------
 
-# Deployment
+# **Deployment**
 
 I deployed the page on Heroku via the following procedure:
 
@@ -417,9 +466,9 @@ I deployed the page on Heroku via the following procedure:
 10. Enter the name of the repository and click 'connect'
 11. Once complete, select 'Automatic Deploys'. As your deployment method. This will create a deployed link which displays the live site.
 
-You can find the live site via the following URL - [accountspy-preview live webpage](https://about-me-rebecca.herokuapp.com/)
+You can find the live site via the following URL - [AboutMe live webpage](https://about-me-rebecca.herokuapp.com/)
 
-# Future Enhancements
+# **Future Enhancements**
 
 - Add the possibility to message other users on the platform
     Having the possibility of messaging other users privately, not only through comments would enhance user experience and allow for networking
@@ -438,9 +487,15 @@ You can find the live site via the following URL - [accountspy-preview live webp
     I already started working on this by adding a column to the profile model for dark mode, though the feature is not implemented yet (I need to create work on a separate dark mode stylesheet),
     and it would make more sense for me to just impelment a fully configurable theme instead
 
-# Credits
+# **Credits**
 
-# Links
+* **Richard Wells**
+    As always, my Code Institute mentor has helped me tremendously throughout the project, giving tonnes of amazing advice when needed.
+
+# **Links**
+
+Live webpage: https://about-me-rebecca.herokuapp.com/
+
 
 [logo]: images/logo.png
 [tables]: images/tables.png
@@ -452,3 +507,4 @@ You can find the live site via the following URL - [accountspy-preview live webp
 [start-wireframe]: images/wireframestart.png
 [clickup-start]: images/clickupip.png
 [clickup-end]: images/clickupdone.png
+[lighthouse]: images/lighthouse.png
