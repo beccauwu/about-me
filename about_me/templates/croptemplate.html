@@ -12,12 +12,18 @@
     <img src="{{ current_img_url }}" class="dcsic_current_img rounded-circle"
         style="width: {{ widget.preview_width }}px; height: {{ widget.preview_height }}px" />
     <div id="imgOptionsContainer">
-        <label>
-            <span class="dcsic_choose_img btn btn-primary btn-sm">{% trans "Choose image" %}</span>
-            <span class="dcsic_choose_other_img btn btn-primary btn-sm">{% trans "Choose other image" %}</span>
-            <input type="file" class="dcsic_file_input" accept="image/*" />
-        </label>
-        {% if input_clearable %}<span class="dcsic_delete_image btn btn-primary btn-sm">{% trans "Delete image" %}</span>{% endif %}
+        <div class="my-2 d-inline-block">
+            <label>
+                <span class="dcsic_choose_img mt-2 btn btn-primary btn-sm">{% trans "Choose image" %}</span>
+                <span class="dcsic_choose_other_img mt-2 btn btn-primary btn-sm">{% trans "Choose other image" %}</span>
+                <input type="file" class="dcsic_file_input" accept="image/*" />
+            </label>
+        </div>
+        {% if input_clearable %}
+        <div class="my-2 d-inline-block">
+            <span class="dcsic_delete_image text-nowrap btn btn-primary btn-sm">{% trans "Delete image" %}</span>
+        </div>
+        {% endif %}
     </div>
 </div>
 <div class="dcsic_overlay">
