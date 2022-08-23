@@ -98,14 +98,15 @@ def login_request(request):
         except Exception as e:
             messages.error(request, '{}'.format(e))
             return redirect('start')
-    # form = LoginForm()
-    # return render(request=request, template_name='login.html', context={'form':form})
 
 def signup(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user.refresh_from_db()
+            auth_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            login(request, auth_user)
             messages.success(request, _('You have successfully registered!\nyou may now log in.'))
             return redirect('start')
         else:
