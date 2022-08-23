@@ -1,0 +1,12 @@
+{% extends base.html %}
+
+{% block title %}403{% endblock %}
+
+{% block content %}
+<div class="wi-fc mx-auto">
+    <h1 class="giBold">403 - Permission Denied</h1>
+    <a href="{% url 'start' %}">Go to start page</a>
+    <small>You may not be logged in or lack permission to view this page <br> if this keeps happening and it shouldn't email me on<a
+            href="mailto:rebecca@perttula.co">rebecca@perttula.co</a></small>
+</div>
+{% endblock %}
