@@ -43,29 +43,6 @@ class ProfileView(CustomLoginRequiredMixin, TemplateView):
         print(context)
         return super().get_context_data(**context)
 
-class DeleteImageView(DeleteView):
-    model = Image
-    success_url = '/user/'
-    template_name = 'delete_image.html'
-    def get_context_data(self, **kwargs):
-        context = {}
-        if self.object:
-            context['image'] = self.object
-            context_object_name = self.get_context_object_name(self.object)
-            if context_object_name:
-                context[context_object_name] = self.object
-        context.update(kwargs)
-        return super().get_context_data(**context)
-
-class EditImageView(UpdateView):
-    model = Image
-    form_class = PhotoEditForm
-    template_name = 'edit_image.html'
-    success_url = '/user/'
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
 def follow_user(request, pk):
     if not request.user.is_authenticated:
         messages.error(request, _('You are not logged in.'))

@@ -1,21 +1,14 @@
-import os
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.auth.models import User
 from about_me.mixins import CustomLoginRequiredMixin
-from django_addanother.views import CreatePopupMixin
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
-from boto.s3.connection import S3Connection
-from dal import autocomplete
 from .models import Image, Collection, Comment, Like
-from .forms import PhotoUploadForm, CollectionCreateForm, CommentUploadForm
-from about_me.storage_backends import staturl
+from .forms import CommentUploadForm
 from accounts.models import Follower, Profile
 from django.contrib import messages
-import boto3
 
 class PhotoDetail(DetailView):
     model = Image
