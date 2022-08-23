@@ -19,6 +19,10 @@ class PhotoDetail(DetailView):
         context['likes'] = Like.objects.filter(image=context['image'])
         context['likes_count'] = context['likes'].count()
         context['form'] = CommentUploadForm()
+        for like in context['likes']:
+            if like.user == self.request.user:
+                context['liked'] = True
+                break
         print(context)
         return super().get_context_data(**context)
 

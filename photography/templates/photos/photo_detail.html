@@ -42,18 +42,10 @@
                 </a>
                 <div class="d-inline px-2 py-1 rounded bg-altlight border border-4 border-primary">
                     {% if request.user.is_authenticated %}
-                    {% if likes %}
-                    {% for like in likes %}
-                    {% if request.user.id == like.user.id %}
+                    {% if liked %}
                     <a class="text-decoration-none" href="{% url 'unlike' image.id %}">
                         <i class="mt-1 fs-4 fa-solid fa-heart text-danger"></i>
                     </a>
-                    {% else %}
-                    <a class="text-decoration-none" href="{% url 'like' image.id %}">
-                        <i class="mt-1 fs-4 fa-regular fa-heart text-black"></i>
-                    </a>
-                    {% endif %}
-                    {% endfor %}
                     {% else %}
                     <a class="text-decoration-none" href="{% url 'like' image.id %}">
                         <i class="mt-1 fs-4 fa-regular fa-heart text-black"></i>
