@@ -1,4 +1,3 @@
-import collections
 import uuid
 import pathlib
 from django.db import models

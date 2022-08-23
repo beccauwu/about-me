@@ -2,7 +2,6 @@ from django import forms
 from django.utils.html import format_html
 from inlineedit.adaptors import BasicAdaptor
 from markdown import markdown
-from photography.models import Comment
 
 class FormControl(BasicAdaptor):
     def form_field(self):

@@ -1,10 +1,8 @@
-from logging import setLogRecordFactory
-from django.forms import CharField, TextInput, EmailField, Form, EmailInput, PasswordInput, ImageField
 from django import forms
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from django.contrib.auth.models import User, Group
-from django.utils.translation import gettext, gettext_lazy as _
+from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 from about_me.widgets import CustomCropWidget
 from .models import Profile
 

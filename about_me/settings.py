@@ -13,7 +13,6 @@ import os
 import dj_database_url
 from pathlib import Path
 from decouple import config
-from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -158,22 +157,9 @@ STATIC_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-#         os.path.join(BASE_DIR, 'google-credentials.json')
-#     )
 
 DEFAULT_FILE_STORAGE = 'about_me.storage_backends.MediaRootS3Boto3Storage'
 STATICFILES_STORAGE = "about_me.storage_backends.StaticRootS3Boto3Storage"
-# GS_BUCKET_NAME = 'django-site1-b420694.appspot.com'
-
-# STATICFILES_STORAGE = "about_me.storage_backends.StaticGCSStorage"
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATIC_LOCATION = 'static'
-# STATIC_URL = 'https://storage.googleapis.com/{}/static/'.format(GS_BUCKET_NAME)
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-# MEDIA_LOCATION = 'media'
-# MEDIA_URL = 'https://storage.googleapis.com/{}/media/'.format(GS_BUCKET_NAME)
 
 CACHES = {
     'default': {

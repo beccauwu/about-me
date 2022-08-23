@@ -1,7 +1,7 @@
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import HttpResponseRedirect, redirect
 from django.contrib import messages
-from accounts.forms import LoginForm, NewUserForm, ProfileForm
+from accounts.forms import LoginForm
 
 class LoginFormMiddleware(MiddlewareMixin):
     def process_request(self, request):

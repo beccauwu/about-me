@@ -1,22 +1,13 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from about_me.mixins import CustomLoginRequiredMixin
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from django.views.generic.base import TemplateView
-from .models import update_profile_signal, Profile, Follower
-from photography.models import Image
-from photography.forms import PhotoEditForm, PhotoUploadForm
+from .models import Follower
 from django.utils.translation import gettext_lazy as _
-from django.views.generic.edit import UpdateView, DeleteView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.detail import DetailView
 from about_me.storage_backends import staturl
 from django.http import HttpResponseRedirect
-import getpass
-# Create your views here.
-
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 
