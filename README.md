@@ -116,7 +116,11 @@ Following allows the user to now, on the post page, browse posts by the users th
 
 # ClickUp
 
-For the project planning I used ClickUp to track my progress based on user/admin stories.
+For the project planning I used ClickUp to track my progress based on user/admin stories. I used different priority flags based on which order the different features should be implemented, as well as tagging to make it easier to distiguish between the features.
+
+| Clickup at the start of project 	| Clickup at the end of project 	|
+|:---:	|:---:	|
+| <img src="images/clickupip.png" alt="clickup project screenshot" width="500"> 	| <img src="images/clickupdone.png" alt="clickup project screenshot" width="500"> 	|
 
 # Wireframes
 
@@ -428,4 +432,5 @@ Verdict ✅: The test passed as everything worked as expected
 [search-wireframe]: images/wireframesearch.png
 [signup-wireframe]: images/wireframesignup.png
 [start-wireframe]: images/wireframestart.png
-
+[clickup-start]: images/clickupip.png
+[clickup-end]: images/clickupdone.png

@@ -22,7 +22,7 @@
                 <i class="fa-regular fa-trash-can"></i>
             </a>
             {% endif %}
-            <img class="img-fluid" src="{{ image.img.url }}">
+            <img class="img-fluid" src="{{ image.img.url }}" alt="{{ image.title }}">
             {% if image.text_content %}
                 {% if image.collection.user.id == request.user.id %}
                 {% inlineedit 'image.text_content' 'textarea' template='inlineedit_custom.html' %}
@@ -34,9 +34,9 @@
                 <a href="{% url 'profiledetails' image.collection.user.id %}"
                     class="d-block text-black text-reset text-decoration-none">
                     {% if image.collection.user.profile.pfp %}
-                    <img class="rounded-circle" width="30" src="{{ image.collection.user.profile.pfp.url }}">
+                    <img class="rounded-circle" width="30" src="{{ image.collection.user.profile.pfp.url }}" alt="{{ image.collecion.user.username }}'s profile picture">
                     {% else %}
-                    <img class="rounded-circle" width="30" src="{% static 'base/img/default_pfp.png' %}">
+                    <img class="rounded-circle" width="30" src="{% static 'base/img/default_pfp.png' %}" alt="default profile picture">
                     {% endif %}
                     {{ image.collection.user.username }}
                 </a>
@@ -90,9 +90,9 @@
                                 class="d-block float-end m-0 p-0 text-decoration-none text-reset">
                                 <p class="d-inline giBold">{{ comment.author.username }}</p>
                                 {% if comment.author.profile.pfp %}
-                                <img class="rounded-circle" width="30" src="{{ comment.author.profile.pfp.url }}">
+                                <img class="rounded-circle" width="30" src="{{ comment.author.profile.pfp.url }}" alt="{{ comment.author.username }}'s profile picture">
                                 {% else %}
-                                <img class="rounded-circle" width="30" src="{% static 'base/img/default_pfp.png' %}">
+                                <img class="rounded-circle" width="30" src="{% static 'base/img/default_pfp.png' %}" alt="default profile picture">
                                 {% endif %}
                             </a>
                         </div>
