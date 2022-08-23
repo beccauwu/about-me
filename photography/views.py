@@ -136,10 +136,10 @@ def gallery_upload(request):
             image.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def post_comment(request):
-    if request.method == "POST":
+def post_comment(request, pk):
+    if request.user.is_authenticated:
         comment = Comment(
-        image = Image.objects.get(id=request.POST['image_id']),
+        image = Image.objects.get(id=pk),
         author = request.user,
         comment = request.POST['comment']
         )

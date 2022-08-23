@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import LoginForm, NewUserForm, ProfileForm, UserUpdateForm
 from django.views.generic.base import TemplateView
 from .models import update_profile_signal, Profile, Follower
@@ -23,15 +24,16 @@ class UserView(DetailView):
     model = User
     template_name = 'user_detail.html'
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['userdetail'] = get_object_or_404(User, id=self.kwargs['pk'])
-            context['followers'] = Follower.objects.filter(user=context['userdetail'])
-            context['follower_count'] = str(context['followers'].count())
-            print(context)
-            return super().get_context_data(**context)
+        context = super().get_context_data(**kwargs)
+        context['userdetail'] = get_object_or_404(User, id=self.kwargs['pk'])
+        context['followers'] = Follower.objects.filter(user=context['userdetail'])
+        context['follower_count'] = str(context['followers'].count())
+        print(context)
+        return super().get_context_data(**context)
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
+    login_url = '/'
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super().get_context_data(**kwargs)
@@ -107,7 +109,7 @@ def signup(request):
             user.refresh_from_db()
             auth_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             login(request, auth_user)
-            messages.success(request, _('You have successfully registered!\nyou may now log in.'))
+            messages.success(request, _('You have successfully registered!\nyou were automatically logged in.'))
             return redirect('start')
         else:
             messages.error(request, _('Please correct the error below.'))

@@ -36,7 +36,7 @@
                     {% if image.collection.user.profile.pfp %}
                     <img class="rounded-circle" width="30" src="{{ image.collection.user.profile.pfp.url }}">
                     {% else %}
-                    <img class="rounded-circle" width="30" src="{% static 'base/images/default_pfp.png' %}">
+                    <img class="rounded-circle" width="30" src="{% static 'base/img/default_pfp.png' %}">
                     {% endif %}
                     {{ image.collection.user.username }}
                 </a>
@@ -92,16 +92,15 @@
                                 {% if comment.author.profile.pfp %}
                                 <img class="rounded-circle" width="30" src="{{ comment.author.profile.pfp.url }}">
                                 {% else %}
-                                <img class="rounded-circle" width="30" src="{% static 'base/images/default_pfp.png' %}">
+                                <img class="rounded-circle" width="30" src="{% static 'base/img/default_pfp.png' %}">
                                 {% endif %}
                             </a>
                         </div>
                     </div>
                     {% endfor %}
                     {% endif %}
-                    <form method="post" action="{% url 'postcomment' %}">
+                    <form method="post" action="{% url 'postcomment' image.id %}">
                         {% csrf_token %}
-                        <input type="hidden" name="image_id" value="{{ image.id }}">
                         <label for="commentInput" class="text-black giBold text-center">Upload comment:</label>
                         <textarea class="form-control my-2 text-center" id="commentInput" name="comment" rows="3"></textarea>
                         <button type="submit" class="btn btn-primary wi-fc mx-auto">Submit</button>
