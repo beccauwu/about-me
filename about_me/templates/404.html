@@ -1,12 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'errors.html' %}
 
 {% block title %}404{% endblock %}
-
-{% block content %}
-<div class="wi-fc mx-auto bg-light mt-5 text-center p-4 rounded">
-    <h1 class="giBold text-black">404 -<br> Page not found</h1>
-    <a class="d-block giBold pt-1 border-top border-black" href="{% url 'start' %}">Go to start page</a>
-    <small class="text-black">If you know this page should exist, please send me an email on <a
-            href="mailto:rebecca@perttula.co">rebecca@perttula.co</a> and I'll have a look</small>
-</div>
-{% endblock %}
+{% block errorcode %}404{% endblock %}
+{% block errordes %}page not found{% endblock %}
+{% block errorextra %}If you know this page should exist, please send me an email on <a
+    href="mailto:rebecca@perttula.co">rebecca@perttula.co</a> and I'll have a look{% endblock %}

@@ -1,12 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'errors.html' %}
 
 {% block title %}403{% endblock %}
-
-{% block content %}
-<div class="wi-fc mx-auto bg-light mt-5 text-center p-4 rounded">
-    <h1 class="giBold text-black">403 -<br> Permission Denied</h1>
-    <a class="d-block giBold pt-1 border-top border-black" href="{% url 'start' %}">Go to start page</a>
-    <small class="text-black">You may not be logged in or lack permission to view this page <br> if this keeps happening and it shouldn't email me on<a
-            href="mailto:rebecca@perttula.co">rebecca@perttula.co</a></small>
-</div>
-{% endblock %}
+{% block errorcode %}403{% endblock %}
+{% block errordes %}permission denied{% endblock %}
+{% block errorextra %}You may not be logged in or lack permission to view this page <br> if this keeps happening and it shouldn't email me
+on<a href="mailto:rebecca@perttula.co">rebecca@perttula.co</a>{% endblock %}
