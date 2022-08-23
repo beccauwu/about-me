@@ -13,5 +13,7 @@ urlpatterns = [
     path('follow/<int:pk>/', views.follow_user, name='followuser'),
     path('unfollow/<int:pk>/', views.unfollow_user, name='unfollowuser'),
     path('update/', views.profile_update, name='profileupdate'),
+    path('tos/', TemplateView.as_view(template_name='tos.html'), name='tos'),
+    path('pp/', TemplateView.as_view(template_name='pp.html'), name='pp'),
     path('', views.ProfileView.as_view(), name='profile'),
 ]

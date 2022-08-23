@@ -2,8 +2,8 @@
 {% load static %}
 {% load inlineedit %}
 {% block styles %}<link rel="stylesheet" type="text/css" href="{% static 'photos/css/photos.css' %}">{% endblock %}
-{% block title %}Photo Gallery{% endblock %}
-{% block photos %}<a class="nav-link active giBold" href="{% url 'photos' %}" aria-label="current page">Photo gallery</a>{% endblock %}
+{% block title %}Posts{% endblock %}
+{% block posts %}<a class="nav-link active giBold" href="{% url 'start' %}" aria-label="current page">Posts</a>{% endblock %}
 
 {% block content %}
 <div class="container my-2">
