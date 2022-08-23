@@ -112,6 +112,8 @@ Following allows the user to now, on the post page, browse posts by the users th
 
 ### **Tables**
 
+As shown below I have implemented 7 different models to handle the variety of functionality on the site. Column for dark mode in accounts_profile is present, as I had planned to implement an optional dark mode on the site but decided it wasn't a priority for the time being as with the backgrount the site is relatively dark already. The paths that separate at the end represent many-to-one relationships and the single-line paths represent one-to-one relationships.
+
 <img src="images/tables.png" alt="logo image" width="1000">
 
 # ClickUp
@@ -346,16 +348,16 @@ Verdict ✅: The test passed as everything worked as expected
 
 # Dependencies
 
-1. **Django Client Side Image Corpping**
-2. **Django CORS-headers**
-3. **Django Inlineedit**
-4. **Django Storages**
-5. **Gunicorn**
-6. **Django Markdown**
-7. **Pillow**
-8. **Python-decouple**
-9. **Selenium**
-10. **Whitenoise**
+1. [**Django Client Side Image Corpping**](https://pypi.org/project/django-client-side-image-cropping/)
+2. [**Django CORS-headers**](https://pypi.org/project/django-cors-headers/)
+3. [**Django Inlineedit**](https://github.com/ptav/django-inlineedit)
+4. [**Django Storages**](https://pypi.org/project/django-storages/)
+5. [**Gunicorn**](https://pypi.org/project/gunicorn/)
+6. [**Django Markdown**](https://pypi.org/project/django-markdown/)
+7. [**Pillow**](https://pypi.org/project/Pillow/)
+8. [**Python-decouple**](https://pypi.org/project/python-decouple/)
+9. [**Selenium**](https://pypi.org/project/selenium/)
+10. [**Whitenoise**](https://pypi.org/project/whitenoise/)
 
 # Bugs
 
@@ -400,6 +402,22 @@ Verdict ✅: The test passed as everything worked as expected
 ---------------
 
 # Deployment
+
+I deployed the page on Heroku via the following procedure:
+
+1. Sign up or log in to [heroku dashboard](https://dashboard.heroku.com/)
+2. Select 'Create New App'
+3. Name the project (must be a unique name), choose your region and click 'Create'
+4. Navigate to the settings tab (must be done before deploying code)
+5. Click on 'Add buildpack'
+6. Search for python
+7. Select heroku/python
+8.  Navigate to the Deploy tab
+9.  Select GitHub as deployment method and confirm that you want to connect to your repository
+10. Enter the name of the repository and click 'connect'
+11. Once complete, select 'Automatic Deploys'. As your deployment method. This will create a deployed link which displays the live site.
+
+You can find the live site via the following URL - [accountspy-preview live webpage](https://about-me-rebecca.herokuapp.com/)
 
 # Future Enhancements
 

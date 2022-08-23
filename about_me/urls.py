@@ -19,7 +19,6 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('photography.urls')),
-    path('contact/', include('contact.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path('user/', include("accounts.urls")),
     path('inlineedit/', include('inlineedit.urls')),
