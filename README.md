@@ -6,7 +6,7 @@
 
 </div>
 
-# 1. Introduction
+# Introduction
 
 AboutMe is a site for sharing images. 
 
@@ -14,7 +14,45 @@ On the site, users can share their stories in images in combination of text post
 
 Users are able to follow their favourite people to easily find their content on the front page, and perhaps upload comment encouraging words on the posts they like.
 
-# 2. Features and UX
+# Features and UX
+
+## **UX**
+
+### **Typography**
+
+I wanted to choose an easy-to-read font with a modern feel and chose Glacial Indifference, both regular and bold variants.
+
+### **Colours**
+
+Below are the main colours used on the site:
+
+<img src="images/colours.png" alt="colour scheme" width="200">
+
+I chose these colours specifically as they are picked from the colours present in the background image.
+
+### **User Stories**
+
+* **User Story 1**: As a site user, I want to register an account to be able to post content and interact with others' content.
+* **User Story 2**: As a site user, I want to be able to eaily change my account information.
+* **User Story 3**: As a site user, I want to be able to share images to others.
+* **User Story 4**: As a site user, I want to be able to follow other users whose content I enjoy.
+* **User Story 5**: As a site user, I want to share text content with my photos.
+* **User Story 6**: As a site user, I want to be able to easily edit my posts' text content.
+* **User Story 7**: As a site user, I want to group similar posts into collections.
+* **User Story 8**: As a site user, I want to easily access the content of those I follow.
+* **User Story 9**: As a site user, I want to show other users that I enjoy their content by liking their post.
+* **User Story 10**: As a site user, I want to share my thoughts on others' posts by commenting on them.
+* **User Story 11**: As a site user, I want to see the number of likes on posts to know how many enjoy my content.
+* **User Story 12**: As a site user, I want to see how many followers I have.
+* **User Story 13**: As a site user, I want to be able to easily remove my comments and posts.
+
+### **Admin Stories**
+
+* **Admin Story 1**: As a site admin, I can remove posts that violate the Terms of Use.
+* **Admin Story 2**: As a site admin, I can remove users who repetadly violate the Terms of Use.
+* **Admin Story 3**: As a site admin, I can remove comments violating the Terms of Use.
+
+---
 
 ## **Features**
 
@@ -76,31 +114,233 @@ Following allows the user to now, on the post page, browse posts by the users th
 
 <img src="images/tables.png" alt="logo image" width="1000">
 
----
+# ClickUp
 
-## **UX**
+For the project planning I used ClickUp to track my progress based on user/admin stories.
 
-### **Typography**
+# Wireframes
 
-I wanted to choose an easy-to-read font with a modern feel and chose Glacial Indifference, both regular and bold variants.
+Before starting the project, I did create some wireframes to use as a guide during development. I hadn't been able to imagine the whole end result and the layout differs slightly but it did help me with a rough idea of the result.
 
-### **Colours**
+| Landing page 	| Search 	| Post 	|
+|:---:	|:---:	|:---:	|
+| ![landing page wireframe][start-wireframe] 	| ![searchbox wireframe][search-wireframe] 	| ![post page wireframe][post-wireframe] 	|
 
-Below are the main colours used on the site:
+| Login prompt 	| Signup prompt 	| Account page 	|
+|:---:	|:---:	|:---:	|
+| ![login wireframe][login-wireframe] 	| ![signup wireframe][signup-wireframe] 	| ![account page wireframe][account-wireframe] 	|
 
-<img src="images/colours.png" alt="colour scheme" width="200">
-
----
-
-# 3. Wireframes
-
-# 4. Testing
+# Testing
 
 ## **Manual testing**
 
+**Methodology**
+
+All the user and admin stories have been implemented and tested as shown below.
+
+### **User Stories**
+
+---------------
+
+**As a site user, I want to register an account to be able to post content and interact with others' content.**
+
+Implementation 🏭: In the login modal, there is a button allowing for users to sign up.
+
+Test 🧪: I created a new user.
+
+Result 🏆: Everything worked as expected, the user was created and logged in.
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to be able to eaily change my account information.**
+
+Implementation 🏭: On the user's account pade there is a profile edit button where they have the option to update their profile picture, bio, username and email.
+
+Test 🧪: I tried changing the profile photo, bio, username and email using the profile edit modal
+
+Result 🏆: Everything worked as expected, values were immediately updated in the database and a confirmation message was shown
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to be able to share images to others.**
+
+Implementation 🏭: On the user's account page there is an image upload button which opens up a modal where they may upload an image.
+
+Test 🧪: I tried uploading photos on the site using the photo upload modal
+
+Result 🏆: Everything worked as expected, the photo was saved with its title
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to be able to follow other users whose content I enjoy.**
+
+Implementation 🏭: When logged in, a user icon with a plus sign is shown on others' profile page. Users can click this to follow that user.
+
+Test 🧪: I tried following other users on the site using the follow button
+
+Result 🏆: Everything worked as expected, my user was added to the followers of that user
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to share text content with my photos.**
+
+Implementation 🏭: In the image upload menu, the user has the option to add text content to their post. In that case they may enter the text into the textarea field
+
+Test 🧪: I uploaded an image with added text content
+
+Result 🏆: Everything worked as expected, the text content was shown on the post page
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to be able to easily edit my posts' text content.**
+
+Implementation 🏭: The user is able to edit their posts' text content using the inline editing tool. On the user's own post upon hover there is a pencil icon next to editable content
+
+Test 🧪: I tried editing the titles and text contents of photos using the inline editing tool
+
+Result 🏆: Everything worked as expected, the new content was updated to the post page
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to group similar posts into collections.**
+
+Implementation 🏭: Adding an image is mandatory as part of the upload process, the user is also able to create new collections on that page
+
+Test 🧪: I tested whether or not images were added to the chosen/new collection
+
+Result 🏆: Image uploaded was added to the collection
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to easily access the content of those I follow.**
+
+Implementation 🏭: On the Posts page, the user is able to filter posts of users they follow by clicking the "following" button in the button group
+
+Test 🧪: I used the following filter on the Posts page
+
+Result 🏆: Images shown were only of the users I followd
+
+Verdict ✅: The test passed as everything worked as expected
+
+---
+
+**As a site user, I want to show other users that I enjoy their content by liking their post.**
+
+Implementation 🏭: On the individual post page there is a button with a heart. Logged in users can click this to like the post. The total amount of likes is shown next to the button
+
+Test 🧪: I used the button to like a post
+
+Result 🏆: A like was added to the counter next to the heart icon
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to share my thoughts on others' posts by commenting on them.**
+
+Implementation 🏭: On the individual post page at the bottom, there is a textarea where logged in users may upload a comment. This comment is then shown above the text area. Users who are not logged in can only see the comments
+
+Test 🧪: I used the textarea to upload a comment on a post
+
+Result 🏆: A comment was added above the textarea
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to see the number of likes on posts to know how many enjoy my content.**
+
+Implementation 🏭: A like counter is shown next to the heart icon on an individual post page. This shows the total amount of likes the post has received
+
+Test 🧪: I checked if the counter displays likes correctly
+
+Result 🏆: The counter increased by one after liking, and decreased by one after unliking,
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to see how many followers I have.**
+
+Implementation 🏭: On the account page, below the user's username the number of followers is displayed in slightly smaller text
+
+Test 🧪: I checked if the counter displays followers correctly
+
+Result 🏆: The counter increased by one after following the user, and decreased by one after unfollowing
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site user, I want to be able to easily remove my comments and posts.**
+
+Implementation 🏭: A rubbish bin is shown on a user's comments above their username/profile picture. Clicking this deletes the comment
+
+Test 🧪: I checked if the comment got deletet upon clicking the rubbish bin
+
+Result 🏆: The comment was deleted
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+### **Admin Stories**
+
+**As a site admin, I can remove posts that violate the Terms of Use.**
+
+Implementation 🏭: A rubbish bin is shown on top of the post title on the individual post page for staff members. Clicking this deletes the post
+
+Test 🧪: I checked if the after got deletet upon clicking the rubbish bin
+
+Result 🏆: The post was deleted
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site admin, I can remove users who repetadly violate the Terms of Use.**
+
+Implementation 🏭: A staff member can navigate to the admin panel Users menu, where they can manually delete users. This is more difficult of a task in order to prevent accidental user deletions
+
+Test 🧪: I checked if the user got deleted from the admin panel Users meny
+
+Result 🏆: The user was deleted
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
+**As a site admin, I can remove comments violating the Terms of Use.**
+
+Implementation 🏭: While regular users see a rubbish bin on top of only their comments, a staff member sees one on top of all comments and is able to delete a comment that way
+
+Test 🧪: I checked if the comment got deleted after clicking the rubbish bin
+
+Result 🏆: The comment was deleted
+
+Verdict ✅: The test passed as everything worked as expected
+
+---------------
+
 ## **Lighthouse**
 
-# 5. Dependencies
+
+
+# Dependencies
 
 1. **Django Client Side Image Corpping**
 2. **Django CORS-headers**
@@ -113,7 +353,7 @@ Below are the main colours used on the site:
 9. **Selenium**
 10. **Whitenoise**
 
-# 6. Bugs
+# Bugs
 
 ## **Fixed**
 
@@ -155,9 +395,9 @@ Below are the main colours used on the site:
 
 ---------------
 
-# 7. Deployment
+# Deployment
 
-# 8. Future Enhancements
+# Future Enhancements
 
 - Add the possibility to message other users on the platform
     Having the possibility of messaging other users privately, not only through comments would enhance user experience and allow for networking
@@ -176,9 +416,16 @@ Below are the main colours used on the site:
     I already started working on this by adding a column to the profile model for dark mode, though the feature is not implemented yet (I need to create work on a separate dark mode stylesheet),
     and it would make more sense for me to just impelment a fully configurable theme instead
 
-# 9. Credits
+# Credits
 
-# 10. Links
+# Links
 
 [logo]: images/logo.png
 [tables]: images/tables.png
+[account-wireframe]: images/wireframeaccount.png
+[login-wireframe]: images/wireframelogin.png
+[post-wireframe]: images/wireframepost.png
+[search-wireframe]: images/wireframesearch.png
+[signup-wireframe]: images/wireframesignup.png
+[start-wireframe]: images/wireframestart.png
+
