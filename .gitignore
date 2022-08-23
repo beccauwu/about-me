@@ -20,5 +20,6 @@ fb_creds.json
 /resume
 /home
 /blog
+/contact
 localstorage.js
 db.sqlite3
