@@ -21,12 +21,6 @@ class NewUserForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'signupEmailInput', 'placeholder': 'mail@example.com'})
         self.fields['password1'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'password1Input', 'placeholder': 'Password'})
         self.fields['password2'].widget.attrs.update({'class': "form-control giBold mb-2 text-center bg-internal-light-dark", 'id': 'password2Input', 'placeholder': 'Confirm Password'})
-    def save(self, commit=True, **kwargs):
-        from .models import update_profile_signal
-        user = super().save(commit=commit)
-        if commit:
-            auth_user = authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password1'])
-            login(self.request, auth_user)
 
 class UserUpdateForm(UserChangeForm):
     class Meta:
