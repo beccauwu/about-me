@@ -58,15 +58,14 @@ def unfollow_user(request, pk):
 def login_request(request):
     if request.method == 'POST':
         form = LoginForm(request=request, data=request.POST)
-        try:
-            form.is_valid()
+        if form.is_valid():
             form.user_login()
             messages.success(request, _('You have successfully logged in!'))
             if '/user/logout/' in request.get_full_path():
                 return HttpResponseRedirect('/')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        except Exception as e:
-            messages.error(request, '{}'.format(e))
+        else:
+            messages.error(request, 'Wrong username or password.')
             return redirect('start')
 
 def signup(request):

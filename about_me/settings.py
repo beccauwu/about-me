@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
     'about_me',
+    'contact',
     'accounts',
     'photography',
     'anymail',

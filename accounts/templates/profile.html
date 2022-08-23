@@ -15,7 +15,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container my-4">
-    <div class="col-6 mx-auto">
+    <div class="col-sm-12 col-md-6 mx-auto">
         <div class="text-center mt-3 rounded p-4 bg-light text-black">
             {% if user.profile.pfp %}
             <img src="{{ user.profile.pfp.url }}" width="100" class="rounded-circle">

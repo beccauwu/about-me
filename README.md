@@ -189,11 +189,11 @@ All the user and admin stories have been implemented and tested as shown below.
 
 **As a site user, I want to register an account to be able to post content and interact with others' content.**
 
-Implementation 🏭: In the login modal, there is a button allowing for users to sign up.
+Implementation 🏭: In the login modal, there is a button allowing for users to sign up
 
 Test 🧪: I created a new user.
 
-Result 🏆: Everything worked as expected, the user was created and logged in.
+Result 🏆: Everything worked as expected, the user was created and logged in
 
 Verdict ✅: The test passed as everything worked as expected
 
@@ -201,7 +201,7 @@ Verdict ✅: The test passed as everything worked as expected
 
 **As a site user, I want to be able to eaily change my account information.**
 
-Implementation 🏭: On the user's account pade there is a profile edit button where they have the option to update their profile picture, bio, username and email.
+Implementation 🏭: On the user's account pade there is a profile edit button where they have the option to update their profile picture, bio, username and email
 
 Test 🧪: I tried changing the profile photo, bio, username and email using the profile edit modal
 
@@ -213,7 +213,7 @@ Verdict ✅: The test passed as everything worked as expected
 
 **As a site user, I want to be able to share images to others.**
 
-Implementation 🏭: On the user's account page there is an image upload button which opens up a modal where they may upload an image.
+Implementation 🏭: On the user's account page there is an image upload button which opens up a modal where they may upload an image
 
 Test 🧪: I tried uploading photos on the site using the photo upload modal
 
@@ -225,7 +225,7 @@ Verdict ✅: The test passed as everything worked as expected
 
 **As a site user, I want to be able to follow other users whose content I enjoy.**
 
-Implementation 🏭: When logged in, a user icon with a plus sign is shown on others' profile page. Users can click this to follow that user.
+Implementation 🏭: When logged in, a user icon with a plus sign is shown on others' profile page. Users can click this to follow that user
 
 Test 🧪: I tried following other users on the site using the follow button
 
@@ -406,35 +406,43 @@ The lighthouse results are about what one would expect for a relatively resource
 
 ---------------
 
-    Bug 🐝: Submitting any form would instead of submitting the form in question try to submit a login request
+Bug 🐝: Submitting any form would instead of submitting the form in question try to submit a login request
 
-    Cause 🛠: Logging in was handled as a middleware which was looking for any post request, not just for the login form
+Cause 🛠: Logging in was handled as a middleware which was looking for any post request, not just for the login form
 
-    Fix 💚: Move login to a view instead
-
----------------
-
-    Bug 🐝: On the page showing posts of followed users, it showed the current user's posts instead
-
-    Cause 🛠: The queryset filter wasn't properly configured in the view
-
-    Fix 💚: Modify the filter to get posts of followed users
+Fix 💚: Move login to a view instead
 
 ---------------
 
-    Bug 🐝: Images submitted in forms weren't processed - causing no errors but also not uploading the image to storage
+Bug 🐝: On the page showing posts of followed users, it showed the current user's posts instead
 
-    Cause 🛠: Form didn't have the correct 'enctype' attribute
+Cause 🛠: The queryset filter wasn't properly configured in the view
 
-    Fix 💚: Add the attribute enctype='multipart/formdata' to the HTML form element, and modify the views handling form submittion to also look for files in the post request
+Fix 💚: Modify the filter to get posts of followed users
 
 ---------------
 
-    Bug 🐝: Unauthorised users were able to get to restricted pages, only getting an error instead of a redirect.
+Bug 🐝: Images submitted in forms weren't processed - causing no errors but also not uploading the image to storage
 
-    Cause 🛠: I hadn't included the LoginRequiredMixin where needed
+Cause 🛠: Form didn't have the correct 'enctype' attribute
 
-    Fix 💚: Add the mixin to appropriate views
+Fix 💚: Add the attribute enctype='multipart/formdata' to the HTML form element, and modify the views handling form submittion to also look for files in the post request
+
+---------------
+
+Bug 🐝: Unauthorised users were able to get to restricted pages, only getting an error instead of a redirect
+
+Cause 🛠: I hadn't included the LoginRequiredMixin where needed
+
+Fix 💚: Add the mixin to appropriate views
+
+---------------
+
+Bug 🐝: If a post had more than 1 like it would print out the amount of likes of hearts in the like button
+
+Cause 🛠: Checking if a user had liked the post was done in template with a for-loop
+
+Fix 💚: Check for this inside view class instead returning True if user had liked the post
 
 ---------------
 
@@ -442,11 +450,11 @@ The lighthouse results are about what one would expect for a relatively resource
 
 ---------------
 
-    Bug 🐝: Line breaks in post text content are not shown for post owners in the post page
+Bug 🐝: Line breaks in post text content are not shown for post owners in the post page
 
-    Cause 🛠: Inlineedit gets the field separately from normal attributes which doesn't allow me to add the 'linebreaks' filter to the field
+Cause 🛠: Inlineedit gets the field separately from normal attributes which doesn't allow me to add the 'linebreaks' filter to the field
 
-    Fix 💚: Perhaps write my own module for inline editing that allows this/figure out a way to in the textarea adaptor for the add this functionality
+Fix 💚: Perhaps write my own module for inline editing that allows this/figure out a way to in the textarea adaptor for the add this functionality
 
 ---------------
 
